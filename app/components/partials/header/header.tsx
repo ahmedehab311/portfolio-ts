@@ -1,0 +1,216 @@
+// "use client";
+
+// import { useTheme } from "next-themes";
+// import Link from "next/link";
+// import { useEffect, useState } from "react";
+
+// export default function Header() {
+//     const { theme, setTheme } = useTheme();
+//     const [mounted, setMounted] = useState(false);
+
+//     useEffect(() => setMounted(true), []);
+//     if (!mounted) return null;
+
+//     const navLinks = [
+//         { name: "Home", href: "#home" },
+//         { name: "Skills", href: "#skills" },
+//         { name: "Resume", href: "#resume" },
+//         { name: "Work", href: "#projects" },
+//         { name: "Contact", href: "#contact" },
+//     ];
+
+//     return (
+//         <header className="fixed w-full top-0 left-0 z-50 backdrop-blur-md bg-primary  shadow-md transition-colors duration-500">
+
+//             <div className="max-w-7xl mx-auto flex justify-between items-center p-6">
+//                 {/* Left */}
+//                 <div className="text-2xl font-extrabold text-red dark:text-white">
+//                     Ahmed Ehab
+//                 </div>
+
+//                 {/* Right */}
+//                 <nav className="flex items-center gap-6">
+//                     {navLinks.map((link) => (
+//                         <Link
+//                             key={link.href}
+//                             href={link.href}
+//                             className="relative text-gray-800 dark:text-gray-200 font-medium 
+//              before:absolute before:bottom-0 before:left-0 before:w-0 
+//              before:h-[2px] before:bg-primary-light before:transition-all 
+//              before:duration-300 hover:before:w-full"
+//                         >
+//                             {link.name}
+//                         </Link>
+//                     ))}
+
+//                     {/* Dark/Light toggle */}
+//                     <button
+//                         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+//                         className="ml-4 w-10 h-10 rounded-full flex items-center justify-center
+//                        bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600
+//                        transition-colors duration-300 text-xl cursor-pointer"
+//                     >
+//                         {theme === "light" ? "🌙" : "☀️"}
+//                     </button>
+//                 </nav>
+//             </div>
+//         </header>
+//     );
+// }
+
+// app/components/Header.jsx
+"use client";
+
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+
+const Header = () => {
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const navLinks = [
+        { name: "Home", href: "#home" },
+        { name: "Skills", href: "#skills" },
+        { name: "Resume", href: "#resume" },
+        { name: "Projects", href: "#projects" },
+        { name: "Contact", href: "#contact" },
+    ];
+
+    const handleNavClick = (href: string) => {
+        setIsMenuOpen(false);
+        const element = document.querySelector(href);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    if (!mounted) return null;
+
+    return (
+        <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled
+            ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg py-2"
+            : "bg-transparent py-4"
+            }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center">
+                    {/* Logo */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="flex items-center space-x-2"
+                    >
+                        <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary-light rounded-full" />
+                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
+                            Ahmed ehab
+                        </span>
+                    </motion.div>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center space-x-8">
+                        {navLinks.map((link, index) => (
+                            <motion.div
+                                key={link.href}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <button
+                                    onClick={() => handleNavClick(link.href)}
+                                    className="relative group text-gray-700  font-medium text-sm uppercase tracking-wider"
+                                >
+                                    {link.name}
+                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                                </button>
+                            </motion.div>
+                        ))}
+
+                        {/* Theme Toggle */}
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                            className="relative w-12 h-6 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 p-1 transition-all duration-300"
+                            aria-label="Toggle theme"
+                        >
+                            <motion.div
+                                className="w-4 h-4 rounded-full bg-white shadow-lg"
+                                animate={{ x: theme === "light" ? 0 : 24 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                <div className="flex items-center justify-center h-full">
+                                    {theme === "light" ? "☀️" : "🌙"}
+                                </div>
+                            </motion.div>
+                        </motion.button>
+                    </nav>
+
+                    {/* Mobile Menu Button */}
+                    <div className="flex items-center md:hidden space-x-4">
+                        {/* Theme Toggle Mobile */}
+                        <button
+                            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+                        >
+                            {theme === "light" ? "🌙" : "☀️"}
+                        </button>
+
+                        {/* Hamburger Menu */}
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="relative w-10 h-10 flex flex-col items-center justify-center space-y-1.5"
+                            aria-label="Toggle menu"
+                        >
+                            <span className={`block w-6 h-0.5 bg-gray-700 dark:bg-gray-300 transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-2" : ""
+                                }`} />
+                            <span className={`block w-6 h-0.5 bg-gray-700 dark:bg-gray-300 transition-all duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"
+                                }`} />
+                            <span className={`block w-6 h-0.5 bg-gray-700 dark:bg-gray-300 transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                                }`} />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="md:hidden overflow-hidden"
+                        >
+                            <div className="py-6 space-y-4 border-t border-gray-200 dark:border-gray-800 mt-4">
+                                {navLinks.map((link) => (
+                                    <button
+                                        key={link.href}
+                                        onClick={() => handleNavClick(link.href)}
+                                        className="block w-full text-left text-lg text-black dark:t py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                    >
+                                        {link.name}
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </header>
+    );
+};
+
+export default Header;
