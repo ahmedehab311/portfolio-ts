@@ -1,4 +1,4 @@
-import { connectDB } from "./app/lib/db";
+import { connectDB } from "./lib/db";
 
 const testConnection = async () => {
   try {

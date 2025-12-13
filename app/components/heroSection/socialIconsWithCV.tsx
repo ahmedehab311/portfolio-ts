@@ -40,7 +40,7 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
 
             <button
                 onClick={handleViewCV}
-                className={`px-6 py-3 bg-gradient-to-r ${colors.buttonGradient} text-white font-medium rounded-lg hover:opacity-90 transition-all duration-300 flex items-center gap-2 ${colors.shadow} hover:scale-105`}
+                className="btn-primary-global"
             >
                 <span>View CV</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

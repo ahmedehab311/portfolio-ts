@@ -1,4 +1,4 @@
-import { connectDB } from "@/app/lib/db";
+import { connectDB } from "@/lib/db";
 import Skill from "@/models/Skill";
 
 export async function GET() {

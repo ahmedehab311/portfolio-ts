@@ -40,6 +40,66 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+
+
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-900: #1e3a8a;
+
+  --cyan-300: #67e8f9;
+  --cyan-400: #22d3ee;
+  --cyan-500: #06b6d4;
+
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* متغيرات للتصميم الأزرق - الوضع الفاتح */
+  --bg-gradient-from-light: var(--blue-50);
+  --bg-gradient-via-light: var(--blue-100);
+  --bg-gradient-to-light: #ffffff;
+
+  --text-primary-light: var(--gray-900);
+  --text-secondary-light: var(--gray-700);
+  --text-accent-light: var(--blue-600);
+
+  --card-bg-light: rgb(255 255 255 / 0.8);
+  --code-bg-light: rgb(255 255 255 / 0.95);
+
+  --button-gradient-from-light: var(--blue-500);
+  --button-gradient-to-light: var(--cyan-400);
+
+  --border-color-light: var(--gray-200);
+  --border-light-light: rgb(209 213 219 / 0.3);
+
+  --badge-bg-light: rgb(59 130 246 / 0.1);
+  --badge-text-light: var(--blue-700);
+
+  --cursor-effect-light: rgba(59, 130, 246, 0.1);
+
+  /* استخدام الـ custom properties الحالية مع الافتراضية */
+  --bg-gradient-from: var(--bg-gradient-from-light);
+  --bg-gradient-via: var(--bg-gradient-via-light);
+  --bg-gradient-to: var(--bg-gradient-to-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-accent: var(--text-accent-light);
+  --card-bg: var(--card-bg-light);
+  --code-bg: var(--code-bg-light);
+  --button-gradient-from: var(--button-gradient-from-light);
+  --button-gradient-to: var(--button-gradient-to-light);
+  --border-color: var(--border-color-light);
+  --border-light: var(--border-light-light);
+  --badge-bg: var(--badge-bg-light);
+  --badge-text: var(--badge-text-light);
+  --cursor-effect: var(--cursor-effect-light);
 }
 
 @theme inline {
@@ -120,28 +180,50 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --bg-gradient-from-dark: var(--gray-900);
+  --bg-gradient-via-dark: var(--blue-900);
+  --bg-gradient-to-dark: var(--gray-900);
+
+  --text-primary-dark: #ffffff;
+  --text-secondary-dark: var(--gray-300);
+  --text-accent-dark: var(--blue-400);
+
+  --card-bg-dark: rgb(31 41 55 / 0.5);
+  --code-bg-dark: rgb(17 24 39 / 0.9);
+
+  --button-gradient-from-dark: var(--blue-600);
+  --button-gradient-to-dark: var(--cyan-500);
+
+  --border-color-dark: var(--gray-700);
+  --border-light-dark: rgb(255 255 255 / 0.1);
+
+  --badge-bg-dark: rgb(59 130 246 / 0.2);
+  --badge-text-dark: rgb(147 197 253);
+
+  --cursor-effect-dark: rgba(29, 78, 216, 0.15);
+
+  /* استخدام الـ custom properties مع القيم المظلمة */
+  --bg-gradient-from: var(--bg-gradient-from-dark);
+  --bg-gradient-via: var(--bg-gradient-via-dark);
+  --bg-gradient-to: var(--bg-gradient-to-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --text-accent: var(--text-accent-dark);
+  --card-bg: var(--card-bg-dark);
+  --code-bg: var(--code-bg-dark);
+  --button-gradient-from: var(--button-gradient-from-dark);
+  --button-gradient-to: var(--button-gradient-to-dark);
+  --border-color: var(--border-color-dark);
+  --border-light: var(--border-light-dark);
+  --badge-bg: var(--badge-bg-dark);
+  --badge-text: var(--badge-text-dark);
+  --cursor-effect: var(--cursor-effect-dark);
 }
 
 body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1e40af;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #1d4ed8;
 }
 
 @utility flex-center {
@@ -216,4 +298,71 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+@utility bg-gradient-hero {
+  background: linear-gradient(135deg,
+      var(--bg-gradient-from) 0%,
+      var(--bg-gradient-via) 50%,
+      var(--bg-gradient-to) 100%);
+}
+
+@utility text-gradient-blue-cyan {
+  background: linear-gradient(to right, var(--blue-500), var(--cyan-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility bg-gradient-button-primary {
+  background: linear-gradient(to right,
+      var(--button-gradient-from),
+      var(--button-gradient-to));
+}
+
+@utility card-glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+}
+
+@utility code-window {
+  background: var(--code-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+}
+
+@utility badge-primary {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--border-light);
+}
+
+@utility btn-primary-global {
+  @apply px-6 py-3 bg-gradient-button-primary text-white font-medium rounded-lg hover:opacity-90 transition-all duration-300 flex items-center gap-2 shadow-xl hover:scale-105;
+}
+
+@utility btn-primary {
+ @apply flex items-center gap-2 card-glass px-4 py-2 rounded-lg transition-colors duration-300
+}
+
+@utility text-primary {
+  color: var(--text-primary);
+}
+
+@utility text-secondary {
+  color: var(--text-secondary);
+}
+
+@utility text-accent {
+  color: var(--text-accent);
+}
+
+@utility border-custom {
+  border-color: var(--border-color);
+}
+
+@utility border-light-custom {
+  border-color: var(--border-light);
 }
