@@ -1,70 +1,10 @@
-// "use client";
-
-// import { useTheme } from "next-themes";
-// import Link from "next/link";
-// import { useEffect, useState } from "react";
-
-// export default function Header() {
-//     const { theme, setTheme } = useTheme();
-//     const [mounted, setMounted] = useState(false);
-
-//     useEffect(() => setMounted(true), []);
-//     if (!mounted) return null;
-
-//     const navLinks = [
-//         { name: "Home", href: "#home" },
-//         { name: "Skills", href: "#skills" },
-//         { name: "Resume", href: "#resume" },
-//         { name: "Work", href: "#projects" },
-//         { name: "Contact", href: "#contact" },
-//     ];
-
-//     return (
-//         <header className="fixed w-full top-0 left-0 z-50 backdrop-blur-md bg-primary  shadow-md transition-colors duration-500">
-
-//             <div className="max-w-7xl mx-auto flex justify-between items-center p-6">
-//                 {/* Left */}
-//                 <div className="text-2xl font-extrabold text-red dark:text-white">
-//                     Ahmed Ehab
-//                 </div>
-
-//                 {/* Right */}
-//                 <nav className="flex items-center gap-6">
-//                     {navLinks.map((link) => (
-//                         <Link
-//                             key={link.href}
-//                             href={link.href}
-//                             className="relative text-gray-800 dark:text-gray-200 font-medium 
-//              before:absolute before:bottom-0 before:left-0 before:w-0 
-//              before:h-[2px] before:bg-primary-light before:transition-all 
-//              before:duration-300 hover:before:w-full"
-//                         >
-//                             {link.name}
-//                         </Link>
-//                     ))}
-
-//                     {/* Dark/Light toggle */}
-//                     <button
-//                         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-//                         className="ml-4 w-10 h-10 rounded-full flex items-center justify-center
-//                        bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600
-//                        transition-colors duration-300 text-xl cursor-pointer"
-//                     >
-//                         {theme === "light" ? "🌙" : "☀️"}
-//                     </button>
-//                 </nav>
-//             </div>
-//         </header>
-//     );
-// }
-
-// app/components/Header.jsx
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu } from "lucide-react";
 
 const Header = () => {
 
@@ -87,7 +27,7 @@ const Header = () => {
 
     const navLinks = [
         { name: "Home", href: "#home" },
-        { name: "Skills", href: "/skills" },
+        { name: "Skills", href: "#skills" },
         { name: "Resume", href: "#resume" },
         { name: "Projects", href: "#projects" },
         { name: "Contact", href: "#contact" },
@@ -95,7 +35,7 @@ const Header = () => {
 
     const handleNavClick = (href: string) => {
         setIsMenuOpen(false);
-        const element = document?.querySelector(href);
+        const element = document.querySelector(href);
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
         }
@@ -104,9 +44,9 @@ const Header = () => {
     if (!mounted) return null;
 
     return (
-        <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled
-            ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg py-2"
-            : "bg-transparent py-4"
+        <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500   ${scrolled
+            ? " backdrop-blur-xl shadow-lg py-2"
+            : " py-4"
             }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
@@ -126,19 +66,19 @@ const Header = () => {
                         }}
                     >
                         <div className="relative">
-                            <div className="w-12 h-12 border-2 border-primary rounded-lg flex items-center justify-center transform rotate-45 overflow-hidden">
+                            <div className="w-12 h-12 border-2 border-second rounded-lg flex items-center justify-center transform rotate-45 overflow-hidden">
                                 <div className="transform -rotate-45">
-                                    <span className="text-primary font-black text-lg">A</span>
+                                    <span className=" font-black text-lg">A</span>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col border-l-2 border-primary pl-3">
-                            <span className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">
+                        <div className="flex  flex-col  border-l-2 border-second pl-3">
+                            <h4 className="tracking-tight">
                                 AHMED
-                            </span>
-                            <span className="text-lg font-light text-gray-600 dark:text-gray-300 tracking-wider">
+                            </h4>
+                            <h6 className="tracking-wider">
                                 E H A B
-                            </span>
+                            </h6>
                         </div>
                     </motion.div>
 
@@ -153,7 +93,7 @@ const Header = () => {
                             >
                                 <button
                                     onClick={() => handleNavClick(link.href)}
-                                    className="relative group text-gray-700  font-medium text-sm uppercase tracking-wider"
+                                    className="relative group  font-medium text-sm uppercase tracking-wider cursor-pointer"
                                 >
                                     {link.name}
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
@@ -166,7 +106,7 @@ const Header = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                            className="relative w-12 h-6 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 p-1 transition-all duration-300"
+                            className="relative w-12 h-6 rounded-full bg-gradient-to-r from-gray-200   cursor-pointer to-gray-300 dark:from-gray-700 dark:to-gray-800 p-1 transition-all duration-300"
                             aria-label="Toggle theme"
                         >
                             <motion.div
@@ -174,7 +114,7 @@ const Header = () => {
                                 animate={{ x: theme === "light" ? 0 : 24 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                <div className="flex items-center justify-center h-full">
+                                <div className="flex items-center justify-center h-full ">
                                     {theme === "light" ? "☀️" : "🌙"}
                                 </div>
                             </motion.div>
@@ -186,7 +126,7 @@ const Header = () => {
                         {/* Theme Toggle Mobile */}
                         <button
                             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+                            className="p-2 rounded-lg cursor-pointer"
                         >
                             {theme === "light" ? "🌙" : "☀️"}
                         </button>
@@ -197,12 +137,7 @@ const Header = () => {
                             className="relative w-10 h-10 flex flex-col items-center justify-center space-y-1.5"
                             aria-label="Toggle menu"
                         >
-                            <span className={`block w-6 h-0.5 bg-gray-700 dark:bg-gray-300 transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-2" : ""
-                                }`} />
-                            <span className={`block w-6 h-0.5 bg-gray-700 dark:bg-gray-300 transition-all duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"
-                                }`} />
-                            <span className={`block w-6 h-0.5 bg-gray-700 dark:bg-gray-300 transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-                                }`} />
+                            <Menu />
                         </button>
                     </div>
                 </div>
@@ -221,7 +156,7 @@ const Header = () => {
                                     <button
                                         key={link.href}
                                         onClick={() => handleNavClick(link.href)}
-                                        className="block w-full text-left text-lg text-black dark:t py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                        className="block w-full text-left text-lg card-bg py-3 px-4 rounded-lg  transition-colors cursor-pointer"
                                     >
                                         {link.name}
                                     </button>

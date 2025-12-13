@@ -1,0 +1,674 @@
+// 'use client';
+
+// import { useEffect, useRef, useState } from 'react';
+// import Image from 'next/image';
+// import { FaFacebook, FaLinkedin, FaGithub, FaCode, FaLaptopCode, FaReact } from 'react-icons/fa';
+// import { SiJavascript, SiNextdotjs, SiTypescript } from 'react-icons/si';
+
+// export default function HeroSection() {
+// const codeRef = useRef(null);
+// const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+// // تأثيرات تفاعلية للمؤشر
+// useEffect(() => {
+//     const handleMouseMove = (e) => {
+//         setMousePosition({ x: e.clientX, y: e.clientY });
+//     };
+
+//     window.addEventListener('mousemove', handleMouseMove);
+//     return () => window.removeEventListener('mousemove', handleMouseMove);
+// }, []);
+
+// // تأثير الكتابة للنص البرمجي
+// useEffect(() => {
+//     const codeElement = codeRef.current;
+//     if (!codeElement) return;
+
+//     const codeLines = [
+//         "function createPortfolio() {",
+//         "  const skills = ['HTML', 'CSS', 'JavaScript'];",
+//         "  const frameworks = ['React', 'Next.js', 'Tailwind'];",
+//         "  return <AwesomeWebsite />;",
+//         "}"
+//     ];
+
+//     let lineIndex = 0;
+//     let charIndex = 0;
+//     let isDeleting = false;
+//     let typingSpeed = 100;
+
+//     function typeWriter() {
+//         if (!codeElement) return;
+
+//         if (lineIndex < codeLines.length) {
+//             const currentLine = codeLines[lineIndex];
+
+//             if (!isDeleting && charIndex <= currentLine.length) {
+//                 codeElement.children[lineIndex].textContent = currentLine.substring(0, charIndex);
+//                 charIndex++;
+//                 typingSpeed = 100;
+//             } else if (isDeleting && charIndex >= 0) {
+//                 codeElement.children[lineIndex].textContent = currentLine.substring(0, charIndex);
+//                 charIndex--;
+//                 typingSpeed = 50;
+//             } else {
+//                 isDeleting = !isDeleting;
+//                 if (!isDeleting) lineIndex++;
+//                 if (isDeleting && lineIndex === codeLines.length - 1) {
+//                     setTimeout(() => {
+//                         lineIndex = 0;
+//                         charIndex = 0;
+//                         codeElement.innerHTML = codeLines.map(() => '<div class="code-line"></div>').join('');
+//                     }, 1500);
+//                 }
+//             }
+//         }
+
+//         setTimeout(typeWriter, typingSpeed);
+//     }
+
+//     // تهيئة عناصر السطور البرمجية
+//     codeElement.innerHTML = codeLines.map(() => '<div class="code-line"></div>').join('');
+
+//     const timer = setTimeout(typeWriter, 1000);
+//     return () => clearTimeout(timer);
+// }, []);
+
+// const handleViewCV = () => {
+//     // محاكاة تنزيل ملف CV (في التطبيق الحقيقي، هنا سيكون رابط لملف PDF)
+//     alert('سيتم تنزيل ملف الـ CV الخاص بـ أحمد إيهاب');
+//     // window.open('/path-to-cv.pdf', '_blank'); // في التطبيق الحقيقي
+// };
+
+//     return (
+//     <section className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 overflow-hidden">
+//         {/* تأثيرات خلفية متحركة */}
+//         <div
+//             className="absolute inset-0 pointer-events-none"
+//             style={{
+//                 background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+//             }}
+//         />
+
+//         {/* عناصر خلفية برمجية عائمة */}
+//         <div className="absolute top-10 left-10 opacity-10 animate-float">
+//             <FaCode size={60} />
+//         </div>
+//         <div className="absolute bottom-20 right-20 opacity-10 animate-float-delayed">
+//             <FaLaptopCode size={50} />
+//         </div>
+//         <div className="absolute top-1/3 right-1/4 opacity-10 animate-float-slow">
+//             <FaReact size={40} />
+//         </div>
+
+//         {/* الجزء الأيسر - النص والمعلومات */}
+//         <div className="lg:w-1/2 z-10 text-center lg:text-left mb-12 lg:mb-0 xl:mt-10 ">
+//             <div className="mb-2">
+//                 <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium mb-4">
+//                     Frontend Developer
+//                 </span>
+//             </div>
+
+//             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+//                 Frontend <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Developer</span>
+//             </h1>
+
+//             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl">
+//                 Welcome to my corner of the web! I&apos;m <span className="font-semibold text-white">Ahmed Ehab</span>, a passionate front-end developer with a talent for transforming ideas into captivating experiences. With a blend of creativity and technical expertise, I strive to design and build user-friendly interfaces that make a lasting impact.
+//             </p>
+
+//             {/* تقنيات العمل */}
+//             <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
+//                 <div className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
+//                     <SiNextdotjs className="text-white" />
+//                     <span className="text-white">Next.js</span>
+//                 </div>
+//                 <div className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
+//                     <FaReact className="text-cyan-400" />
+//                     <span className="text-white">React</span>
+//                 </div>
+//                 <div className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
+//                     <SiJavascript className="text-yellow-400" />
+//                     <span className="text-white">JavaScript</span>
+//                 </div>
+//                 <div className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
+//                     <SiTypescript className="text-blue-500" />
+//                     <span className="text-white">TypeScript</span>
+//                 </div>
+//             </div>
+
+//             {/* الأيقونات الاجتماعية وزر الـ CV */}
+//             <div className="flex flex-col sm:flex-row items-center gap-6">
+//                 <div className="flex gap-6">
+//                     <a
+//                         href="https://facebook.com"
+//                         target="_blank"
+//                         rel="noopener noreferrer"
+//                         className="social-icon"
+//                         aria-label="Facebook"
+//                     >
+//                         <FaFacebook size={24} className="hover:text-blue-500 transition-colors duration-300" />
+//                     </a>
+//                     <a
+//                         href="https://linkedin.com"
+//                         target="_blank"
+//                         rel="noopener noreferrer"
+//                         className="social-icon"
+//                         aria-label="LinkedIn"
+//                     >
+//                         <FaLinkedin size={24} className="hover:text-blue-700 transition-colors duration-300" />
+//                     </a>
+//                     <a
+//                         href="https://github.com"
+//                         target="_blank"
+//                         rel="noopener noreferrer"
+//                         className="social-icon"
+//                         aria-label="GitHub"
+//                     >
+//                         <FaGithub size={24} className="hover:text-gray-300 transition-colors duration-300" />
+//                     </a>
+//                 </div>
+
+//                 <button
+//                     onClick={handleViewCV}
+//                     className="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium rounded-lg hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl"
+//                 >
+//                     <span>View CV</span>
+//                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+//                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+//                     </svg>
+//                 </button>
+//             </div>
+//         </div>
+
+//         {/* الجزء الأيمن - الصورة/الأيقونة المتحركة */}
+//         <div className="lg:w-1/2 flex justify-center items-center z-10">
+//             <div className="relative">
+//                 {/* الصورة المتحركة */}
+//                 <div className="relative w-64 h-64 md:w-80 md:h-80">
+//                     {/* دائرة خلفية متحركة */}
+//                     <div className="absolute inset-0 rounded-full border-4 border-blue-500/30 animate-ping-slow"></div>
+//                     <div className="absolute inset-4 rounded-full border-4 border-cyan-500/20 animate-spin-slow"></div>
+
+//                     {/* الأيقونة المركزية */}
+//                     <div className="absolute inset-0 flex items-center justify-center">
+//                         <div className="relative w-48 h-48 md:w-60 md:h-60 bg-gradient-to-br from-blue-500/20 to-cyan-400/20 rounded-2xl flex items-center justify-center shadow-2xl backdrop-blur-sm border border-white/10">
+//                             {/* تأثيرات داخل الأيقونة */}
+//                             <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-blue-500/30 animate-pulse"></div>
+//                             <div className="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-cyan-400/30 animate-pulse-delayed"></div>
+
+//                             {/* رمز البرمجة المركزي */}
+//                             <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+//                                 &lt;/&gt;
+//                             </div>
+
+//                             {/* عناصر برمجية صغيرة تدور حول الأيقونة */}
+//                             <div className="absolute -top-2 -left-2 animate-orbit">
+//                                 <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+//                                     <SiJavascript className="text-yellow-400" size={16} />
+//                                 </div>
+//                             </div>
+//                             <div className="absolute -top-2 -right-2 animate-orbit-reverse">
+//                                 <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+//                                     <FaReact className="text-cyan-400" size={16} />
+//                                 </div>
+//                             </div>
+//                             <div className="absolute -bottom-2 -left-2 animate-orbit-delayed">
+//                                 <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+//                                     <SiNextdotjs className="text-white" size={16} />
+//                                 </div>
+//                             </div>
+//                             <div className="absolute -bottom-2 -right-2 animate-orbit-reverse-delayed">
+//                                 <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+//                                     <SiTypescript className="text-blue-400" size={16} />
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 {/* نافذة كود برمجي متحركة */}
+//                 <div className="absolute -bottom-20 -right-10 md:right-0 w-64 bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+//                     <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+//                         <div className="flex gap-2">
+//                             <div className="w-3 h-3 rounded-full bg-red-500"></div>
+//                             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+//                             <div className="w-3 h-3 rounded-full bg-green-500"></div>
+//                         </div>
+//                         <div className="text-xs text-gray-400">portfolio.js</div>
+//                     </div>
+//                     <div className="p-4 font-mono text-sm">
+//                         <div ref={codeRef} className="text-cyan-400">
+//                             {/* سيتم إضافة الكود ديناميكيًا */}
+//                         </div>
+//                         <div className="mt-2 text-gray-500">
+//                             <span className="text-green-400">//</span> Transforming ideas into code
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+
+//         {/* الأسهم للإشارة للتمرير لأسفل */}
+//         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+//             <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+//                 <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
+//             </div>
+//         </div>
+
+//         <style jsx global>{`
+//     @keyframes float {
+//       0%, 100% { transform: translateY(0); }
+//       50% { transform: translateY(-20px); }
+//     }
+//     @keyframes float-delayed {
+//       0%, 100% { transform: translateY(0); }
+//       50% { transform: translateY(-15px); }
+//     }
+//     @keyframes float-slow {
+//       0%, 100% { transform: translateY(0); }
+//       50% { transform: translateY(-10px); }
+//     }
+//     @keyframes orbit {
+//       0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+//       100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+//     }
+//     @keyframes orbit-reverse {
+//       0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+//       100% { transform: rotate(-360deg) translateX(60px) rotate(360deg); }
+//     }
+//     @keyframes orbit-delayed {
+//       0% { transform: rotate(90deg) translateX(60px) rotate(-90deg); }
+//       100% { transform: rotate(450deg) translateX(60px) rotate(-450deg); }
+//     }
+//     @keyframes orbit-reverse-delayed {
+//       0% { transform: rotate(90deg) translateX(60px) rotate(-90deg); }
+//       100% { transform: rotate(-270deg) translateX(60px) rotate(270deg); }
+//     }
+//     @keyframes ping-slow {
+//       75%, 100% { transform: scale(1.1); opacity: 0; }
+//     }
+//     @keyframes spin-slow {
+//       from { transform: rotate(0deg); }
+//       to { transform: rotate(360deg); }
+//     }
+
+//     .animate-float { animation: float 6s ease-in-out infinite; }
+//     .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite 1s; }
+//     .animate-float-slow { animation: float-slow 8s ease-in-out infinite 2s; }
+//     .animate-orbit { animation: orbit 10s linear infinite; }
+//     .animate-orbit-reverse { animation: orbit-reverse 12s linear infinite; }
+//     .animate-orbit-delayed { animation: orbit-delayed 14s linear infinite; }
+//     .animate-orbit-reverse-delayed { animation: orbit-reverse-delayed 16s linear infinite; }
+//     .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
+//     .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+
+//     .social-icon {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       width: 48px;
+//       height: 48px;
+//       border-radius: 50%;
+//       background: rgba(255, 255, 255, 0.05);
+//       backdrop-filter: blur(10px);
+//       border: 1px solid rgba(255, 255, 255, 0.1);
+//       transition: all 0.3s ease;
+//       color: #ccc;
+//     }
+
+//     .social-icon:hover {
+//       transform: translateY(-5px);
+//       background: rgba(255, 255, 255, 0.1);
+//       border-color: rgba(255, 255, 255, 0.3);
+//     }
+
+//     .code-line {
+//       min-height: 1.2em;
+//       font-family: 'Courier New', monospace;
+//     }
+//   `}</style>
+//     </section>
+//     );
+// }
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { FaFacebook, FaLinkedin, FaGithub, FaCode, FaLaptopCode, FaReact, FaSun, FaMoon } from 'react-icons/fa';
+import { SiJavascript, SiNextdotjs, SiTypescript } from 'react-icons/si';
+import SkillsHero from './skillsHero';
+import SocialIconsWithCV from './socialIconsWithCV';
+import MyDescrption from './myDescrption';
+
+export default function HeroSection() {
+    const codeRef = useRef(null);
+    const { theme, setTheme, resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+
+    const currentTheme = resolvedTheme || theme;
+    const isDark = currentTheme === 'dark';
+
+    const colors = {
+        // الخلفيات
+        bgGradient: isDark
+            ? 'from-gray-900 via-blue-900 to-gray-900'
+            : 'from-blue-50 via-blue-100 to-white',
+
+        // النصوص
+        textPrimary: isDark ? 'text-white' : 'text-gray-900',
+        textSecondary: isDark ? 'text-gray-300' : 'text-gray-700',
+        textAccent: isDark ? 'text-blue-400' : 'text-blue-600',
+
+        // الخلفيات الشفافة
+        cardBg: isDark ? 'bg-gray-800/50' : 'bg-white/80',
+        codeBg: isDark ? 'bg-gray-900/90' : 'bg-white/95',
+
+        // التدرجات
+        buttonGradient: isDark
+            ? 'from-blue-600 to-cyan-500'
+            : 'from-blue-500 to-cyan-400',
+
+        // الحدود
+        borderColor: isDark ? 'border-gray-700' : 'border-gray-200',
+        borderLight: isDark ? 'border-white/10' : 'border-gray-300/30',
+
+        // الأيقونات والشارات
+        badgeBg: isDark ? 'bg-blue-500/20' : 'bg-blue-100',
+        badgeText: isDark ? 'text-blue-300' : 'text-blue-700',
+
+        // الظلال
+        shadow: isDark ? 'shadow-2xl' : 'shadow-xl',
+
+        // تأثيرات المؤشر
+        cursorEffect: isDark
+            ? `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+            : `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.1), transparent 80%)`,
+    };
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+    useEffect(() => {
+        const handleMouseMove = (e: any) => {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    useEffect(() => {
+        const codeElement = codeRef.current;
+        if (!codeElement) return;
+
+        const codeLines = [
+            "import React, { useState } from 'react';",
+            "",
+            "const Portfolio = () => {",
+            "  return (",
+            "    <div >",
+            "      <h1>My React Portfolio</h1>",
+            "    </div>",
+            "  );",
+            "};",
+            "",
+            "export default Portfolio;"
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeWriter() {
+            if (!codeElement) return;
+
+            if (lineIndex < codeLines.length) {
+                const currentLine = codeLines[lineIndex];
+
+                if (!isDeleting && charIndex <= currentLine.length) {
+                    codeElement.children[lineIndex].textContent = currentLine.substring(0, charIndex);
+                    charIndex++;
+                    typingSpeed = 100;
+                } else if (isDeleting && charIndex >= 0) {
+                    codeElement.children[lineIndex].textContent = currentLine.substring(0, charIndex);
+                    charIndex--;
+                    typingSpeed = 50;
+                } else {
+                    isDeleting = !isDeleting;
+                    if (!isDeleting) lineIndex++;
+                    if (isDeleting && lineIndex === codeLines.length - 1) {
+                        setTimeout(() => {
+                            lineIndex = 0;
+                            charIndex = 0;
+                            codeElement.innerHTML = codeLines.map(() => '<div class="code-line"></div>').join('');
+                        }, 1500);
+                    }
+                }
+            }
+
+            setTimeout(typeWriter, typingSpeed);
+        }
+
+        // تهيئة عناصر السطور البرمجية
+        codeElement.innerHTML = codeLines.map(() => '<div class="code-line"></div>').join('');
+
+        const timer = setTimeout(typeWriter, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    // if (!mounted) {
+
+    //     return (
+    //         <section className="min-h-screen flex items-center justify-center">
+    //             <div className="text-center">
+    //                 <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    //                 <p className="mt-4 text-gray-600">Loading...</p>
+    //             </div>
+    //         </section>
+    //     );
+    // }
+
+    // if (!mounted) return null;
+    return (
+        <section className={`relative min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-br ${colors.bgGradient} overflow-hidden transition-colors duration-300 ${!mounted ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}>
+
+            <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                style={{ background: colors.cursorEffect }}
+            />
+
+            {/* عناصر خلفية برمجية عائمة */}
+            <div className={`absolute top-10 left-10 ${isDark ? 'opacity-10' : 'opacity-5'} animate-float`}>
+                <FaCode size={60} />
+            </div>
+            <div className={`absolute bottom-20 right-20 ${isDark ? 'opacity-10' : 'opacity-5'} animate-float-delayed`}>
+                <FaLaptopCode size={50} />
+            </div>
+            <div className={`absolute top-1/3 right-1/4 ${isDark ? 'opacity-10' : 'opacity-5'} animate-float-slow`}>
+                <FaReact size={40} />
+            </div>
+
+            {/* الجزء الأيسر - النص والمعلومات */}
+            <div className="lg:w-1/2 z-10 text-center lg:text-left mb-12 lg:mb-0 mt-6" >
+
+                <MyDescrption colors={colors} />
+
+                < SkillsHero colors={colors} isDark={isDark} />
+                {/* الأيقونات الاجتماعية وزر الـ CV */}
+
+                <SocialIconsWithCV colors={colors} isDark={isDark} />
+
+            </div>
+
+            {/* الجزء الأيمن - الصورة/الأيقونة المتحركة */}
+            <div className="lg:w-1/2 flex justify-center items-center z-10">
+                <div className="relative">
+                    {/* الصورة المتحركة */}
+                    <div className="relative w-64 h-64 md:w-80 md:h-80">
+                        {/* دائرة خلفية متحركة */}
+                        <div className={`absolute inset-0 rounded-full border-4 ${isDark ? 'border-blue-500/30' : 'border-blue-400/20'} animate-ping-slow`}></div>
+                        <div className={`absolute inset-4 rounded-full border-4 ${isDark ? 'border-cyan-500/20' : 'border-cyan-400/10'} animate-spin-slow`}></div>
+
+                        {/* الأيقونة المركزية */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className={`relative w-48 h-48 md:w-60 md:h-60 ${isDark ? 'bg-gradient-to-br from-blue-500/20 to-cyan-400/20' : 'bg-gradient-to-br from-blue-400/10 to-cyan-300/10'} rounded-2xl flex items-center justify-center ${colors.shadow} backdrop-blur-sm border ${colors.borderLight} transition-colors duration-300`}>
+                                {/* تأثيرات داخل الأيقونة */}
+                                <div className={`absolute top-4 left-4 w-8 h-8 rounded-full ${isDark ? 'bg-blue-500/30' : 'bg-blue-400/20'} animate-pulse`}></div>
+                                <div className={`absolute bottom-4 right-4 w-6 h-6 rounded-full ${isDark ? 'bg-cyan-400/30' : 'bg-cyan-300/20'} animate-pulse-delayed`}></div>
+
+                                {/* رمز البرمجة المركزي */}
+                                <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                                    &lt;/&gt;
+                                </div>
+
+                                {/* عناصر برمجية صغيرة تدور حول الأيقونة */}
+                                <div className="absolute -top-2 -left-2 animate-orbit">
+                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                        <SiJavascript className="text-yellow-500" size={16} />
+                                    </div>
+                                </div>
+                                <div className="absolute -top-2 -right-2 animate-orbit-reverse">
+                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                        <FaReact className="text-cyan-500" size={16} />
+                                    </div>
+                                </div>
+                                <div className="absolute -bottom-2 -left-2 animate-orbit-delayed">
+                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                        <SiNextdotjs className={isDark ? "text-white" : "text-gray-900"} size={16} />
+                                    </div>
+                                </div>
+                                <div className="absolute -bottom-2 -right-2 animate-orbit-reverse-delayed">
+                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                        <SiTypescript className="text-blue-500" size={16} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/* نافذة كود برمجي متحركة */}
+                    <div className="absolute -bottom-20 -right-10 md:right-0 w-64 bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+                            <div className="flex gap-2">
+                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div className="text-xs text-gray-400">portfolio.js</div>
+                        </div>
+                        <div className="p-4 font-mono text-sm">
+                            <div ref={codeRef} className="text-cyan-400">
+                                {/* سيتم إضافة الكود ديناميكيًا */}
+                            </div>
+                            <div className="mt-2 text-gray-500">
+                                <span className="text-green-400"></span> Transforming ideas into code
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* الأسهم للإشارة للتمرير لأسفل */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+                <div className={`w-6 h-10 border-2 ${isDark ? 'border-white/30' : 'border-gray-400/30'} rounded-full flex justify-center transition-colors duration-300`}>
+                    <div className={`w-1 h-3 ${isDark ? 'bg-white/50' : 'bg-gray-600/50'} rounded-full mt-2`}></div>
+                </div>
+            </div>
+
+            <style jsx global>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes orbit {
+          0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+          100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+        @keyframes orbit-reverse {
+          0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+          100% { transform: rotate(-360deg) translateX(60px) rotate(360deg); }
+        }
+        @keyframes orbit-delayed {
+          0% { transform: rotate(90deg) translateX(60px) rotate(-90deg); }
+          100% { transform: rotate(450deg) translateX(60px) rotate(-450deg); }
+        }
+        @keyframes orbit-reverse-delayed {
+          0% { transform: rotate(90deg) translateX(60px) rotate(-90deg); }
+          100% { transform: rotate(-270deg) translateX(60px) rotate(270deg); }
+        }
+        @keyframes ping-slow {
+          75%, 100% { transform: scale(1.1); opacity: 0; }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite 1s; }
+        .animate-float-slow { animation: float-slow 8s ease-in-out infinite 2s; }
+        .animate-orbit { animation: orbit 10s linear infinite; }
+        .animate-orbit-reverse { animation: orbit-reverse 12s linear infinite; }
+        .animate-orbit-delayed { animation: orbit-delayed 14s linear infinite; }
+        .animate-orbit-reverse-delayed { animation: orbit-reverse-delayed 16s linear infinite; }
+        .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        
+        .social-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+        }
+        
+        .dark-social {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #ccc;
+        }
+        
+        .light-social {
+          background: rgba(0, 0, 0, 0.03);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          color: #666;
+        }
+        
+        .social-icon:hover {
+          transform: translateY(-5px);
+        }
+        
+        .dark-social:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .light-social:hover {
+          background: rgba(0, 0, 0, 0.08);
+          border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .code-line {
+          min-height: 1.2em;
+          font-family: 'Courier New', monospace;
+        }
+      `}</style>
+        </section>
+    );
+}
