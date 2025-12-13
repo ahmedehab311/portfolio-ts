@@ -60,13 +60,15 @@
 
 // app/components/Header.jsx
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
+
+    const router = useRouter();
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -110,14 +112,34 @@ const Header = () => {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center space-x-2"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ type: "spring", stiffness: 100 }}
+                        className="flex items-center space-x-3 cursor-pointer group"
+                        onClick={() => router.push("/")}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                router.push("/");
+                            }
+                        }}
                     >
-                        <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary-light rounded-full" />
-                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
-                            Ahmed ehab
-                        </span>
+                        <div className="relative">
+                            <div className="w-12 h-12 border-2 border-primary rounded-lg flex items-center justify-center transform rotate-45 overflow-hidden">
+                                <div className="transform -rotate-45">
+                                    <span className="text-primary font-black text-lg">A</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col border-l-2 border-primary pl-3">
+                            <span className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">
+                                AHMED
+                            </span>
+                            <span className="text-lg font-light text-gray-600 dark:text-gray-300 tracking-wider">
+                                E H A B
+                            </span>
+                        </div>
                     </motion.div>
 
                     {/* Desktop Navigation */}
