@@ -87,7 +87,7 @@ const Header = () => {
 
     const navLinks = [
         { name: "Home", href: "#home" },
-        { name: "Skills", href: "#skills" },
+        { name: "Skills", href: "/skills" },
         { name: "Resume", href: "#resume" },
         { name: "Projects", href: "#projects" },
         { name: "Contact", href: "#contact" },
@@ -95,7 +95,7 @@ const Header = () => {
 
     const handleNavClick = (href: string) => {
         setIsMenuOpen(false);
-        const element = document.querySelector(href);
+        const element = document?.querySelector(href);
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
         }
