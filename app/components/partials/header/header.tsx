@@ -44,11 +44,8 @@ const Header = () => {
     if (!mounted) return null;
 
     return (
-        <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500   ${scrolled
-            ? " backdrop-blur-xl shadow-lg py-2"
-            : " py-4"
-            }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled ? "backdrop-blur-xl shadow-lg" : ""}`}>
+            <div className="px-4 md:px-8 lg:px-16 py-4 ">
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <motion.div
@@ -166,6 +163,7 @@ const Header = () => {
                     )}
                 </AnimatePresence>
             </div>
+
         </header>
     );
 };
