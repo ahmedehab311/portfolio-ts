@@ -11,7 +11,7 @@ export default function MyDescrption({ colors }: TDescrption) {
     return (
         <>
             <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold ${colors.textPrimary} mb-6`}>
-                Frontend <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Developer</span>
+                FullStack <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Developer</span>
             </h1>
 
             {isLoading ? (
