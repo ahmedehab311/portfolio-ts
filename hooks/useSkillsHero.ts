@@ -10,7 +10,7 @@ export interface TSkillsHero {
 }
 
 export const useSkillsHero = () =>
-    useApiQuery<TSkillsHero>({
+    useApiQuery<TSkillsHero[]>({
         key: ["skillsHero"],
         url: "/api/skills-hero",
     });

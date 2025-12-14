@@ -1,9 +1,10 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, models, model } from "mongoose";
 
 export interface TSkillsHero extends Document {
     name: string;
     icon: string;
     color?: string;
+    order: number
 }
 
 const SkillsHeroSchema = new Schema<TSkillsHero>(
@@ -20,10 +21,10 @@ const SkillsHeroSchema = new Schema<TSkillsHero>(
             type: String,
             required: true,
         },
+        order: { type: Number, default: 1 },
     },
     {
-        timestamps: true, 
+        timestamps: true,
     }
 );
-
-export const SkillsHero = mongoose.models.SkillsHero || mongoose.model<TSkillsHero>("Skills-hero", SkillsHeroSchema);
+export const SkillsHero = models["Skills-hero"] || model("Skills-hero", SkillsHeroSchema);

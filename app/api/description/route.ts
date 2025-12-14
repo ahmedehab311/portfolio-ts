@@ -16,9 +16,8 @@ export async function GET() {
             );
         }
 
-        return new Response(JSON.stringify(description), {
-            status: 200,
-        });
+        // return new Response(JSON.stringify(description), { status: 200, });
+        return Response.json(description, { status: 200 });
     } catch (error: any) {
         return new Response(
             JSON.stringify({ message: error.message }),

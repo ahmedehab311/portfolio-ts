@@ -5,7 +5,7 @@ export async function GET() {
 
   try {
     await connectDB()
-    const skills = await SkillsHero.find()
+    const skills = await SkillsHero.find().sort({ order: 1 });
 
     if (!skills) {
       return new Response(
@@ -14,7 +14,7 @@ export async function GET() {
       );
     }
 
-    return new Response(JSON.stringify(skills), { status: 200 })
+    return Response.json(skills, { status: 200 })
   } catch (error: any) {
     return new Response(error.message, { status: 500 });
   }
@@ -36,11 +36,13 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-
+    const lastSkill = await SkillsHero.findOne().sort({ order: -1 });
+    const nextOrder = lastSkill ? lastSkill.order + 1 : 1;
     const skill = await SkillsHero.create({
       name,
       icon,
       color,
+      order: nextOrder
     });
 
     return new Response(
