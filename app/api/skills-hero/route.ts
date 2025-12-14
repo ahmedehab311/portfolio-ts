@@ -1,23 +1,23 @@
 import { connectDB } from "@/lib/db";
-import skillsHero from "@/models/hero/skillsHero";
+import { SkillsHero } from "@/models/hero/skillsHero";
 
 export async function GET() {
 
-    try {
-        await connectDB()
-        const skills = await skillsHero.find()
+  try {
+    await connectDB()
+    const skills = await SkillsHero.find()
 
-        if (!skills) {
-            return new Response(
-                JSON.stringify({ message: "No skills found" }),
-                { status: 404 }
-            );
-        }
-
-        return new Response(JSON.stringify(skills), { status: 200 })
-    } catch (error: any) {
-        return new Response(error.message, { status: 500 });
+    if (!skills) {
+      return new Response(
+        JSON.stringify({ message: "No skills found" }),
+        { status: 404 }
+      );
     }
+
+    return new Response(JSON.stringify(skills), { status: 200 })
+  } catch (error: any) {
+    return new Response(error.message, { status: 500 });
+  }
 }
 
 export async function POST(req: Request) {
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const skill = await skillsHero.create({
+    const skill = await SkillsHero.create({
       name,
       icon,
       color,
