@@ -8,7 +8,7 @@ import SocialIconsWithCV from './socialIconsWithCV';
 import MyDescrption from './myDescrption';
 
 export default function HeroSection() {
-    const codeRef = useRef(null);
+    const codeRef = useRef<HTMLDivElement>(null);
     const { theme, setTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
