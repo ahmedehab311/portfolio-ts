@@ -1,4 +1,4 @@
-import { SiJavascript, SiNextdotjs, SiTypescript } from 'react-icons/si';
+import { SiJavascript, SiNextdotjs, SiTypescript, SiNodedotjs } from 'react-icons/si';
 import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from "react-icons/ri";
 import { TSkillsHero } from '@/types/heroSectionType';
@@ -9,7 +9,7 @@ export const skillsIconsMap: Record<string, any> = {
     SiJavascript,
     SiNextdotjs,
     SiTypescript,
-    RiTailwindCssFill,
+    RiTailwindCssFill, SiNodedotjs
 };
 export default function SkillsHero({ colors, isDark }: TSkillsHero) {
 

@@ -53,8 +53,8 @@ export default function HeroSection() {
 
         // تأثيرات المؤشر
         cursorEffect: isDark
-            ? `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
-            : `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.1), transparent 80%)`,
+            ? `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+            : `radial-gradient(800px at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.1), transparent 80%)`,
     };
 
     useEffect(() => setMounted(true), []);
@@ -121,10 +121,10 @@ export default function HeroSection() {
     return (
         <section className={`relative min-h-screen flex flex-col lg:flex-row items-center justify-center  overflow-hidden 
             }`}>
-            {/* <div
+            <div
                 className="absolute inset-0 transition-opacity duration-300"
                 style={{ background: colors.cursorEffect }}
-            /> */}
+            />
 
             {/* عناصر خلفية برمجية عائمة */}
             <div className={`absolute top-10 left-10 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
