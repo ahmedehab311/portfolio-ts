@@ -19,7 +19,7 @@ export default function SkillsHero({ colors, isDark }: TSkillsHero) {
     return (
         <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
             {isLoading &&
-                Array.from({ length: 4 }).map((_, i) => (
+                Array.from({ length: 5 }).map((_, i) => (
                     <div
                         key={i}
                         className={`w-32 h-10 rounded-lg animate-pulse ${mounted ? colors.cardBg : 'bg-transparent'
