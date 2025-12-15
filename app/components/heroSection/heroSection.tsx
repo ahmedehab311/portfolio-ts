@@ -58,11 +58,6 @@ export default function HeroSection() {
     };
 
     useEffect(() => setMounted(true), []);
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
 
 
     useEffect(() => {
@@ -78,7 +73,7 @@ export default function HeroSection() {
         if (!codeElement) return;
 
         const codeLines = [
-            "import React, { useState } from 'react';",
+            "import { useState } from 'react';",
             "",
             "const Portfolio = () => {",
             "  return (",
@@ -106,7 +101,7 @@ export default function HeroSection() {
                 charIndex++;
                 if (charIndex > currentLine.length) {
                     isDeleting = true;
-                    setTimeout(typeWriter, 1000); // تأخير قبل الحذف
+                    setTimeout(typeWriter, 100); // تأخير قبل الحذف
                     return;
                 }
             } else {
@@ -117,22 +112,12 @@ export default function HeroSection() {
                     lineIndex = (lineIndex + 1) % codeLines.length;
                 }
             }
-            setTimeout(typeWriter, isDeleting ? 50 : 1000);
+            setTimeout(typeWriter, isDeleting ? 50 : 100);
         };
 
         typeWriter();
     }, []);
-    if (!mounted) {
-        // الهيكل المؤقت أثناء التحميل + spinner
-        return (
-            <section className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-                    <p className="mt-4 text-gray-600">Loading...</p>
-                </div>
-            </section>
-        );
-    }
+
     return (
         <section className={`relative min-h-screen flex flex-col lg:flex-row items-center justify-center  overflow-hidden 
             }`}>
@@ -142,13 +127,16 @@ export default function HeroSection() {
             /> */}
 
             {/* عناصر خلفية برمجية عائمة */}
-            <div className={`absolute top-10 left-10 ${isDark ? 'opacity-10' : 'opacity-5'} animate-float`}>
+            <div className={`absolute top-10 left-10 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
+                }  animate-float`}>
                 <FaCode size={60} />
             </div>
-            <div className={`absolute bottom-20 right-20 ${isDark ? 'opacity-10' : 'opacity-5'} animate-float-delayed`}>
+            <div className={`absolute bottom-20 right-20 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
+                }  animate-float-delayed`}>
                 <FaLaptopCode size={50} />
             </div>
-            <div className={`absolute top-1/3 right-1/4 ${isDark ? 'opacity-10' : 'opacity-5'} animate-float-slow`}>
+            <div className={`absolute top-1/3 right-1/4 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
+                }  animate-float-slow`}>
                 <FaReact size={40} />
             </div>
 
@@ -164,67 +152,125 @@ export default function HeroSection() {
             </div>
 
 
-            <div className="lg:w-1/2 flex justify-center items-center z-10">
-                <div className="relative">
-                    {/* الصورة المتحركة */}
-                    <div className="relative w-64 h-64 md:w-80 md:h-80">
-                        {/* دائرة خلفية متحركة */}
-                        <div className={`absolute inset-0 rounded-full border-4 ${isDark ? 'border-blue-500/30' : 'border-blue-400/20'} animate-ping-slow`}></div>
-                        <div className={`absolute inset-4 rounded-full border-4 ${isDark ? 'border-cyan-500/20' : 'border-cyan-400/10'} animate-spin-slow`}></div>
+            {/* <div className="lg:w-1/2 flex justify-center items-center z-10">
+                    <div className="relative">
+                        <div className="relative w-64 h-64 md:w-80 md:h-80">
+                            <div className={`absolute inset-0 rounded-full border-4 ${isDark ? 'border-blue-500/30' : 'border-blue-400/20'} animate-ping-slow`}></div>
+                            <div className={`absolute inset-4 rounded-full border-4 ${isDark ? 'border-cyan-500/20' : 'border-cyan-400/10'} animate-spin-slow`}></div>
 
-                        {/* الأيقونة المركزية */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className={`relative w-48 h-48 md:w-60 md:h-60 ${isDark ? 'bg-gradient-to-br from-blue-500/20 to-cyan-400/20' : 'bg-gradient-to-br from-blue-400/10 to-cyan-300/10'} rounded-2xl flex items-center justify-center ${colors.shadow} backdrop-blur-sm border ${colors.borderLight} transition-colors duration-300`}>
-                                {/* تأثيرات داخل الأيقونة */}
-                                <div className={`absolute top-4 left-4 w-8 h-8 rounded-full ${isDark ? 'bg-blue-500/30' : 'bg-blue-400/20'} animate-pulse`}></div>
-                                <div className={`absolute bottom-4 right-4 w-6 h-6 rounded-full ${isDark ? 'bg-cyan-400/30' : 'bg-cyan-300/20'} animate-pulse-delayed`}></div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className={`relative w-48 h-48 md:w-60 md:h-60 ${isDark ? 'bg-gradient-to-br from-blue-500/20 to-cyan-400/20' : 'bg-gradient-to-br from-blue-400/10 to-cyan-300/10'} rounded-2xl flex items-center justify-center ${colors.shadow} backdrop-blur-sm border ${colors.borderLight} transition-colors duration-300`}>
+                                    <div className={`absolute top-4 left-4 w-8 h-8 rounded-full ${isDark ? 'bg-blue-500/30' : 'bg-blue-400/20'} animate-pulse`}></div>
+                                    <div className={`absolute bottom-4 right-4 w-6 h-6 rounded-full ${isDark ? 'bg-cyan-400/30' : 'bg-cyan-300/20'} animate-pulse-delayed`}></div>
 
-                                {/* رمز البرمجة المركزي */}
-                                <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
-                                    &lt;/&gt;
-                                </div>
+                                    <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                                        &lt;/&gt;
+                                    </div>
 
-                                {/* عناصر برمجية صغيرة تدور حول الأيقونة */}
-                                <div className="absolute -top-2 -left-2 animate-orbit">
-                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                        <SiJavascript className="text-yellow-500" size={16} />
+                                    <div className="absolute -top-2 -left-2 animate-orbit">
+                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                            <SiJavascript className="text-yellow-500" size={16} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="absolute -top-2 -right-2 animate-orbit-reverse">
-                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                        <FaReact className="text-cyan-500" size={16} />
+                                    <div className="absolute -top-2 -right-2 animate-orbit-reverse">
+                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                            <FaReact className="text-cyan-500" size={16} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="absolute -bottom-2 -left-2 animate-orbit-delayed">
-                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                        <SiNextdotjs className={isDark ? "text-white" : "text-gray-900"} size={16} />
+                                    <div className="absolute -bottom-2 -left-2 animate-orbit-delayed">
+                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                            <SiNextdotjs className={isDark ? "text-white" : "text-gray-900"} size={16} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="absolute -bottom-2 -right-2 animate-orbit-reverse-delayed">
-                                    <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                        <SiTypescript className="text-blue-500" size={16} />
+                                    <div className="absolute -bottom-2 -right-2 animate-orbit-reverse-delayed">
+                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
+                                            <SiTypescript className="text-blue-500" size={16} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+                        <div className="absolute -bottom-20 -right-10 md:right-0 w-64 bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+                            <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+                                <div className="flex gap-2">
+                                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div className="text-xs text-gray-400">portfolio.js</div>
+                            </div>
+                            <div className="p-4 font-mono text-sm">
+                                <div ref={codeRef} className="text-cyan-400">
+                                </div>
+                                <div className="mt-2 text-gray-500">
+                                    <span className="text-green-400"></span> Transforming ideas into code
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
+            <div className="lg:w-1/2 flex justify-center items-center z-10">
+                <div className="relative">
+                    <div className="relative w-64 h-64 md:w-80 md:h-80">
+                        <div className="absolute inset-0 rounded-full border-4 border-blue-400/20 dark:border-blue-500/30 animate-ping-slow"></div>
+                        <div className="absolute inset-4 rounded-full border-4 border-cyan-400/10 dark:border-cyan-500/20 animate-spin-slow"></div>
+
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className={`relative w-48 h-48 md:w-60 md:h-60 
+                        bg-gradient-to-br from-blue-400/10 to-cyan-300/10
+                        dark:from-blue-500/20 dark:to-cyan-400/20
+                        rounded-2xl flex items-center justify-center
+                       shadow-2xl backdrop-blur-sm border border-blue-400/20 dark:border-blue-500/30 transition-colors duration-300`}>
+
+                                <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-blue-400/20 dark:bg-blue-500/30 animate-pulse"></div>
+                                <div className="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-cyan-300/20 dark:bg-cyan-400/30 animate-pulse-delayed"></div>
+
+                                <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                                    &lt;/&gt;
+                                </div>
+
+                                <div className="absolute -top-2 -left-2 animate-orbit">
+                                    <div className={`w-10 h-10 rounded-full bg-blue-400/10 dark:bg-blue-500/20 flex items-center justify-center border border-blue-400/20 dark:border-blue-500/30`}>
+                                        <SiJavascript className="text-yellow-500" size={16} />
+                                    </div>
+                                </div>
+
+                                <div className="absolute -top-2 -right-2 animate-orbit-reverse">
+                                    <div className={`w-10 h-10 rounded-full bg-blue-400/10 dark:bg-blue-500/20 flex items-center justify-center border border-blue-400/20 dark:border-blue-500/30`}>
+                                        <FaReact className="text-cyan-500" size={16} />
+                                    </div>
+                                </div>
+
+                                <div className="absolute -bottom-2 -left-2 animate-orbit-delayed">
+                                    <div className={`w-10 h-10 rounded-full bg-blue-400/10 dark:bg-blue-500/20 flex items-center justify-center border border-blue-400/20 dark:border-blue-500/30`}>
+                                        <SiNextdotjs className="text-gray-900 dark:text-white" size={16} />
+                                    </div>
+                                </div>
+
+                                <div className="absolute -bottom-2 -right-2 animate-orbit-reverse-delayed">
+                                    <div className={`w-10 h-10 rounded-full bg-blue-400/10 dark:bg-blue-500/20 flex items-center justify-center border border-blue-400/20 dark:border-blue-500/30`}>
+                                        <SiTypescript className="text-blue-500" size={16} />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
-
-                    {/* نافذة كود برمجي متحركة */}
-                    <div className="absolute -bottom-20 -right-10 md:right-0 w-64 bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
-                        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+                    <div className="absolute -bottom-20 -right-10 md:right-0 w-64 bg-gray-900/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 dark:border-gray-600 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 dark:bg-gray-700 border-b border-gray-700 dark:border-gray-600">
                             <div className="flex gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
                                 <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
-                            <div className="text-xs text-gray-400">portfolio.js</div>
+                            <div className="text-xs text-gray-400 dark:text-gray-300">portfolio.js</div>
                         </div>
                         <div className="p-4 font-mono text-sm">
-                            <div ref={codeRef} className="text-cyan-400">
-                                {/* سيتم إضافة الكود ديناميكيًا */}
-                            </div>
-                            <div className="mt-2 text-gray-500">
+                            <div ref={codeRef} className="text-cyan-400"></div>
+                            <div className="mt-2 text-gray-500 dark:text-gray-300">
                                 <span className="text-green-400"></span> Transforming ideas into code
                             </div>
                         </div>
@@ -232,10 +278,17 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* الأسهم للإشارة للتمرير لأسفل */}
+            {!mounted && (
+                <div className="fixed inset-0 flex flex-col items-center justify-center bg-white dark:bg-gray-900 z-50">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                    <p className="mt-4 text-gray-600 dark:text-gray-300">Loading...</p>
+                </div>
+            )}
+
+
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-                <div className={`w-6 h-10 border-2 ${isDark ? 'border-white/30' : 'border-gray-400/30'} rounded-full flex justify-center transition-colors duration-300`}>
-                    <div className={`w-1 h-3 ${isDark ? 'bg-white/50' : 'bg-gray-600/50'} rounded-full mt-2`}></div>
+                <div className={`w-6 h-10 border-2 border-white/30 dark:border-gray-400/30 rounded-full flex justify-center transition-colors duration-300`}>
+                    <div className={`w-1 h-3  bg-white/50 dark:bg-gray-600/50 rounded-full mt-2`}></div>
                 </div>
             </div>
 
