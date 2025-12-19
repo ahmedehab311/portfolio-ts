@@ -15,9 +15,10 @@ type Project = {
     demoUrl: string;
 };
 
+const projectsData = []
+// const { projectsData, isLoading, isError } = useProjects()
 
-const { projectsData, isLoading, isError } = useProjects()
-const allTechnologies = Array.from(new Set(projectsData.flatMap(project => project.tags)));
+const allTechnologies = Array.from(new Set(projectsData?.flatMap(project => project.tags)));
 
 export default function ProjectsSection() {
     const [selectedTech, setSelectedTech] = useState<string>("All Projects");
