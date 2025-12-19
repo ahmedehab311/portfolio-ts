@@ -1,3 +1,4 @@
+import { apiResponse } from "@/lib/apiResponseBackend";
 import { connectDB } from "@/lib/db";
 import { SkillsHero } from "@/models/hero/skillsHero";
 
@@ -14,9 +15,10 @@ export async function GET() {
       );
     }
 
-    return Response.json(skills, { status: 200 })
+    // return Response.json(skills, { status: 200 })
+    return apiResponse({ statusCode: 200, status: "success", message: "skills fetched successfully", data: skills })
   } catch (error: any) {
-    return new Response(error.message, { status: 500 });
+    return apiResponse({ statusCode: 500, status: "error", message: `${error.message} ||skills fetched successfully`, data: null })
   }
 }
 

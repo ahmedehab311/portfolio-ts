@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 interface TDescrption {
     colors: TSkillsHeroColors;
 }
-
+//  textPrimary: isDark ? 'text-white' : 'text-gray-900',
+//         textSecondary: isDark ? 'text-gray-300' : 'text-gray-700',
+//         textAccent: isDark ? 'text-blue-400' : 'text-blue-600',
 export default function MyDescrption({ colors }: TDescrption) {
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
     return (
         <>
             <h1
-                className={`text-4xl md:text-5xl lg:text-6xl font-bold ${mounted ? colors.textPrimary : 'text-transparent'
-                    } mb-6`}
+                className={`text-4xl md:text-5xl lg:text-6xl font-bold  text-gray-900' dark:text-white    mb-6`}
             >
                 Frontend{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
@@ -21,13 +22,11 @@ export default function MyDescrption({ colors }: TDescrption) {
             </h1>
 
             <p
-                className={`text-lg md:text-xl ${mounted ? colors.textSecondary : 'text-transparent'
-                    } mb-8 max-w-2xl`}
+                className={`text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl`}
             >
                 Welcome to my corner of the web! I&apos;m{' '}
                 <span
-                    className={`font-semibold ${mounted ? colors.textPrimary : 'text-transparent'
-                        }`}
+                    className={`font-semibold  text-gray-900 dark:text-white `}
                 >
                     Ahmed Ehab
                 </span>

@@ -121,22 +121,19 @@ export default function HeroSection() {
     return (
         <section className={`relative min-h-screen flex flex-col lg:flex-row items-center justify-center  overflow-hidden 
             }`}>
-            <div
+            {/* <div
                 className="absolute inset-0 transition-opacity duration-300"
                 style={{ background: colors.cursorEffect }}
-            />
+            /> */}
 
             {/* عناصر خلفية برمجية عائمة */}
-            <div className={`absolute top-10 left-10 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
-                }  animate-float`}>
+            <div className={`absolute top-10 left-10  opacity-5 dark:opacity-10  animate-float`}>
                 <FaCode size={60} />
             </div>
-            <div className={`absolute bottom-20 right-20 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
-                }  animate-float-delayed`}>
+            <div className={`absolute bottom-20 right-20 opacity-5 dark:opacity-10  animate-float-delayed`}>
                 <FaLaptopCode size={50} />
             </div>
-            <div className={`absolute top-1/3 right-1/4 ${mounted ? (isDark ? 'opacity-10' : 'opacity-5') : 'opacity-0'
-                }  animate-float-slow`}>
+            <div className={`absolute top-1/3 right-1/4 opacity-5 dark:opacity-10 animate-float-slow`}>
                 <FaReact size={40} />
             </div>
 
@@ -152,65 +149,6 @@ export default function HeroSection() {
             </div>
 
 
-            {/* <div className="lg:w-1/2 flex justify-center items-center z-10">
-                    <div className="relative">
-                        <div className="relative w-64 h-64 md:w-80 md:h-80">
-                            <div className={`absolute inset-0 rounded-full border-4 ${isDark ? 'border-blue-500/30' : 'border-blue-400/20'} animate-ping-slow`}></div>
-                            <div className={`absolute inset-4 rounded-full border-4 ${isDark ? 'border-cyan-500/20' : 'border-cyan-400/10'} animate-spin-slow`}></div>
-
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className={`relative w-48 h-48 md:w-60 md:h-60 ${isDark ? 'bg-gradient-to-br from-blue-500/20 to-cyan-400/20' : 'bg-gradient-to-br from-blue-400/10 to-cyan-300/10'} rounded-2xl flex items-center justify-center ${colors.shadow} backdrop-blur-sm border ${colors.borderLight} transition-colors duration-300`}>
-                                    <div className={`absolute top-4 left-4 w-8 h-8 rounded-full ${isDark ? 'bg-blue-500/30' : 'bg-blue-400/20'} animate-pulse`}></div>
-                                    <div className={`absolute bottom-4 right-4 w-6 h-6 rounded-full ${isDark ? 'bg-cyan-400/30' : 'bg-cyan-300/20'} animate-pulse-delayed`}></div>
-
-                                    <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
-                                        &lt;/&gt;
-                                    </div>
-
-                                    <div className="absolute -top-2 -left-2 animate-orbit">
-                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                            <SiJavascript className="text-yellow-500" size={16} />
-                                        </div>
-                                    </div>
-                                    <div className="absolute -top-2 -right-2 animate-orbit-reverse">
-                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                            <FaReact className="text-cyan-500" size={16} />
-                                        </div>
-                                    </div>
-                                    <div className="absolute -bottom-2 -left-2 animate-orbit-delayed">
-                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                            <SiNextdotjs className={isDark ? "text-white" : "text-gray-900"} size={16} />
-                                        </div>
-                                    </div>
-                                    <div className="absolute -bottom-2 -right-2 animate-orbit-reverse-delayed">
-                                        <div className={`w-10 h-10 rounded-full ${isDark ? 'bg-blue-500/20' : 'bg-blue-400/10'} flex items-center justify-center border ${colors.borderLight}`}>
-                                            <SiTypescript className="text-blue-500" size={16} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className="absolute -bottom-20 -right-10 md:right-0 w-64 bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
-                            <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-                                <div className="flex gap-2">
-                                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                </div>
-                                <div className="text-xs text-gray-400">portfolio.js</div>
-                            </div>
-                            <div className="p-4 font-mono text-sm">
-                                <div ref={codeRef} className="text-cyan-400">
-                                </div>
-                                <div className="mt-2 text-gray-500">
-                                    <span className="text-green-400"></span> Transforming ideas into code
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             <div className="lg:w-1/2 flex justify-center items-center z-10">
                 <div className="relative">
                     <div className="relative w-64 h-64 md:w-80 md:h-80">

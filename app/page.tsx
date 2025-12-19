@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import HeroSection from "./components/heroSection/heroSection";
 import Header from "./components/partials/header/header";
 import { useEffect, useState } from "react";
+import MyProjects from "./components/projects/myProjects";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -20,7 +21,7 @@ export default function Home() {
       >
         <Header />
         <HeroSection />
-
+        <MyProjects />
       </div>
     </>
   );
