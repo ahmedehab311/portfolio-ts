@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
+import { useProjects } from "@/hooks/useProjects";
 
-// أنواع المشاريع
+
 type Project = {
     id: number;
     title: string;
@@ -15,46 +16,7 @@ type Project = {
 };
 
 
-const projectsData: Project[] = [
-    {
-        id: 1,
-        title: "E-Commerce Platform",
-        description: "A full-featured online shopping platform with cart, checkout, and admin dashboard.",
-        image: "/project1.jpg",
-        tags: ["React", "Next.js", "TypeScript", "Tailwind", "Node.js"],
-        codeUrl: "https://github.com",
-        demoUrl: "https://demo.com",
-    },
-    {
-        id: 2,
-        title: "Task Management App",
-        description: "Collaborative task management tool with real-time updates and team features.",
-        image: "/project2.jpg",
-        tags: ["React", "Firebase", "Material-UI"],
-        codeUrl: "https://github.com",
-        demoUrl: "https://demo.com",
-    },
-    {
-        id: 3,
-        title: "Weather Dashboard",
-        description: "Real-time weather application with forecasts and interactive maps.",
-        image: "/project3.jpg",
-        tags: ["JavaScript", "API", "CSS"],
-        codeUrl: "https://github.com",
-        demoUrl: "https://demo.com",
-    },
-    {
-        id: 4,
-        title: "Portfolio Website",
-        description: "Modern portfolio website with dark mode and animations.",
-        image: "/project4.jpg",
-        tags: ["Next.js", "TypeScript", "Tailwind"],
-        codeUrl: "https://github.com",
-        demoUrl: "https://demo.com",
-    },
-];
-
-// جميع التكنولوجيات الفريدة من بيانات المشاريع
+const { projectsData, isLoading, isError } = useProjects()
 const allTechnologies = Array.from(new Set(projectsData.flatMap(project => project.tags)));
 
 export default function ProjectsSection() {
@@ -69,7 +31,7 @@ export default function ProjectsSection() {
         <section className="page- ">
             {/* العنوان والفلتر */}
             <div className="mb-10 md:mb-16">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+                <h2 className="text-center mb-6">
                     My <span className="text-gradient-blue-cyan">Projects</span>
                 </h2>
 
@@ -78,8 +40,8 @@ export default function ProjectsSection() {
                     <button
                         onClick={() => setSelectedTech("All Projects")}
                         className={`px-4 py-2 rounded-lg text-sm md:text-base transition-all duration-300 ${selectedTech === "All Projects"
-                            ? "bg-gradient-button-primary text-white shadow-lg"
-                            : "card-glass text-secondary hover:text-primary"
+                            ? "bg-gradient-button-primary shadow-lg"
+                            : "card-glass"
                             }`}
                     >
                         All Projects
@@ -89,9 +51,9 @@ export default function ProjectsSection() {
                         <button
                             key={tech}
                             onClick={() => setSelectedTech(tech)}
-                            className={`px-4 py-2 rounded-lg text-sm md:text-base transition-all duration-300 ${selectedTech === tech
-                                ? "bg-gradient-button-primary text-white shadow-lg"
-                                : "card-glass text-secondary hover:text-primary"
+                            className={`px-4 py-2 rounded-lg text-sm md:text-base transition-all text-center duration-300  ${selectedTech === tech
+                                ? " bg-gradient-button-primary shadow-lg"
+                                : "card-glass  hover:text-primary"
                                 }`}
                         >
                             {tech}
@@ -101,7 +63,7 @@ export default function ProjectsSection() {
             </div>
 
             {/* شبكة المشاريع */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 ">
                 {filteredProjects.map((project) => (
                     <ProjectCard key={project.id} project={project} />
                 ))}
@@ -143,11 +105,11 @@ function ProjectCard({ project }: { project: Project }) {
 
             {/* محتوى الكارت */}
             <div className="p-5 md:p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-primary mb-3 group-hover:text-accent transition-colors">
+                <h3 className="text-xl md:text-2xl font-bold t mb-3 group-hover:text transition-colors">
                     {project.title}
                 </h3>
 
-                <p className="text-secondary text-sm md:text-base mb-4 md:mb-6 line-clamp-3">
+                <p className=" text-sm md:text-base mb-4 md:mb-6 line-clamp-3">
                     {project.description}
                 </p>
 

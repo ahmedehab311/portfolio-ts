@@ -1,5 +1,5 @@
-import { apiResponse } from "@/lib/apiResponseBackend";
 import { connectDB } from "@/lib/db";
+import { apiResponse } from "@/lib/apiResponseBackend";
 import { SkillsHero } from "@/models/hero/skillsHero";
 
 export async function GET() {
