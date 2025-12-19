@@ -6,9 +6,7 @@ import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
 import { NextRequest } from "next/server";
 
-export const config = {
-    api: { bodyParser: false },
-};
+
 
 export async function PUT(req: NextRequest) {
     try {

@@ -6,9 +6,6 @@ import { NextRequest } from "next/server";
 import { projectSchema } from "../validators/project.schema";
 import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
-export const config = {
-    api: { bodyParser: false },
-};
 export async function GET(req: NextRequest) {
 
     try {
