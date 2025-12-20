@@ -6,6 +6,7 @@ import { NextRequest } from "next/server";
 import { projectSchema } from "../validators/project.schema";
 import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
+
 export async function GET(req: NextRequest) {
 
     try {
