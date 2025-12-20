@@ -4,8 +4,13 @@ import { ProjectCategory, ProjectStatus } from "@/app/constants/project";
 export const projectSchema = z.object({
     title: z.string().min(3, "Title is too short"),
     description: z.string().min(10, "Description is too short"),
-    category: z.enum(ProjectCategory),
-    projectStatus: z.enum(ProjectStatus),
+    category: z.enum(
+        Object.values(ProjectCategory) as [string, ...string[]]
+    ),
+
+    projectStatus: z.enum(
+        Object.values(ProjectStatus) as [string, ...string[]]
+    ),
     image: z.string().min(1, "Image is required"),
     codeUrl: z.url({ message: "Invalid code URL" }),
     demoUrl: z.url({ message: "Invalid demo URL" }),

@@ -71,26 +71,35 @@ export async function POST(req: NextRequest) {
         });
 
         const imageUrl = uploadResult.secure_url;
-
+        console.log("FORM DATA ENTRIES:");
+        for (const [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
         // دمج البيانات مع رابط الصورة
         const projectData = {
             title: fields.title,
             description: fields.description,
             category: fields.category,
             projectStatus: fields.projectStatus,
-            image: imageUrl,       // <--- مهم جداً: الصورة موجودة كـ string URL قبل validation
+            image: imageUrl,
             codeUrl: fields.codeUrl,
             demoUrl: fields.demoUrl,
             order: Number(fields.order),
             tags,
         };
-        console.log("PROJECT DATA TO SAVE:", projectData);
+
         // Validation باستخدام Zod
         const validatedData = projectSchema.parse(projectData);
+        // Validate النصوص الأول
+        projectSchema.omit({ image: true }).parse({
+            ...projectData,
+            image: "temp",
+        });
+
 
         // حفظ المشروع في DB
         const project = await Project.create(validatedData);
-        console.log("SAVED PROJECT:", project);
+
         return apiResponse({
             statusCode: 201,
             status: "success",
@@ -98,19 +107,21 @@ export async function POST(req: NextRequest) {
             data: project,
         });
     } catch (error: any) {
-        if (error.name === "ZodError") {
+        if (error?.issues && Array.isArray(error.issues)) {
             return apiResponse({
                 statusCode: 400,
                 status: "error",
-                message: error.errors.map((e: any) => e.message).join(", "),
+                message: error.issues.map((e: any) => e.message).join(", "),
                 data: null,
             });
         }
 
+        console.error("POST /api/projects ERROR:", error);
+
         return apiResponse({
             statusCode: 500,
             status: "error",
-            message: error.message,
+            message: error.message || "Internal server error",
             data: null,
         });
     }
