@@ -183,7 +183,7 @@ export default function ProjectsSection() {
             {/* العنوان */}
             <div className="mb-10 md:mb-16 text-center">
                 <h2 className="mb-6">
-                    My <span className="text-gradient-blue-cyan">Projects</span>
+                    My <span className="text-gradient-blue-cyan">Projectsss</span>
                 </h2>
 
                 {/* فلتر الكاتيجوري */}
