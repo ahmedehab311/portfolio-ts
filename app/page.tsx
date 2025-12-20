@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <div
-        className={`bg-gradient-to-br ${isClient ? (theme === "dark" ? 'from-gray-900 via-blue-900 to-gray-900' : 'from-blue-50 via-blue-100 to-white') : 'from-blue-50 via-blue-100 to-white'} px-4 md:px-8 lg:px-16 py-12 transition-all duration-300`}
+        className={`bg-gradient-to-br  dark:from-gray-900 dark:via-blue-900  dark:to-gray-900  from-blue-50 via-blue-100 to-white px-4 md:px-8 lg:px-16 py-12 transition-all duration-300`}
         suppressHydrationWarning
       >
         <Header />

@@ -146,7 +146,6 @@ import { ExternalLink, Github } from "lucide-react";
 import { useProjects } from "@/hooks/useProjects";
 import { ProjectCategory } from "@/app/constants/project";
 
-// TypeScript type مطابق للـ DB
 type Project = {
     _id: string;
     title: string;
