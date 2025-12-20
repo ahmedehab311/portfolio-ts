@@ -10,6 +10,7 @@ export interface TProjects {
     codeUrl: string;
     demoUrl: string;
     order: number;
+    tags:string[]
 }
 
 export const useProjects = () =>
