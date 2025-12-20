@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ProjectCategory } from "@/app/constants/project";
 import ProjectCard from "./ProjectCard";
+import { TProjectSchema } from "@/types/back/project";
 type Project = {
     _id: string;
     title: string;

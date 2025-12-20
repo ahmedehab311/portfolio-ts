@@ -3,7 +3,6 @@ import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from "react-icons/ri";
 import { TSkillsHero } from '@/types/heroSectionType';
 import { useSkillsHero } from '@/hooks/useSkillsHero';
-import { useEffect, useState } from 'react';
 export const skillsIconsMap: Record<string, any> = {
     FaReact,
     SiJavascript,
@@ -11,19 +10,17 @@ export const skillsIconsMap: Record<string, any> = {
     SiTypescript,
     RiTailwindCssFill, SiNodedotjs
 };
-export default function SkillsHero({ colors, isDark }: TSkillsHero) {
+export default function SkillsHero() {
 
     const { data, isLoading, isError } = useSkillsHero()
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
+
     return (
         <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
             {isLoading &&
                 Array.from({ length: 5 }).map((_, i) => (
                     <div
                         key={i}
-                        className={`w-32 h-10 rounded-lg animate-pulse ${mounted ? colors.cardBg : 'bg-transparent'
-                            } border ${mounted ? colors.borderColor : 'border-transparent'}`}
+                        className="w-32 h-10 rounded-lg animate-pulse   bg-white/80 dark:bg-gray-800/50   border border-gray-200 dark:border-gray-700 "
                     />
                 ))}
 
@@ -33,16 +30,12 @@ export default function SkillsHero({ colors, isDark }: TSkillsHero) {
                 return (
                     <div
                         key={skill._id}
-                        className={`flex items-center gap-2 ${mounted ? colors.cardBg : 'bg-transparent'
-                            } backdrop-blur-sm px-4 py-2 rounded-lg border ${mounted ? colors.borderColor : 'border-transparent'
-                            }`}
+                        className="flex items-center gap-2 bg-white/80 dark:bg-gray-800/50  border-gray-200 dark:border-gray-700  backdrop-blur-sm px-4 py-2 rounded-lg border"
                     >
                         {Icon && (
-                            <Icon className={mounted ? `text-${skill.color}` : 'text-transparent'} />
+                            <Icon className={skill.color ? `text-${skill.color}` : 'text-transparent'} />
                         )}
-                        <span className={mounted ? colors.textPrimary : 'text-transparent'}>
-                            {skill.name}
-                        </span>
+                        <span>{skill.name}</span>
                     </div>
                 );
             })}

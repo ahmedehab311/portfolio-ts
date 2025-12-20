@@ -121,10 +121,7 @@ export default function HeroSection() {
     return (
         <section className={`relative min-h-screen flex flex-col lg:flex-row items-center justify-center  overflow-hidden 
             }`}>
-            {/* <div
-                className="absolute inset-0 transition-opacity duration-300"
-                style={{ background: colors.cursorEffect }}
-            /> */}
+
 
             {/* عناصر خلفية برمجية عائمة */}
             <div className={`absolute top-10 left-10  opacity-5 dark:opacity-10  animate-float`}>
@@ -141,7 +138,7 @@ export default function HeroSection() {
 
                 <MyDescrption colors={colors} />
 
-                < SkillsHero colors={colors} isDark={isDark} />
+                < SkillsHero />
 
 
                 <SocialIconsWithCV colors={colors} isDark={isDark} />
