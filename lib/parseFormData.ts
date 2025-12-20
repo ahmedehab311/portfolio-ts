@@ -35,7 +35,7 @@ export async function parseFormData(req: NextRequest) {
   } else if (fileArray) {
     imageFile = fileArray;
   } else {
-    throw new Error("Image file is required");
+    throw new Error("Image file is requireddd");
   }
 
   return { fields, image: imageFile };

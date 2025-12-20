@@ -179,11 +179,11 @@ export default function ProjectsSection() {
     const categories = Object.values(ProjectCategory);
 
     return (
-        <section className="page-">
+        <section className="page- my-8">
             {/* العنوان */}
             <div className="mb-10 md:mb-16 text-center">
                 <h2 className="mb-6">
-                    My <span className="text-gradient-blue-cyan">Projectsss</span>
+                    My <span className="text-gradient-blue-cyan">Projects</span>
                 </h2>
 
                 {/* فلتر الكاتيجوري */}
@@ -192,7 +192,7 @@ export default function ProjectsSection() {
                         <button
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
-                            className={`px-4 py-2 rounded-lg text-sm md:text-base transition-all duration-300 ${selectedCategory === cat
+                            className={`px-4 py-2 rounded-lg text-sm md:text-base transition-all duration-300 cursor-pointer ${selectedCategory === cat
                                 ? "bg-gradient-button-primary shadow-lg"
                                 : "card-glass hover:text-primary"
                                 }`}
@@ -232,7 +232,7 @@ function ProjectCard({ project }: { project: Project }) {
                     {project.tags.slice(0, 2).map((tag) => (
                         <span
                             key={tag}
-                            className="badge-primary px-2 py-1 rounded-md text-xs font-medium"
+                            className="badge-primar bg-second font-bold px-2 py-1 rounded-md text-xs font-"
                         >
                             {tag}
                         </span>
