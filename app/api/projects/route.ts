@@ -26,52 +26,6 @@ export async function GET(req: NextRequest) {
 
 }
 
-// export async function POST(req: NextRequest) {
-//     try {
-//         await connectDB();
-//         const data = await parseFormData(req);
-
-//         // رفع الصورة على Cloudinary
-//         const result = await cloudinary.uploader.upload(data.image.filepath, {
-//             folder: "portfolio-projects",
-//         });
-
-//         // دمج البيانات النصية + URL الصورة
-//         const projectData = {
-//             ...data.fields,
-//             image: result.secure_url,
-//             order: Number(data.fields.order),
-//         };
-
-//         // Validation باستخدام Zod
-//         const validatedData = projectSchema.parse(projectData);
-
-//         const project = await Project.create(validatedData);
-
-//         return apiResponse({
-//             statusCode: 201,
-//             status: "success",
-//             message: "Project created successfully",
-//             data: project,
-//         });
-//     } catch (error: any) {
-//         if (error.name === "ZodError") {
-//             return apiResponse({
-//                 statusCode: 400,
-//                 status: "error",
-//                 message: error.errors[0].message,
-//                 data: null,
-//             });
-//         }
-
-//         return apiResponse({
-//             statusCode: 500,
-//             status: "error",
-//             message: error.message,
-//             data: null,
-//         });
-//     }
-// }
 export async function POST(req: NextRequest) {
     try {
         await connectDB();
@@ -80,14 +34,28 @@ export async function POST(req: NextRequest) {
         const formData = await req.formData();
 
         // جلب الصورة
+
         const imageFile = formData.get("image") as Blob;
         if (!imageFile) throw new Error("Image file is required");
 
         // تحويل باقي الحقول إلى object
         const fields: any = {};
+        let tags: string[] = [];
         formData.forEach((value, key) => {
             if (key !== "image") fields[key] = value;
         });
+        if (fields.tags) {
+            try {
+                tags = JSON.parse(fields.tags);
+
+                if (!Array.isArray(tags)) {
+                    throw new Error("Tags must be an array");
+                }
+            } catch {
+                throw new Error("Invalid tags format");
+            }
+        }
+
         const buffer = Buffer.from(await imageFile.arrayBuffer());
 
         // رفع الصورة على Cloudinary
@@ -114,14 +82,15 @@ export async function POST(req: NextRequest) {
             codeUrl: fields.codeUrl,
             demoUrl: fields.demoUrl,
             order: Number(fields.order),
+            tags,
         };
-
+        console.log("PROJECT DATA TO SAVE:", projectData);
         // Validation باستخدام Zod
         const validatedData = projectSchema.parse(projectData);
 
         // حفظ المشروع في DB
         const project = await Project.create(validatedData);
-
+        console.log("SAVED PROJECT:", project);
         return apiResponse({
             statusCode: 201,
             status: "success",

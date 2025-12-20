@@ -10,4 +10,12 @@ export const projectSchema = z.object({
     codeUrl: z.url({ message: "Invalid code URL" }),
     demoUrl: z.url({ message: "Invalid demo URL" }),
     order: z.number().int().min(0),
+    tags: z
+        .array(
+            z.string()
+                .trim()
+                .min(1, "Tag cannot be empty")
+                .max(20, "Tag is too long")
+        )
+        .min(1, "At least one tag is required"),
 })

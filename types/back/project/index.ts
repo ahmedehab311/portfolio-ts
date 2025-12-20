@@ -6,6 +6,7 @@ export interface TProjectSchema extends Document {
     image: string,
     codeUrl: string,
     demoUrl: string,
-    order: number
+    order: number,
+    tags: string[]
 
 }

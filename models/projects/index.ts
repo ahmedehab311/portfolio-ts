@@ -35,6 +35,7 @@ const ProjectSchema = new Schema<TProjectSchema>({
         type: Number,
         default: 0,
     },
+    tags: { type: [String], required: true, default: [] },
 },
     {
         timestamps: true,
@@ -42,4 +43,4 @@ const ProjectSchema = new Schema<TProjectSchema>({
 
 )
 
-export const Project = models["Project"] || model("Project", ProjectSchema);
+export const Project = models["Project"] || model<TProjectSchema>("Project", ProjectSchema);
