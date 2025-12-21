@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/db";
 import { Project } from "@/models/projects";
-import { projectSchema } from "../../validators/project.schema";
+import { updateProjectSchema } from "../../validators/project.schema";
 import { apiResponse } from "@/lib/apiResponseBackend";
 import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
@@ -12,29 +12,37 @@ export async function PUT(req: NextRequest) {
     try {
         await connectDB();
 
+        // 1️⃣ استخراج الـ id
         const url = new URL(req.url);
-        const id = url.pathname.split("/").pop(); // آخر جزء من المسار هو الـ id
+        const id = url.pathname.split("/").pop();
         if (!id) throw new Error("Project id is required");
 
+        // 2️⃣ قراءة الـ formData
         const formData = await req.formData();
         const imageFile = formData.get("image") as Blob | null;
 
-        // جلب المشروع القديم
-        const existingProject = await Project.findById(id);
-        if (!existingProject) {
-            return apiResponse({ statusCode: 404, status: "error", message: "Project not found", data: null });
-        }
+        // 3️⃣ تجميع الداتا اللي جاية بس
+        const updatePayload: any = {};
 
-        // تحويل باقي الحقول إلى object
-        const fields: any = {};
         formData.forEach((value, key) => {
-            if (key !== "image") fields[key] = value;
+            if (key !== "image") {
+                updatePayload[key] = value;
+            }
         });
 
-        // رفع الصورة الجديدة إذا موجودة
-        let imageUrl = existingProject.image;
+        // 4️⃣ تحويل الأنواع
+        if (updatePayload.order !== undefined) {
+            updatePayload.order = Number(updatePayload.order);
+        }
+
+        if (updatePayload.tags) {
+            updatePayload.tags = JSON.parse(updatePayload.tags);
+        }
+
+        // 5️⃣ رفع صورة جديدة (لو موجودة)
         if (imageFile && imageFile.size > 0) {
             const buffer = Buffer.from(await imageFile.arrayBuffer());
+
             const uploadResult = await new Promise<any>((resolve, reject) => {
                 const uploadStream = cloudinary.uploader.upload_stream(
                     { folder: "portfolio-projects" },
@@ -45,47 +53,61 @@ export async function PUT(req: NextRequest) {
                 );
                 streamifier.createReadStream(buffer).pipe(uploadStream);
             });
-            imageUrl = uploadResult.secure_url;
+
+            updatePayload.image = uploadResult.secure_url;
         }
 
-        // دمج القديم والجديد
-        const updatedData = {
-            ...existingProject.toObject(),
-            ...fields,
-            image: imageUrl,
-            order: fields.order ? Number(fields.order) : existingProject.order,
-        };
+        // 6️⃣ Validation (جزئي)
+        const validatedData = updateProjectSchema.parse(updatePayload);
 
-        const validatedData = projectSchema.parse(updatedData);
+        // 7️⃣ التحديث
+        const project = await Project.findByIdAndUpdate(
+            id,
+            { $set: validatedData },
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
 
-        // تحديث المشروع
-        const project = await Project.findByIdAndUpdate(id, validatedData, { new: true });
+        if (!project) {
+            return apiResponse({
+                statusCode: 404,
+                status: "error",
+                message: "Project not found",
+                data: null,
+            });
+        }
 
+        // 8️⃣ Success
         return apiResponse({
             statusCode: 200,
             status: "success",
             message: "Project updated successfully",
             data: project,
         });
+
     } catch (error: any) {
-        if (error.name === "ZodError") {
+        // Zod Errors
+        if (error?.issues) {
             return apiResponse({
                 statusCode: 400,
                 status: "error",
-                message: error.errors.map((e: any) => e.message).join(", "),
+                message: error.issues.map((e: any) => e.message).join(", "),
                 data: null,
             });
         }
 
+        console.error("PUT /api/projects ERROR:", error);
+
         return apiResponse({
             statusCode: 500,
             status: "error",
-            message: error.message,
+            message: error.message || "Internal server error",
             data: null,
         });
     }
 }
-
 export async function DELETE(req: NextRequest) {
     try {
         await connectDB();
