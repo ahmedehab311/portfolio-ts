@@ -1,5 +1,3 @@
-// components/heroSection/skillsHeroServer.ts
-import mongoose from "mongoose";
 import Skill, { TSkills } from "@/models/Skill"; // المسار حسب مشروعك
 import { connectDB } from "@/lib/db"; // لو عندك function للاتصال بالDB
 

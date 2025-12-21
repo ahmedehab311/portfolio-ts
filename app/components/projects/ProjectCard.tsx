@@ -15,7 +15,7 @@ export default function ProjectCard({ project }: any) {
                     {project.tags.slice(0, 2).map((tag: any) => (
                         <span
                             key={tag}
-                            className="badge-primar bg-second font-bold px-2 py-1 rounded-md text-xs font-"
+                            className="dark:badge-primary bg-second font-bold px-2 py-1 rounded-md text-xs font-"
                         >
                             {tag}
                         </span>
