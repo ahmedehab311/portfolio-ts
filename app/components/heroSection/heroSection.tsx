@@ -6,12 +6,17 @@ import { SiJavascript, SiNextdotjs, SiTypescript } from 'react-icons/si';
 import SkillsHero from './skillsHero';
 import SocialIconsWithCV from './socialIconsWithCV';
 import MyDescrption from './myDescrption';
+import { TSkills } from '@/models/Skill';
+import { LeanSkill } from './skillsHeroServer';
 // import Loading from '@/app/loading';
 interface TMousePosition {
     x: number;
     y: number;
 }
-export default function HeroSection() {
+interface HeroSectionProps {
+    skills: LeanSkill[];
+}
+export default function HeroSection({ skills }: HeroSectionProps) {
     const codeRef = useRef<HTMLDivElement>(null);
     const { theme, setTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -138,7 +143,7 @@ export default function HeroSection() {
 
                 <MyDescrption colors={colors} />
 
-                < SkillsHero />
+                <SkillsHero skills={skills} />
 
 
                 <SocialIconsWithCV colors={colors} isDark={isDark} />

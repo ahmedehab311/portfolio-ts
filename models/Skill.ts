@@ -1,12 +1,19 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
 
 export interface TSkills extends Document {
     name: string;
     icon?: string
+    color: string;
+    order?: number;
 }
 
 const SkillSchema = new Schema<TSkills>({
     name: { type: String, required: true },
-    icon: String
+    icon: String,
+    color: { type: String, required: true },
+    order: { type: Number }
 })
-export default mongoose.models.skill || mongoose.model<TSkills>("skills", SkillSchema)
+
+const Skill: Model<TSkills> = mongoose.models.Skill || mongoose.model<TSkills>("Skill", SkillSchema);
+
+export default Skill;

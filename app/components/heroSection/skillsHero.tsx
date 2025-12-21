@@ -3,6 +3,9 @@ import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from "react-icons/ri";
 import { TSkillsHero } from '@/types/heroSectionType';
 import { useSkillsHero } from '@/hooks/useSkillsHero';
+import { TSkills } from '@/models/Skill';
+import { LeanSkill } from './skillsHeroServer';
+
 export const skillsIconsMap: Record<string, any> = {
     FaReact,
     SiJavascript,
@@ -10,7 +13,12 @@ export const skillsIconsMap: Record<string, any> = {
     SiTypescript,
     RiTailwindCssFill, SiNodedotjs
 };
-export default function SkillsHero() {
+interface HeroSectionProps {
+    skills: LeanSkill[];
+}
+
+export default function SkillsHero({ skills }: HeroSectionProps) {
+    console.log("skills", skills);
 
     const { data, isLoading, isError } = useSkillsHero()
 
@@ -24,7 +32,7 @@ export default function SkillsHero() {
                     />
                 ))}
 
-            {data?.map((skill) => {
+            {skills?.map((skill: any) => {
                 const Icon = skillsIconsMap[skill.icon];
 
                 return (
