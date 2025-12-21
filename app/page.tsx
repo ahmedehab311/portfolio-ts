@@ -2,6 +2,7 @@ import HeroSection from "./components/heroSection/heroSection";
 import Header from "./components/partials/header/header";
 import ProjectsSection from "./components/projects/ProjectsSection.client";
 import { getProjects } from "./components/projects/ProjectCardServer";
+export const dynamic = "force-dynamic";
 export default async function Home() {
   const projects = await getProjects();
 
