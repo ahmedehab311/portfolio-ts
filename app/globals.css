@@ -101,7 +101,7 @@
   --badge-text: var(--badge-text-light);
   --cursor-effect: var(--cursor-effect-light);
 
-  
+
 }
 
 @theme inline {
@@ -321,6 +321,13 @@ body {
   background: linear-gradient(to right,
       var(--button-gradient-from),
       var(--button-gradient-to));
+}
+
+@utility hover-glow {
+  &:hover {
+    box-shadow: 0 0 15px var(--button-gradient-from);
+    border-color: var(--button-gradient-to);
+  }
 }
 
 @utility card-glass {

@@ -38,8 +38,6 @@ export default function ProjectsSection() {
             new Set(projectsData.map(project => project.category))
         )
     ];
-
-
     return (
         <section className="page- my-8">
             {/* العنوان */}

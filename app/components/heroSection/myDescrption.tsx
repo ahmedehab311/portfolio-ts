@@ -1,38 +1,106 @@
 
 import { TSkillsHeroColors } from "@/types/heroSectionType";
-import { useState, useEffect } from "react";
-interface TDescrption {
-    colors: TSkillsHeroColors;
-}
-//  textPrimary: isDark ? 'text-white' : 'text-gray-900',
-//         textSecondary: isDark ? 'text-gray-300' : 'text-gray-700',
-//         textAccent: isDark ? 'text-blue-400' : 'text-blue-600',
-export default function MyDescrption({ colors }: TDescrption) {
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
+import { motion } from "framer-motion";
+
+export default function MyDescrption() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2, // بيخلي العناصر تظهر ورا بعضها بفرق زمني
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    };
     return (
-        <>
-            <h1
-                className={`text-4xl md:text-5xl lg:text-6xl font-bold  text-gray-900' dark:text-white    mb-6`}
+        // <motion.div
+        //     variants={containerVariants}
+        //     initial="hidden"
+        //     animate="visible"
+        // >
+        //     {/* العنوان الرئيسي */}
+        //     <motion.h1
+        //         variants={itemVariants}
+        //         className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight"
+        //     >
+        //         Full Stack <br className="md:hidden" />
+        //         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+        //             Developer
+        //         </span>
+        //     </motion.h1>
+
+        //     {/* الوصف المعدل */}
+        //     <motion.p
+        //         variants={itemVariants}
+        //         className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed"
+        //     >
+        //         Hi, I&apos;m <span className="font-bold text-gray-900 dark:text-white border-b-2 border-blue-500/30">Ahmed Ehab</span>.
+        //         With over <span className="text-blue-500 font-semibold">1.5 years</span> of professional experience at
+        //         <span className="italic"> OtherLogic</span>, I specialize in building high-performance
+        //         web applications.
+        //         <br className="hidden md:block" /><br className="hidden md:block" />
+        //         While my heart belongs to <span className="font-medium text-gray-900 dark:text-white">Frontend Excellence</span>,
+        //         I bridge the gap between design and logic by crafting scalable <span className="font-medium text-gray-900 dark:text-white">Full-stack solutions</span> with MongoDB and Node.js.
+        //     </motion.p>
+
+        //     {/* أزرار سريعة (Optional) لزيادة التفاعل */}
+        //     <motion.div variants={itemVariants} className="flex gap-4">
+        //         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-medium">
+        //             <span className="relative flex h-2 w-2">
+        //                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+        //                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+        //             </span>
+        //             Available for Projects
+        //         </div>
+        //     </motion.div>
+        // </motion.div>
+        <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-start"
+        >
+            {/* العنوان: احترافي وشامل */}
+            <motion.h1
+                variants={itemVariants}
+                className="text-4xl md:text-5xl lg:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
             >
-                Frontend{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                Software <br className="hidden md:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400">
                     Developer
                 </span>
-            </h1>
+            </motion.h1>
 
-            <p
-                className={`text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl`}
+            {/* الوصف: صادق ومركز على قوتك */}
+            <motion.p
+                variants={itemVariants}
+                className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed"
             >
-                Welcome to my corner of the web! I&apos;m{' '}
-                <span
-                    className={`font-semibold  text-gray-900 dark:text-white `}
-                >
-                    Ahmed Ehab
-                </span>
-                , a passionate front-end developer with a talent for transforming ideas into captivating experiences. With a blend of creativity and technical expertise, I strive to design and build user-friendly interfaces that make a lasting impact.
-            </p>
+                Hi, I&apos;m <span className="font-bold text-gray-900 dark:text-white">Ahmed Ehab</span>.
+                I have <span className="text-blue-500 font-semibold">1.5 years</span> of professional experience as a
+                <span className="font-semibold italic"> Frontend Developer</span> at
+                <span className="text-blue-600 dark:text-blue-400"> OtherLogic</span>.
+                <br /><br />
+                My core expertise lies in crafting <span className="font-medium text-gray-900 dark:text-white">Exceptional User Interfaces</span>,
+                while I expand my horizons by building end-to-end applications using
+                <span className="font-medium text-gray-900 dark:text-white"> Next.js, Node.js, and MongoDB</span>.
+            </motion.p>
 
-        </>
+            {/* Badge الحالة الحالية */}
+            <motion.div variants={itemVariants} className="flex gap-4">
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-medium">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    Available for Projects
+                </div>
+            </motion.div>
+        </motion.div>
     )
 }

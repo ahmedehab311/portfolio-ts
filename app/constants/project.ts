@@ -7,7 +7,6 @@ export enum ProjectCategory {
     FULLSTACK = "fullstack",
 }
 
-// Array of strings للاستخدام مع Zod
 export const ProjectCategoryValues = Object.values(ProjectCategory);
 
 export enum ProjectStatus {
@@ -16,3 +15,9 @@ export enum ProjectStatus {
 }
 
 export const ProjectStatusValues = Object.values(ProjectStatus);
+
+export enum AllSkilsCategory {
+    FRONTEND = "frontend",
+    BACKEND = "backend",
+    TOOLS = "tools",
+}

@@ -1,6 +1,6 @@
 type ApiResponse = {
     statusCode: number
-    status: "success" | "error";
+    status: "success" | "error" | "fail";
     message: string;
     data: any;
 };

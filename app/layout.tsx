@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider >
-          <ThemeProvider defaultTheme="light" enableSystem={false} attribute="class">
+          <ThemeProvider defaultTheme="dark" enableSystem={false} attribute="class">
 
             {children}
           </ThemeProvider>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ProjectCategory } from "@/app/constants/project";
 import ProjectCard from "./ProjectCard";
 import { TProjectSchema } from "@/types/back/project";
+import { motion, AnimatePresence } from "framer-motion";
 type Project = {
     _id: string;
     title: string;
@@ -43,19 +44,53 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     ];
 
     return (
-        <section className="my-8">
-            {/* العنوان */}
-            <div className="mb-10 text-center">
-                <h2 className="mb-6">
-                    My <span className="text-gradient-blue-cyan">Projects</span>
-                </h2>
+        // <section className="my-8">
+        //     <div className="mb-10 text-center">
+        //         <h2 className="mb-6">
+        //             My <span className="text-gradient-blue-cyan">Projects</span>
+        //         </h2>
 
-                <div className="flex flex-wrap gap-3 justify-center">
+        //         <div className="flex flex-wrap gap-3 justify-center">
+        //             {categories.map(cat => (
+        //                 <button
+        //                     key={cat}
+        //                     onClick={() => setSelectedCategory(cat as ProjectCategory)}
+        //                     className={`px-4 py-2 rounded-lg transition ${selectedCategory === cat
+        //                         ? "bg-gradient-button-primary"
+        //                         : "card-glass"
+        //                         }`}
+        //                 >
+        //                     {cat === ProjectCategory.ALL ? "All Projects" : cat}
+        //                 </button>
+        //             ))}
+        //         </div>
+        //     </div>
+
+        //     {/* الكروت */}
+        //     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        //         {filteredProjects.map(project => (
+        //             <ProjectCard key={project._id} project={project} />
+        //         ))}
+        //     </div>
+        // </section>
+        <section id="projects" className="py-20 scroll-mt-20">
+            <div className="mb-12 text-center">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-3xl md:text-4xl font-bold mb-6"
+                >
+                    Featured <span className="text-gradient-blue-cyan">Projects</span>
+                </motion.h2>
+
+                {/* Filter Buttons */}
+                {/* <div className="flex flex-wrap gap-3 justify-center">
                     {categories.map(cat => (
                         <button
                             key={cat}
                             onClick={() => setSelectedCategory(cat as ProjectCategory)}
-                            className={`px-4 py-2 rounded-lg transition ${selectedCategory === cat
+                            className={`px-4 py-2 rounded-lg cursor-pointer transition ${selectedCategory === cat
                                 ? "bg-gradient-button-primary"
                                 : "card-glass"
                                 }`}
@@ -63,15 +98,61 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                             {cat === ProjectCategory.ALL ? "All Projects" : cat}
                         </button>
                     ))}
+                </div> */}
+                <div className="flex flex-wrap gap-3 justify-center">
+                    {categories.map((cat) => {
+                        const isActive = selectedCategory === cat;
+
+                        return (
+                            <motion.button
+                                key={cat}
+                                onClick={() => setSelectedCategory(cat as ProjectCategory)}
+                                // Hover & Tap Effects
+                                whileHover={{ y: -2, scale: 1.02 }}
+                                whileTap={{ scale: 0.95 }}
+                                className={`relative px-6 py-2.5 rounded-xl font-medium transition-colors duration-300 cursor-pointer overflow-hidden ${isActive ? "text-white" : "card-glass hover:text-primary"
+                                    }`}
+                            >
+                                {/* نص الزرار */}
+                                <span className="relative z-10">
+                                    {cat === ProjectCategory.ALL ? "All Projects" : cat}
+                                </span>
+
+                                {/* الحركة الانسيابية للخلفية (The Magic) */}
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="activeTab" // ده بيخلي الخلفية تتزحلق بين الزراير
+                                        className="absolute inset-0 bg-gradient-button-primary shadow-lg shadow-blue-500/20"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                            </motion.button>
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* الكروت */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map(project => (
-                    <ProjectCard key={project._id} project={project} />
-                ))}
-            </div>
-        </section>
+
+            {/* Projects Grid with Animation */}
+            <motion.div
+                layout // دي بتخلي الكروت تتحرك لمكانها الجديد بنعومة
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+                <AnimatePresence mode="popLayout">
+                    {filteredProjects.map((project) => (
+                        <motion.div
+                            key={project._id}
+                            layout
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <ProjectCard project={project} />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </motion.div>
+        </section >
     );
 }

@@ -64,6 +64,27 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                 >
+            
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                </svg>
+            </button>
+            <button
+                onClick={handleViewCV}
+                className="btn-primary-global"
+            >
+                <span>Contact Me</span>
+                <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
                     <path
                         strokeLinecap="round"
                         strokeLinejoin="round"

@@ -7,13 +7,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 
 const Header = () => {
-
     const router = useRouter();
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState<string>("home");
+    useEffect(() => {
+        const observers = [];
+        const sections = ["home", "projects", "skills", "experience", "contact"];
 
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', 
+            threshold: 0
+        };
+
+        const observerCallback = (entries: any) => {
+            entries.forEach((entry: any) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, []);
     useEffect(() => {
         setMounted(true);
 
@@ -27,9 +53,9 @@ const Header = () => {
 
     const navLinks = [
         { name: "Home", href: "#home" },
-        { name: "Skills", href: "#skills" },
-        { name: "Resume", href: "#resume" },
         { name: "Projects", href: "#projects" },
+        { name: "Skills", href: "#skills" },
+        { name: "Experience", href: "#experience" },
         { name: "Contact", href: "#contact" },
     ];
 
@@ -93,7 +119,11 @@ const Header = () => {
                                     className="relative group  font-medium text-sm uppercase tracking-wider cursor-pointer"
                                 >
                                     {link.name}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                                    <motion.span
+                                        className={`absolute -bottom-1 left-0 h-0.5 bg-primary`}
+                                        initial={false}
+                                        animate={{ width: activeSection === link.href.replace('#', '') ? "100%" : "0%" }}
+                                    />
                                 </button>
                             </motion.div>
                         ))}
