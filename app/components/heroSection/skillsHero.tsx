@@ -24,14 +24,6 @@ export default function SkillsHero({ skills }: HeroSectionProps) {
 
     return (
         <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
-            {isLoading &&
-                Array.from({ length: 5 }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="w-32 h-10 rounded-lg animate-pulse   bg-white/80 dark:bg-gray-800/50   border border-gray-200 dark:border-gray-700 "
-                    />
-                ))}
-
             {skills?.map((skill: any) => {
                 const Icon = skillsIconsMap[skill.icon];
 
@@ -47,6 +39,7 @@ export default function SkillsHero({ skills }: HeroSectionProps) {
                     </div>
                 );
             })}
+
         </div>
 
     )
