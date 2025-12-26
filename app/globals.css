@@ -104,6 +104,32 @@
 
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* الخلفية اللي السكرول بيتحرك عليها */
+::-webkit-scrollbar-track {
+  background: #0f172a;
+  /* لون غامق جداً يتماشى مع الـ Dark Mode */
+}
+
+/* الجزء اللي بيتحرك (المقبض) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #2563eb, #22d3ee);
+  /* تدرج من الأزرق للـ Cyan */
+  border-radius: 5px;
+  /* يخلي الحواف دائرية */
+  border: 2px solid #0f172a;
+  /* بيعمل مسافة بسيطة بين المقبض والاطار */
+}
+
+/* لما المستخدم يقف بالماوس على السكرول */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #1d4ed8, #0891b2);
+  /* يغمق سنة عند الـ Hover */
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -236,32 +262,6 @@ body {
   @apply bg-[var(--card)] hover:bg-[var(--card-hover)] transition-colors;
 }
 
-/* @layer components {
-  .cardsss {
-    @apply
-  }
-} */
-
-/* @layer base {
-  h2 {
-    @apply text-3xl
-  }
-
-  h3 {
-    @apply text-2xl font-bold
-  }
-
-  h4 {
-    @apply text-xl font-medium
-  }
-
-  h5 {
-    @apply text-xl font-medium
-  }
-  p{
-
-  }
-} */
 @layer base {
   h1 {
     @apply text-4xl md:text-5xl font-bold;

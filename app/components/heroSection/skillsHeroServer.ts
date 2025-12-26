@@ -21,7 +21,7 @@ export interface LeanSkill {
     color: string;
     order?: number;
 }
-export async function getSkillsHero(): Promise<LeanSkill[]> {
+export default async function getSkillsHero(): Promise<LeanSkill[]> {
     await connectDB();
 
     const skills = await SkillsHero.find({}).lean()

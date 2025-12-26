@@ -180,14 +180,14 @@ export default function ProjectCard({ project }: any) {
 
       
                 <div className="mt-auto flex items-center gap-3 pt-4 border-t border-white/5">
-                    <a href={project.codeUrl} className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium transition-all">
+                    <a href={project.codeUrl} className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-/5 border-white/10 hover:border-primary/50 border border-/10 text-xs font-medium transition-all">
                         <Github size={14} /> Code
                     </a>
                     <a href={project.demoUrl} className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-gradient-button-primary text-white text-xs font-medium transition-all shadow-lg shadow-primary/20">
                         <ExternalLink size={14} /> Demo
                     </a>
                 </div>
-            </div>
+            </div>  
         </div>
     )
 }

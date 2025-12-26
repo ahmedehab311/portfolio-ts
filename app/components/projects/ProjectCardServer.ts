@@ -1,7 +1,7 @@
 import { connectDB } from "@/lib/db";
 import { Project } from "@/models/projects";
 
-export async function getProjects() {
+export default async function getProjects() {
   await connectDB();
 
   const projects = await Project.find({})

@@ -4,6 +4,7 @@ import { ProjectCategory } from "@/app/constants/project";
 import ProjectCard from "./ProjectCard";
 import { TProjectSchema } from "@/types/back/project";
 import { motion, AnimatePresence } from "framer-motion";
+import HeaderComponents from "../headerComponents";
 type Project = {
     _id: string;
     title: string;
@@ -75,30 +76,11 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         // </section>
         <section id="projects" className="py-20 scroll-mt-20">
             <div className="mb-12 text-center">
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-3xl md:text-4xl font-bold mb-6"
-                >
-                    Featured <span className="text-gradient-blue-cyan">Projects</span>
-                </motion.h2>
-
-                {/* Filter Buttons */}
-                {/* <div className="flex flex-wrap gap-3 justify-center">
-                    {categories.map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setSelectedCategory(cat as ProjectCategory)}
-                            className={`px-4 py-2 rounded-lg cursor-pointer transition ${selectedCategory === cat
-                                ? "bg-gradient-button-primary"
-                                : "card-glass"
-                                }`}
-                        >
-                            {cat === ProjectCategory.ALL ? "All Projects" : cat}
-                        </button>
-                    ))}
-                </div> */}
+                <HeaderComponents
+                    leftText="Featured"
+                    rightText="Projects"
+                    description="A collection of web applications where design meets functional logic, built to solve real-world problems."
+                />
                 <div className="flex flex-wrap gap-3 justify-center">
                     {categories.map((cat) => {
                         const isActive = selectedCategory === cat;

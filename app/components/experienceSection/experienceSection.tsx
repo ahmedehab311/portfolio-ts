@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Briefcase, Calendar, CheckCircle2 } from "lucide-react";
+import HeaderComponents from "../headerComponents";
 
 
 export default function ExperienceSection({ experiences }: { experiences: any[] }) {
@@ -9,13 +10,11 @@ export default function ExperienceSection({ experiences }: { experiences: any[] 
     return (
         <section id="experience" className="py-24 px-4 relative overflow-hidden">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                        Professional <span className="text-gradient-blue-cyan">Journey</span>
-                    </h2>
-                </div>
-
+                <HeaderComponents
+                    leftText="Professional"
+                    rightText="Journey"
+                    description="A summary of my current role and professional contributions as a developer"
+                />
                 {/* Container الأب */}
                 <div className="relative">
 
@@ -36,8 +35,8 @@ export default function ExperienceSection({ experiences }: { experiences: any[] 
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     className={`relative w-full flex ${isSingle
-                                            ? "justify-center"
-                                            : (isEven ? "md:justify-start" : "md:justify-end")
+                                        ? "justify-center"
+                                        : (isEven ? "md:justify-start" : "md:justify-end")
                                         } mb-12 md:mb-0`}
                                 >
                                     {/* الدائرة اللي في النص (Timeline Dot) */}

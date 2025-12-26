@@ -1,9 +1,6 @@
 import { SiJavascript, SiNextdotjs, SiTypescript, SiNodedotjs } from 'react-icons/si';
 import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from "react-icons/ri";
-import { TSkillsHero } from '@/types/heroSectionType';
-import { useSkillsHero } from '@/hooks/useSkillsHero';
-import { TSkills } from '@/models/Skill';
 import { LeanSkill } from './skillsHeroServer';
 
 export const skillsIconsMap: Record<string, any> = {
@@ -18,9 +15,6 @@ interface HeroSectionProps {
 }
 
 export default function SkillsHero({ skills }: HeroSectionProps) {
-    console.log("skills", skills);
-
-    const { data, isLoading, isError } = useSkillsHero()
 
     return (
         <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
