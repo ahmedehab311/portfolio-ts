@@ -1,9 +1,25 @@
+import { apiResponse } from "@/lib/apiResponseBackend";
 import { connectDB } from "@/lib/db";
 import { Contact } from "@/models/contact/contact";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function GET() {
+    try {
+        await connectDB();
+        const contact = await Contact.find().sort({ order: 1 });
+        if (contact.length === 0) {
+
+            return apiResponse({ statusCode: 404, status: "fail", message: "No contact found", data: [] })
+        }
+        return apiResponse({ statusCode: 200, status: "success", message: "contact fetched successfully", data: contact })
+    } catch (error: any) {
+        return apiResponse({ statusCode: 500, status: "error", message: `${error.message} ||contact fetched successfully`, data: null })
+    }
+
+}
 
 export async function POST(req: NextRequest) {
     try {
@@ -16,8 +32,8 @@ export async function POST(req: NextRequest) {
 
         // 2. إرسال الإيميل لنفسك
         await resend.emails.send({
-            from: "Portfolio <onboarding@resend.dev>", 
-            to: "ahmedehab.aa47@gmail.com", 
+            from: "Portfolio <onboarding@resend.dev>",
+            to: "ahmedehab.aa47@gmail.com",
             subject: `New Message: ${subject}`,
             html: `
         <h2>You got a new message from your portfolio!</h2>
