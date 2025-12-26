@@ -1,21 +1,25 @@
-
-import { TSkillsHeroColors } from "@/types/heroSectionType";
-import { motion } from "framer-motion";
-
+import { motion, Variants } from "framer-motion";
 export default function MyDescrption() {
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2, // بيخلي العناصر تظهر ورا بعضها بفرق زمني
+                staggerChildren: 0.2,
             },
         },
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut" // دلوقتي هيفهم إن دي Easing function صحيحة
+            }
+        },
     };
     return (
         // <motion.div
@@ -65,7 +69,6 @@ export default function MyDescrption() {
             animate="visible"
             className="flex flex-col items-start"
         >
-            {/* العنوان: احترافي وشامل */}
             <motion.h1
                 variants={itemVariants}
                 className="text-4xl md:text-5xl lg:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
@@ -76,7 +79,6 @@ export default function MyDescrption() {
                 </span>
             </motion.h1>
 
-            {/* الوصف: صادق ومركز على قوتك */}
             <motion.p
                 variants={itemVariants}
                 className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed"
@@ -91,7 +93,6 @@ export default function MyDescrption() {
                 <span className="font-medium text-gray-900 dark:text-white"> Next.js, Node.js, and MongoDB</span>.
             </motion.p>
 
-            {/* Badge الحالة الحالية */}
             <motion.div variants={itemVariants} className="flex gap-4">
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-medium">
                     <span className="relative flex h-2 w-2">

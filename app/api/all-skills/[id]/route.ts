@@ -1,13 +1,16 @@
 import { connectDB } from "@/lib/db";
 import { apiResponse } from "@/lib/apiResponseBackend";
 import { allSkills } from "@/models/allSkills/allSkill";
+import { NextRequest } from "next/server";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+type RouteParams = {
+    params: Promise<{ id: string }>;
+};
+
+export async function DELETE(req: NextRequest, { params }: RouteParams) {
     try {
         await connectDB();
-
-        const resolvedParams = await params;
-        const id = resolvedParams.id;
+        const { id } = await params;
 
         const deleteSkill = await allSkills.findByIdAndDelete(id);
 
@@ -21,22 +24,20 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
 }
 
-export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> | any }) {
+export async function PATCH(req: NextRequest, { params }: RouteParams) {
     try {
         await connectDB();
 
-        // 1. فك الـ params باستخدام await (مهم جداً للنسخ الجديدة)
-        const resolvedParams = await params;
-        const id = resolvedParams.id;
+        const { id } = await params;
 
-        console.log("Updating Skill with ID:", id); // اتأكد في الـ terminal إن الـ ID مطبوع صح
+
+        console.log("Updating Skill with ID:", id);
 
         const body = await req.json();
 
-        // 2. استخدم findByIdAndUpdate
         const updatedSkill = await allSkills.findByIdAndUpdate(
             id,
-            { $set: body }, // استخدم $set للتعديل الجزئي
+            { $set: body },
             {
                 new: true,
                 runValidators: true

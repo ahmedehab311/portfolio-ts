@@ -141,7 +141,7 @@ export default function HeroSection({ skills }: HeroSectionProps) {
 
             <div className="lg:w-1/2 z-10 text-center lg:text-left mb-12 lg:mb-0 mt-6" >
 
-                <MyDescrption colors={colors} />
+                <MyDescrption />
 
                 <SkillsHero skills={skills} />
 
