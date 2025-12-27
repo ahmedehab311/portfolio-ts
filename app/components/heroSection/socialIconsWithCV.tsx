@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { TSkillsHero } from '@/types/heroSectionType';
-import { FaFacebook, FaLinkedin, FaGithub, FaCode, FaLaptopCode, FaReact } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { motion } from "framer-motion";
 export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
@@ -53,9 +54,11 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
             </div>
 
             <div className="flex gap-4 flex-wrap items-center">
-                <button
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={handleViewCV}
-                    className="btn-primary-global"
+                    className="btn-primary-global flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium shadow-lg shadow-blue-500/20 transition-all"
                 >
                     <span>View CV</span>
                     <svg
@@ -65,15 +68,15 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                     >
-
+                        {/* أيقونة تحميل أو سهم للخارج تعطي إيحاء أفضل بفتح ملف */}
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                         ></path>
                     </svg>
-                </button>
+                </motion.button>
                 <button
                     onClick={() => {
                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });

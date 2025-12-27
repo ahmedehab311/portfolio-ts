@@ -5,8 +5,9 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className={` w-full top-0 left-0 z-50  duration-500 backdrop-blur-xl shadow-lg bg-linear-to-br  dark:from-gray-900 dark:via-blue-900  dark:to-gray-900  from-blue-50 via-blue-100 to-white px-4 md:px-8 lg:px-16 py-12 transition-all duration-300`}>
-            <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <footer className="w-full z-50 backdrop-blur-xl shadow-lg bg-linear-to-br dark:from-gray-900 dark:via-blue-900 dark:to-gray-900 from-blue-50 via-blue-100 to-white px-4 py-8 transition-all duration-300">
+
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-8">
 
                 <div className="text-center md:text-left">
                     <motion.h2
@@ -23,24 +24,33 @@ export default function Footer() {
                     </p>
                 </div>
 
-                <nav className="flex gap-6 text-sm font-medium">
+                {/* 2. اللينكات (في النص تماماً) */}
+                <nav className="flex justify-center gap-6 text-sm font-medium">
+                    <a href="#home" className="hover:text-blue-500 transition-colors">Home</a>
                     <a href="#projects" className="hover:text-blue-500 transition-colors">Projects</a>
                     <a href="#experience" className="hover:text-blue-500 transition-colors">Experience</a>
-                    <a href="#contact" className="hover:text-blue-500 transition-colors">Contact</a>
+                    <a href="#skills" className="hover:text-blue-500 transition-colors">Skills</a>
                 </nav>
 
-                <div className="flex gap-4">
-                    <a href="https://github.com/yourusername" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 transition-all border border-white/5">
+                {/* 3. السوشيال (على اليمين) */}
+                <div className="flex justify-center md:justify-end gap-4">
+                    <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 border border-white/5 transition-all">
                         <Github size={20} />
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 transition-all border border-white/5">
+                    <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 border border-white/5 transition-all">
                         <Linkedin size={20} />
                     </a>
                 </div>
             </div>
 
-            <div className="mt-3 pt-4  text-center text-xs  italic">
-                "Code is like humor. When you have to explain it, it’s bad."
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 mt-4">
+                <div className="hidden md:block"></div>
+
+                <div className="text-center text-[12    px] md:text-xs italic px-4">
+                    "Code is like humor. When you have to explain it, it’s bad."
+                </div>
+
+                <div className="hidden md:block"></div>
             </div>
         </footer>
     );

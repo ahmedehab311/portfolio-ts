@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ProjectCategory } from "@/app/constants/project";
 import ProjectCard from "./ProjectCard";
 import { TProjectSchema } from "@/types/back/project";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import HeaderComponents from "../headerComponents";
 type Project = {
     _id: string;
@@ -18,7 +18,6 @@ type Project = {
     order: number;
 };
 
-// تعريف props للـ component
 type ProjectsSectionProps = {
     projects: Project[];
 };
@@ -43,37 +42,19 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         ProjectCategory.ALL,
         ...Array.from(new Set(projects.map(p => p.category))),
     ];
-
+    const cardVariants: Variants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: i * 0.1, // ده بيعمل تأثير إن الكروت بتظهر ورا بعضها
+                duration: 0.5,
+                ease: "easeOut"
+            }
+        })
+    };
     return (
-        // <section className="my-8">
-        //     <div className="mb-10 text-center">
-        //         <h2 className="mb-6">
-        //             My <span className="text-gradient-blue-cyan">Projects</span>
-        //         </h2>
-
-        //         <div className="flex flex-wrap gap-3 justify-center">
-        //             {categories.map(cat => (
-        //                 <button
-        //                     key={cat}
-        //                     onClick={() => setSelectedCategory(cat as ProjectCategory)}
-        //                     className={`px-4 py-2 rounded-lg transition ${selectedCategory === cat
-        //                         ? "bg-gradient-button-primary"
-        //                         : "card-glass"
-        //                         }`}
-        //                 >
-        //                     {cat === ProjectCategory.ALL ? "All Projects" : cat}
-        //                 </button>
-        //             ))}
-        //         </div>
-        //     </div>
-
-        //     {/* الكروت */}
-        //     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        //         {filteredProjects.map(project => (
-        //             <ProjectCard key={project._id} project={project} />
-        //         ))}
-        //     </div>
-        // </section>
         <section id="projects" className="py-20 scroll-mt-20">
             <div className="mb-12 text-center">
                 <HeaderComponents
@@ -115,20 +96,21 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             </div>
 
 
-            {/* Projects Grid with Animation */}
             <motion.div
-                layout // دي بتخلي الكروت تتحرك لمكانها الجديد بنعومة
+                layout
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
                 <AnimatePresence mode="popLayout">
-                    {filteredProjects.map((project) => (
+                    {filteredProjects.map((project, index) => (
                         <motion.div
                             key={project._id}
                             layout
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            custom={index}
+                            variants={cardVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
                             exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3 }}
                         >
                             <ProjectCard project={project} />
                         </motion.div>

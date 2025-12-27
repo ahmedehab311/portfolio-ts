@@ -67,7 +67,7 @@ export default function AlSkillsSection({ skills }: { skills: Skill[] }) {
                             {skill.tags.map(tag => (
                                 <span
                                     key={tag}
-                                    className="px-3 py-1 text-[11px] font-semibold bg-white/5 border border-white/10 rounded-full group-hover:bg-blue-500/10 group-hover:border-blue-500/20 transition-colors"
+                                    className="px-3 py-1 text-[11px] font-semibold bg-white/9 border border-black/10 rounded-full group-hover:bg-blue-500/10 group-hover:border-blue-500/20 transition-colors"
                                 >
                                     {tag}
                                 </span>

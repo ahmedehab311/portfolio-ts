@@ -19,7 +19,7 @@ const Header = () => {
 
         const observerOptions = {
             root: null,
-            rootMargin: '-20% 0px -70% 0px', 
+            rootMargin: '-20% 0px -70% 0px',
             threshold: 0
         };
 
@@ -89,17 +89,41 @@ const Header = () => {
                         }}
                     >
                         <div className="relative">
-                            <div className="w-12 h-12 border-2 border-second rounded-lg flex items-center justify-center transform rotate-45 overflow-hidden">
+                            {/* <div className="w-12 h-12 border-2 border-gradient-blue-cyan rounded-lg flex items-center justify-center transform rotate-45 overflow-hidden">
                                 <div className="transform -rotate-45">
                                     <span className=" font-black text-lg">A</span>
                                 </div>
+                            </div> */}
+                            <div className="relative w-12 h-12 flex items-center justify-center transform rotate-45 overflow-hidden group">
+                                {/* الخلفية اللي هتعمل شكل البوردر */}
+                                <div className="absolute inset-0 p-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg">
+                                    {/* المحتوى الداخلي بخلفية غامقة عشان يظهر البوردر */}
+                                    <div className="w-full h-full  dark:bg-gradient-blue-cyan rounded-[6px] flex items-center justify-center">
+                                        <div className="transform -rotate-45">
+                                            <span className="font-black text-lg text-white bg-clip-text  bg-gradient-to-r from-blue-600 to-cyan-400">
+                                                A
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="flex  flex-col  border-l-2 border-second pl-3">
-                            <h4 className="tracking-tight">
+                        {/* <div className="flex  flex-col  border-l-2 border-second pl-3">
+                                <h4 className="tracking-tight">
+                                    AHMED
+                                </h4>
+                                <h6 className="tracking-wider">
+                                    E H A B
+                                </h6>
+                            </div> */}
+                        <div className="flex flex-col relative pl-4 group">
+                            {/* الخط الجانبي الـ Gradient */}
+                            <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-600 via-cyan-400 to-blue-600 rounded-full" />
+
+                            <h4 className="tracking-tight font-bold text-gray-900 dark:text-white leading-none">
                                 AHMED
                             </h4>
-                            <h6 className="tracking-wider">
+                            <h6 className="tracking-[0.2em] text-[12x] text-blue-500/80 font-medium mt-1 uppercase">
                                 E H A B
                             </h6>
                         </div>

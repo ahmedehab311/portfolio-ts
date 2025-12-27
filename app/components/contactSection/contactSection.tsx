@@ -19,7 +19,6 @@ export default function ContactSection() {
         }).then(async (res) => {
             if (!res.ok) throw new Error("Failed to send");
 
-            // لو كله تمام، صفر الفورم
             setFormData({ name: "", email: "", subject: "", message: "" });
             return res;
         });
@@ -44,7 +43,7 @@ export default function ContactSection() {
 
                 <HeaderComponents
                     leftText="Get In"
-                    rightText="Get In"
+                    rightText="Touch"
                     description=" Have a project in mind? Looking to hire? Or just want to say hi? My inbox is always open."
                 />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
@@ -137,7 +136,7 @@ export default function ContactSection() {
 
                             <button
                                 disabled={loading}
-                                className="w-full bg-gradient-button-primary text-white text-xl  shadow-primary/20 disabled:cursor-not-allowed font-bold py-4 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 group"
+                                className="w-full bg-gradient-button-primary text-white text-xl  shadow-primary/20 disabled:cursor-not-allowed font-bold py-4 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 group cursor-pointer"
                             >
                                 {loading ? (
                                     <span className="animate-pulse">Sending...</span>
