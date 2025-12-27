@@ -1,23 +1,23 @@
-// import { connectDB } from "@/lib/db";
-// import { apiResponse } from "@/lib/apiResponseBackend";
-// import { Profile } from "@/models/profile/profile";
-// import { NextResponse } from "next/server";
+import { connectDB } from "@/lib/db";
+import { apiResponse } from "@/lib/apiResponseBackend";
+import  Profile  from "@/models/profile/profile";
+import { NextResponse } from "next/server";
 
 
-// export async function GET() {
-//     try {
-//         await connectDB();
-//         const myProfile = await Profile.findOne();
-//         if (!myProfile) {
+export async function GET() {
+    try {
+        await connectDB();
+        const myProfile = await Profile.findOne();
+        if (!myProfile) {
 
-//             return apiResponse({ statusCode: 404, status: "fail", message: "No Profile found", data: [] })
-//         }
-//         return apiResponse({ statusCode: 200, status: "success", message: "Profile fetched successfully", data: myProfile })
-//     } catch (error: any) {
-//         return apiResponse({ statusCode: 500, status: "error", message: `${error.message} ||Profile fetched successfully`, data: null })
-//     }
+            return apiResponse({ statusCode: 404, status: "fail", message: "No Profile found", data: [] })
+        }
+        return apiResponse({ statusCode: 200, status: "success", message: "Profile fetched successfully", data: myProfile })
+    } catch (error: any) {
+        return apiResponse({ statusCode: 500, status: "error", message: `${error.message} ||Profile fetched successfully`, data: null })
+    }
 
-// }
+}
 // export async function POST(req: Request) {
 //     try {
 //         await connectDB();
