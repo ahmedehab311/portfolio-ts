@@ -5,7 +5,7 @@ export default function ProjectCard({ project }: any) {
         <div className="card-glass rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 group h-full flex flex-col relative">
 
             <button
-                // onClick={() => onOpenDetails(project)} // دي هتفتح المودال
+                // onClick={() => onOpenDetails(project)}
                 className="absolute top-4 left-4 z-20 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white hover:bg-primary transition-colors cursor-pointer"
                 title="View Details"
             >
