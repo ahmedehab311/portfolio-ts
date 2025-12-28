@@ -8,14 +8,21 @@ import HeaderComponents from "../headerComponents";
 type Project = {
     _id: string;
     title: string;
-    description: string;
-    image: string;
+    shortDescription: string;
+    fullDescription: string;
+    mainImage: string;
+    gallery: string[];
+    features: string[];
+    challenges: string[];
+    techStack: string[];
     tags: string[];
     category: string;
     projectStatus: string;
     codeUrl: string;
     demoUrl: string;
     order: number;
+    createdAt?: string;
+    updatedAt?: string;
 };
 
 type ProjectsSectionProps = {
@@ -25,6 +32,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     const [selectedCategory, setSelectedCategory] = useState(
         ProjectCategory.ALL
     );
+    console.log("projects", projects);
+
     const [selectedTag, setSelectedTag] = useState("All Tags");
 
     const filteredProjects = projects.filter(project => {

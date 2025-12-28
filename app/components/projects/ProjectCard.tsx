@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: any) {
 
 
             <div className="relative h-52 overflow-hidden">
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={project.mainImage} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
 
 
                 <div className="absolute top-4 right-4">
@@ -45,7 +45,7 @@ export default function ProjectCard({ project }: any) {
                 </div>
 
                 <p className="text-gray-400 text-sm line-clamp-2 mb-6">
-                    {project.description}
+                    {project.shortDescription}
                 </p>
 
 

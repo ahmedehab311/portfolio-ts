@@ -6,8 +6,6 @@ import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
 import { NextRequest } from "next/server";
 
-
-
 export async function PUT(req: NextRequest) {
     try {
         await connectDB();
@@ -108,6 +106,7 @@ export async function PUT(req: NextRequest) {
         });
     }
 }
+
 export async function DELETE(req: NextRequest) {
     try {
         await connectDB();

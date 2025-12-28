@@ -6,7 +6,7 @@ export default async function getProjects() {
 
   const projects = await Project.find({})
     .select(
-      "title description image tags category projectStatus codeUrl demoUrl order"
+      "title shortDescription fullDescription mainImage gallery features challenges techStack tags category projectStatus codeUrl demoUrl order"
     )
     .sort({ order: 1 })
     .lean();
