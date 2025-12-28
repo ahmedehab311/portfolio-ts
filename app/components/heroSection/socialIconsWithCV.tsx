@@ -54,34 +54,20 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
             </div>
 
             <div className="flex gap-4 flex-wrap items-center">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleViewCV}
-                    className="btn-primary-global flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium shadow-lg shadow-blue-500/20 transition-all"
+                <button
+                    onClick={() => window.open('https://drive.google.com/file/d/18AjyyIDGSXV87Z_cR-FrGfJNX4kLC_Iv/view', '_blank')}
+                    className="btn-primary-global flex items-center gap-2"
                 >
                     <span>View CV</span>
-                    <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        {/* أيقونة تحميل أو سهم للخارج تعطي إيحاء أفضل بفتح ملف */}
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        ></path>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
-                </motion.button>
+                </button>
                 <button
                     onClick={() => {
                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="btn-primary-global flex items-center gap-2" // أضفت gap و flex للتنسيق
+                    className="btn-primary-global flex items-center gap-2"
                 >
                     <span>Contact Me</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
