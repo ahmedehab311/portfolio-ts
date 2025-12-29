@@ -33,7 +33,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     const [selectedCategory, setSelectedCategory] = useState(
         ProjectCategory.ALL
     );
-    console.log("projects", projects);
 
     const [selectedTag, setSelectedTag] = useState("All Tags");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);

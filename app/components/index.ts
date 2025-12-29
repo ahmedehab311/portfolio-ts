@@ -4,7 +4,7 @@ import ProjectsSection from "./projects/ProjectsSection.client";
 import AllSkillsSection from "./allSkillsSection/allSkillsSection";
 import ExperienceSection from "./experienceSection/experienceSection";
 import ContactSection from "./contactSection/contactSection";
-import Footer from "./Footer/footer";
+import Footer from "./partials/Footer/footer";
 
 
 export {

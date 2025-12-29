@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
-import logo from './logo.png';
+import logo from '@/app/icon.png';
 import Image from "next/image";
 const Header = () => {
     const router = useRouter();
@@ -74,46 +74,7 @@ const Header = () => {
         <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled ? "backdrop-blur-xl shadow-lg" : ""}`}>
             <div className="px-4 md:px-8 lg:px-16 py-4 ">
                 <div className="flex justify-between items-center">
-                    {/* Logo */}
-                    {/* <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ type: "spring", stiffness: 100 }}
-                        className="flex items-center space-x-3 cursor-pointer group"
-                        onClick={() => router.push("/")}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                router.push("/");
-                            }
-                        }}
-                    >
-                        <div className="relative">
-                            <div className="relative w-20 h-18 flex items-center justify-center transform  overflow-hidden group">
-                               
-                                <Image
-                                    src={logo}
-                                    alt="Logo"
-                                    width={80}
-                                    height={80}
-                                />
-                            </div>
 
-                        </div>
-         
-                        <div className="flex flex-col relative pl-4 group">
-                            <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-600 via-cyan-400 to-blue-600 rounded-full" />
-
-                            <h4 className="tracking-tight font-bold text-gray-900 dark:text-white leading-none">
-                                AHMED
-                            </h4>
-                            <h6 className="tracking-[0.2em] text-[12x] text-blue-500/80 font-medium mt-1 uppercase">
-                                E H A B
-                            </h6>
-                        </div>
-
-                    </motion.div> */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
