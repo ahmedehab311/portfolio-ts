@@ -5,7 +5,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
-
+import logo from './logo.png';
+import Image from "next/image";
 const Header = () => {
     const router = useRouter();
     const { theme, setTheme } = useTheme();
@@ -74,6 +75,45 @@ const Header = () => {
             <div className="px-4 md:px-8 lg:px-16 py-4 ">
                 <div className="flex justify-between items-center">
                     {/* Logo */}
+                    {/* <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ type: "spring", stiffness: 100 }}
+                        className="flex items-center space-x-3 cursor-pointer group"
+                        onClick={() => router.push("/")}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                router.push("/");
+                            }
+                        }}
+                    >
+                        <div className="relative">
+                            <div className="relative w-20 h-18 flex items-center justify-center transform  overflow-hidden group">
+                               
+                                <Image
+                                    src={logo}
+                                    alt="Logo"
+                                    width={80}
+                                    height={80}
+                                />
+                            </div>
+
+                        </div>
+         
+                        <div className="flex flex-col relative pl-4 group">
+                            <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-600 via-cyan-400 to-blue-600 rounded-full" />
+
+                            <h4 className="tracking-tight font-bold text-gray-900 dark:text-white leading-none">
+                                AHMED
+                            </h4>
+                            <h6 className="tracking-[0.2em] text-[12x] text-blue-500/80 font-medium mt-1 uppercase">
+                                E H A B
+                            </h6>
+                        </div>
+
+                    </motion.div> */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -89,46 +129,28 @@ const Header = () => {
                         }}
                     >
                         <div className="relative">
-                            {/* <div className="w-12 h-12 border-2 border-gradient-blue-cyan rounded-lg flex items-center justify-center transform rotate-45 overflow-hidden">
-                                <div className="transform -rotate-45">
-                                    <span className=" font-black text-lg">A</span>
-                                </div>
-                            </div> */}
-                            <div className="relative w-12 h-12 flex items-center justify-center transform rotate-45 overflow-hidden group">
-                                {/* الخلفية اللي هتعمل شكل البوردر */}
-                                <div className="absolute inset-0 p-[2px] bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg">
-                                    {/* المحتوى الداخلي بخلفية غامقة عشان يظهر البوردر */}
-                                    <div className="w-full h-full  dark:bg-gradient-blue-cyan rounded-[6px] flex items-center justify-center">
-                                        <div className="transform -rotate-45">
-                                            <span className="font-black text-lg text-white bg-clip-text  bg-gradient-to-r from-blue-600 to-cyan-400">
-                                                A
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="relative w-16 h-16 flex items-center justify-center overflow-hidden rounded-full group">
+                                <Image
+                                    src={logo}
+                                    alt="Logo"
+                                    width={64}
+                                    height={64}
+                                    className="object-cover"
+                                />
                             </div>
                         </div>
-                        {/* <div className="flex  flex-col  border-l-2 border-second pl-3">
-                                <h4 className="tracking-tight">
-                                    AHMED
-                                </h4>
-                                <h6 className="tracking-wider">
-                                    E H A B
-                                </h6>
-                            </div> */}
+
                         <div className="flex flex-col relative pl-4 group">
-                            {/* الخط الجانبي الـ Gradient */}
                             <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-600 via-cyan-400 to-blue-600 rounded-full" />
 
                             <h4 className="tracking-tight font-bold text-gray-900 dark:text-white leading-none">
                                 AHMED
                             </h4>
-                            <h6 className="tracking-[0.2em] text-[12x] text-blue-500/80 font-medium mt-1 uppercase">
+                            <h6 className="tracking-[0.2em] text-[12px] text-blue-500/80 font-medium mt-1 uppercase">
                                 E H A B
                             </h6>
                         </div>
                     </motion.div>
-
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center space-x-8">
                         {navLinks.map((link, index) => (

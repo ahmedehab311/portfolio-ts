@@ -1,12 +1,12 @@
 import { ExternalLink, Github, Layers, Info, Cpu } from "lucide-react"; // ضفنا Cpu و Info
 import { motion } from "framer-motion";
-export default function ProjectCard({ project }: any) {
+export default function ProjectCard({ project, onOpenDetails }: any) {
     return (
         <div className="card-glass rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 group h-full flex flex-col relative">
 
             <button
-                // onClick={() => onOpenDetails(project)}
-                className="absolute top-4 left-4 z-20 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white hover:bg-primary transition-colors cursor-pointer"
+                onClick={onOpenDetails} // دي اللي جاية كـ Prop من الأب
+                className="absolute top-4 left-4 z-20 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white dark:text-white transition-colors cursor-pointer"
                 title="View Details"
             >
                 <Info size={18} />

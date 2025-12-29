@@ -5,6 +5,7 @@ import ProjectCard from "./ProjectCard";
 import { TProjectSchema } from "@/types/back/project";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import HeaderComponents from "../headerComponents";
+import ProjectDetailsModal from "./ProjectDetailsModal";
 type Project = {
     _id: string;
     title: string;
@@ -35,6 +36,9 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     console.log("projects", projects);
 
     const [selectedTag, setSelectedTag] = useState("All Tags");
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     const filteredProjects = projects.filter(project => {
         const categoryMatch =
@@ -62,6 +66,10 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 ease: "easeOut"
             }
         })
+    };
+    const handleOpenDetails = (project: Project) => {
+        setSelectedProject(project);
+        setIsModalOpen(true);
     };
     return (
         <section id="projects" className="py-20 scroll-mt-20">
@@ -121,11 +129,16 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                             viewport={{ once: true, margin: "-50px" }}
                             exit={{ opacity: 0, scale: 0.9 }}
                         >
-                            <ProjectCard project={project} />
+                            <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
                         </motion.div>
                     ))}
                 </AnimatePresence>
             </motion.div>
+            <ProjectDetailsModal
+                project={selectedProject}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </section >
     );
 }
