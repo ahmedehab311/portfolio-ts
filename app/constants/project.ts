@@ -4,7 +4,7 @@ export enum ProjectCategory {
     JAVASCRIPT = "javascript",
     REACT = "react",
     NEXTJS = "nextjs",
-    FULLSTACK = "fullstack",
+    FULLSTACK = "Full Stack",
 }
 
 export const ProjectCategoryValues = Object.values(ProjectCategory);

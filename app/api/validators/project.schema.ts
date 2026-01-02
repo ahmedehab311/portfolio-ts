@@ -41,7 +41,7 @@ export const updateProjectSchema = z.object({
             z.string()
                 .trim()
                 .min(1, "Tag cannot be empty")
-                .max(20, "Tag is too long")
+                .max(50, "Tag is too long")
         )
         .optional(),
 

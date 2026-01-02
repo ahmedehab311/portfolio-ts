@@ -8,6 +8,8 @@ import {
 import { ExternalLink, Github, CheckCircle2, Cpu, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -22,19 +24,26 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             {/* التعديل هنا: w-[95vw] للموبايل و h-[90vh] عشان ميخرجش بره الشاشة */}
-            <DialogContent className="w-[95vw] md:max-w-4xl p-0 overflow-hidden border-none bg-linear-to-br dark:from-gray-900 dark:via-blue-900 dark:to-gray-900 from-blue-50 via-blue-100 to-white backdrop-blur-xl shadow-2xl transition-all duration-300 max-h-[90vh] md:max-h-[90vh] flex flex-col">
+            <DialogContent className="w-[95vw] md:max-w-4xl p-0 overflow-hidden border border-white/20 dark:border-blue-500/20 bg-linear-to-br from-blue-50/90 via-blue-100/90 to-white/90 dark:from-gray-950/90 dark:via-blue-950/90 dark:to-gray-950/90 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.3)] dark:shadow-[0_0_40px_rgba(30,58,138,0.5)] transition-all duration-300 max-h-[90vh] flex flex-col rounded-3xl">
                 {/* 1. Header Slider: ارتفاع أصغر للموبايل */}
-                <div className="relative h-[200px] sm:h-[250px] md:h-[380px] w-full bg-muted/10 shrink-0">
+                <div className="relative h-60 sm:h-72 md:h-100 w-full bg-linear-to-b from-transparent to-black/5 dark:to-white/5 shrink-0 border-b border-white/10">
                     <AnimatePresence mode="wait">
-                        <motion.img
+                        <motion.div
                             key={currentImageIndex}
-                            src={allImages[currentImageIndex]}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="w-full h-full object-contain p-2 md:p-4"
-                            alt={project.title}
-                        />
+                            className="relative w-full h-full" // لازم الأب يكون relative عشان fill تشتغل
+                        >
+                            <Image
+                                src={allImages[currentImageIndex]}
+                                alt={project.title}
+                                fill // بيخلي الصورة تملا المساحة المتاحة للأب
+                                priority // عشان أول صورة تحمل فوراً
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 50vw"
+                                className="object-cover object-top transition-transform duration-500"
+                            />
+                        </motion.div>
                     </AnimatePresence>
 
                     {allImages.length > 1 && (
@@ -68,12 +77,13 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
 
                             {/* أزرار الروابط: تملأ العرض في الموبايل */}
                             <div className="flex flex-row gap-2 w-full md:w-auto">
-                                <a href={project.demoUrl} target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all text-xs md:text-sm font-medium">
-                                    <ExternalLink size={14} /> Live
-                                </a>
-                                <a href={project.codeUrl} target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg transition-all text-xs md:text-sm font-medium">
+                                <Link href={project.codeUrl} target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border bg-white/5  border-black/10 backdrop-blur-md hover:border-primary/50 text- rounded-lg transition-all text-xs md:text-sm font-medium">
                                     <Github size={14} /> Code
-                                </a>
+                                </Link>
+                                <Link href={project.demoUrl} target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-gradient-button-primary text-white hover:border-primary/50 rounded-lg transition-all text-xs md:text-sm font-medium">
+                                    <ExternalLink size={14} /> Live
+                                </Link>
+
                             </div>
                         </div>
                     </DialogHeader>
@@ -83,7 +93,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
                         {/* Description & Features */}
                         <div className="md:col-span-2 space-y-6 md:space-y-8">
                             <div className="space-y-2">
-                                <h4 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">About</h4>
+                                <h4 className="text-[11px] font-extrabold text-blue-600 dark:text-blue-400 flex items-center gap-2 mb-4 uppercase tracking-widest">About</h4>
                                 <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
                                     {project.fullDescription || project.shortDescription}
                                 </p>
@@ -91,12 +101,12 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
 
                             {project.features?.length > 0 && (
                                 <div className="space-y-3">
-                                    <h4 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Key Features</h4>
+                                    <h4 className="text-[11px] font-extrabold text-blue-600 dark:text-blue-400 flex items-center gap-2 mb-4 uppercase tracking-widest">Key Features</h4>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         {project.features.map((feature: string) => (
-                                            <div key={feature} className="flex items-start gap-2 p-2.5 rounded-xl bg-gray-50/50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-700/50">
-                                                <CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" />
-                                                <span className="text-[11px] md:text-xs text-gray-700 dark:text-gray-300">{feature}</span>
+                                            <div key={feature} className="flex items-start gap-2 p-3 rounded-2xl bg-white/40 dark:bg-white/5 border border-white/40 dark:border-white/10 shadow-sm backdrop-blur-md">
+                                                <CheckCircle2 size={14} className="text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
+                                                <span className="text-[11px] md:text-xs text-gray-800 dark:text-gray-200">{feature}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -107,12 +117,12 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
                         {/* Sidebar: ينزل تحت في الموبايل */}
                         <div className="space-y-6">
                             <div className="space-y-3">
-                                <h4 className="text-xs font-bold flex items-center gap-2 text-gray-900 dark:text-white uppercase tracking-widest">
+                                <h4 className="text-[11px] font-extrabold text-blue-600 dark:text-blue-400 flex items-center gap-2 mb-4 uppercase tracking-widest">
                                     <Cpu size={14} /> Stack
                                 </h4>
                                 <div className="flex flex-wrap gap-1.5">
                                     {project.techStack?.map((tech: string) => (
-                                        <span key={tech} className="px-2.5 py-1 bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-md text-[10px] font-medium text-gray-600 dark:text-gray-400">
+                                        <span key={tech} className="px-3 py-1.5 bg-blue-500/10 dark:bg-blue-400/10 border border-blue-200/50 dark:border-blue-500/30 rounded-full text-[10px] font-semibold text-blue-700 dark:text-blue-300 transition-hover hover:bg-blue-500/20">
                                             {tech}
                                         </span>
                                     ))}
@@ -120,14 +130,26 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
                             </div>
 
                             {project.challenges?.length > 0 && (
-                                <div className="p-3.5 rounded-xl bg-orange-50/50 dark:bg-orange-950/10 border border-orange-100/50 dark:border-orange-900/20">
-                                    <h4 className="text-[10px] font-bold text-orange-600 dark:text-orange-400 flex items-center gap-2 mb-2 uppercase">
-                                        <AlertCircle size={12} /> Challenges
+                                <div className="relative overflow-hidden p-4 rounded-2xl bg-white/10 dark:bg-blue-500/5 border border-white/20 dark:border-blue-500/20 backdrop-blur-md group">
+                                    {/* لمسة إضاءة زرقاء خفيفة في الخلفية */}
+                                    <div className="absolute -right-4 -top-4 w-12 h-12 bg-blue-500/10 blur-2xl rounded-full" />
+
+                                    <h4 className="text-[11px] font-extrabold text-blue-600 dark:text-blue-400 flex items-center gap-2 mb-4 uppercase tracking-widest">
+                                        <div className="p-1 rounded-lg bg-blue-500/20">
+                                            <AlertCircle size={14} className="text-blue-600 dark:text-cyan-400" />
+                                        </div>
+                                        Technical Challenges
                                     </h4>
-                                    <ul className="space-y-1.5">
-                                        {project.challenges.map((c: string) => (
-                                            <li key={c} className="text-[10px] text-gray-600 dark:text-gray-400 leading-snug flex gap-1.5">
-                                                <span className="text-orange-500">•</span> {c}
+
+                                    <ul className="space-y-3">
+                                        {project.challenges.map((c: string, index: number) => (
+                                            <li key={index} className="group/item flex gap-3 items-start">
+                                                {/* النقطة باللون الأزرق المضيء */}
+                                                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500/60 dark:bg-cyan-500/40 shrink-0 group-hover/item:scale-125 transition-transform duration-300 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+
+                                                <p className="text-[11px] md:text-[12px] text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                                                    {c}
+                                                </p>
                                             </li>
                                         ))}
                                     </ul>

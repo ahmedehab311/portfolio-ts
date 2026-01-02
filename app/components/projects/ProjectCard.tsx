@@ -1,4 +1,5 @@
 import { ExternalLink, Github, Layers, Info, Cpu } from "lucide-react";
+import Link from "next/link";
 export default function ProjectCard({ project, onOpenDetails }: any) {
     return (
         <div className="card-glass rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 group h-full flex flex-col relative">
@@ -17,7 +18,7 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
 
 
                 <div className="absolute top-4 right-4">
-                    <span className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-bold uppercase tracking-tighter px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
+                    <span className="bg-linear-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-bold uppercase tracking-tighter px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5">
                         <Cpu size={12} />
 
                         {project.category === "Full Stack" ? "Next.js" : "React.js"}
@@ -38,7 +39,7 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
             </div>
 
 
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-6 flex flex-col grow">
                 <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
                 </div>
@@ -49,12 +50,22 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
 
 
                 <div className="mt-auto flex items-center gap-3 pt-4 border-t border-white/5">
-                    <a href={project.codeUrl} className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-/5 border-white/10 hover:border-primary/50 border border-/10 text-xs font-medium transition-all">
+                    <Link
+                        href={project.codeUrl || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 px-3  border border-black/10 backdrop-blur-md hover:border-primary/50 text-xs font-medium transition-all"
+                    >
                         <Github size={14} /> Code
-                    </a>
-                    <a href={project.demoUrl} className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-gradient-button-primary text-white text-xs font-medium transition-all shadow-lg shadow-primary/20">
+                    </Link>
+                    <Link
+                        href={project.demoUrl || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-gradient-button-primary text-white text-xs font-medium transition-all shadow-lg shadow-primary/20"
+                    >
                         <ExternalLink size={14} /> Demo
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

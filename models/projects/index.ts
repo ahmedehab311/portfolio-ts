@@ -4,9 +4,16 @@ import { TProjectSchema } from "@/types/back/project";
 
 const ProjectSchema = new Schema<TProjectSchema>({
     title: { type: String, required: true },
-    shortDescription: { type: String, required: true }, 
+    shortDescription: { type: String, required: true },
     fullDescription: { type: String, required: true },
-    category: { type: String, enum: Object.values(ProjectCategory), required: true },
+    category: {
+        type: String,
+        enum: {
+            values: Object.values(ProjectCategory),
+            message: '{VALUE} is not supported' 
+        },
+        required: true
+    },
     projectStatus: { type: String, enum: Object.values(ProjectStatus), default: ProjectStatus.COMPLETED },
     mainImage: { type: String, required: true },
     gallery: { type: [String], default: [] },

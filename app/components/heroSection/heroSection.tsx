@@ -159,7 +159,7 @@ export default function HeroSection({ skills }: HeroSectionProps) {
 
                         <div className="absolute inset-0 flex items-center justify-center">
                             <div className={`relative w-48 h-48 md:w-60 md:h-60 
-                        bg-gradient-to-br from-blue-400/10 to-cyan-300/10
+                        bg-linear-to-b from-blue-400/10 to-cyan-300/10
                         dark:from-blue-500/20 dark:to-cyan-400/20
                         rounded-2xl flex items-center justify-center
                        shadow-2xl backdrop-blur-sm border border-blue-400/20 dark:border-blue-500/30 transition-colors duration-300`}>
@@ -167,7 +167,7 @@ export default function HeroSection({ skills }: HeroSectionProps) {
                                 <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-blue-400/20 dark:bg-blue-500/30 animate-pulse"></div>
                                 <div className="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-cyan-300/20 dark:bg-cyan-400/30 animate-pulse-delayed"></div>
 
-                                <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                                <div className="text-6xl md:text-7xl text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-400">
                                     &lt;/&gt;
                                 </div>
 

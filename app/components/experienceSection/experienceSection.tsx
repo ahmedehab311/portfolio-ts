@@ -57,7 +57,7 @@ export default function ExperienceSection({ experiences }: { experiences: any[] 
                                 >
 
                                     {!isSingle && (
-                                        <div className="absolute left-[15px] md:left-1/2 md:-translate-x-1/2 top-10 w-4 h-4 rounded-full bg-blue-500 border-4 border-gray-900 z-10 hidden md:block shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                                        <div className="absolute left-3.75 md:left-1/2 md:-translate-x-1/2 top-10 w-4 h-4 rounded-full bg-blue-500 border-4 border-gray-900 z-10 hidden md:block shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
                                     )}
 
                                     <div className={`w-full ${isSingle ? "max-w-3xl" : "md:w-[45%]"} group`}>
