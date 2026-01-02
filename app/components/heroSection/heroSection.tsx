@@ -206,7 +206,7 @@ export default function HeroSection({ skills }: HeroSectionProps) {
                                 <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
-                            <div className="text-xs text-gray-400 dark:text-gray-300">portfolio.js</div>
+                            <div className="text-xs text-gray-400 dark:text-gray-300">portfolio.tsx</div>
                         </div>
                         <div className="p-4 font-mono text-sm">
                             <div ref={codeRef} className="text-cyan-400"></div>

@@ -23,9 +23,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            {/* التعديل هنا: w-[95vw] للموبايل و h-[90vh] عشان ميخرجش بره الشاشة */}
             <DialogContent className="w-[95vw] md:max-w-4xl p-0 overflow-hidden border border-white/20 dark:border-blue-500/20 bg-linear-to-br from-blue-50/90 via-blue-100/90 to-white/90 dark:from-gray-950/90 dark:via-blue-950/90 dark:to-gray-950/90 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.3)] dark:shadow-[0_0_40px_rgba(30,58,138,0.5)] transition-all duration-300 max-h-[90vh] flex flex-col rounded-3xl">
-                {/* 1. Header Slider: ارتفاع أصغر للموبايل */}
                 <div className="relative h-60 sm:h-72 md:h-100 w-full bg-linear-to-b from-transparent to-black/5 dark:to-white/5 shrink-0 border-b border-white/10">
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -33,13 +31,13 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="relative w-full h-full" // لازم الأب يكون relative عشان fill تشتغل
+                            className="relative w-full h-full"
                         >
                             <Image
                                 src={allImages[currentImageIndex]}
                                 alt={project.title}
-                                fill // بيخلي الصورة تملا المساحة المتاحة للأب
-                                priority // عشان أول صورة تحمل فوراً
+                                fill
+                                priority
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 50vw"
                                 className="object-cover object-top transition-transform duration-500"
                             />
@@ -75,7 +73,6 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
                                 </div>
                             </div>
 
-                            {/* أزرار الروابط: تملأ العرض في الموبايل */}
                             <div className="flex flex-row gap-2 w-full md:w-auto">
                                 <Link href={project.codeUrl} target="_blank" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border bg-white/5  border-black/10 backdrop-blur-md hover:border-primary/50 text- rounded-lg transition-all text-xs md:text-sm font-medium">
                                     <Github size={14} /> Code
