@@ -1,5 +1,4 @@
 import { ExternalLink, Github, Layers, Info, Cpu } from "lucide-react";
-import { motion } from "framer-motion";
 export default function ProjectCard({ project, onOpenDetails }: any) {
     return (
         <div className="card-glass rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 group h-full flex flex-col relative">

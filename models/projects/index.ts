@@ -4,7 +4,7 @@ import { TProjectSchema } from "@/types/back/project";
 
 const ProjectSchema = new Schema<TProjectSchema>({
     title: { type: String, required: true },
-    shortDescription: { type: String, required: true }, // لازم يكون نفس الاسم في الـ POST
+    shortDescription: { type: String, required: true }, 
     fullDescription: { type: String, required: true },
     category: { type: String, enum: Object.values(ProjectCategory), required: true },
     projectStatus: { type: String, enum: Object.values(ProjectStatus), default: ProjectStatus.COMPLETED },
