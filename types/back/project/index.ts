@@ -4,7 +4,7 @@ export interface TProjectSchema extends Document {
     fullDescription: string;
     category: string;
     projectStatus: string;
-    mainImage: string;
+    mainImage?: string;
     gallery: string[];
     features: string[];
     challenges: string[];

@@ -7,11 +7,11 @@ export const projectSchema = z.object({
     fullDescription: z.string().min(20),
     category: z.enum(Object.values(ProjectCategory) as [string, ...string[]]),
     projectStatus: z.enum(Object.values(ProjectStatus) as [string, ...string[]]),
-    mainImage: z.string().min(1),
+    mainImage: z.string().optional(),
     gallery: z.array(z.string()).default([]),
     challenges: z.array(z.string()).default([]),
     features: z.array(z.string()).default([]),
-    techStack: z.array(z.string()).default([]), // خليناها string عشان تطابق بوستمان
+    techStack: z.array(z.string()).default([]),
     codeUrl: z.url({ message: "Invalid code URL" }),
     demoUrl: z.url({ message: "Invalid demo URL" }),
     order: z.number().int().min(0).default(0),

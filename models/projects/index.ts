@@ -15,7 +15,7 @@ const ProjectSchema = new Schema<TProjectSchema>({
         required: true
     },
     projectStatus: { type: String, enum: Object.values(ProjectStatus), default: ProjectStatus.COMPLETED },
-    mainImage: { type: String, required: true },
+    mainImage: { type: String },
     gallery: { type: [String], default: [] },
     features: { type: [String], default: [] },
     challenges: { type: [String], default: [] },
