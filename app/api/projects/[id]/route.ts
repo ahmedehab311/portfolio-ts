@@ -23,11 +23,11 @@ export async function PUT(req: NextRequest) {
         const updatePayload: any = {};
 
         formData.forEach((value, key) => {
-            if (key !== "image") {
+            // تجاهل أي مفتاح يخص الصور عشان إحنا هنحدثه يدويًا
+            if (key !== "image" && key !== "mainImage") {
                 updatePayload[key] = value;
             }
         });
-
         // 4️⃣ تحويل الأنواع
         if (updatePayload.order !== undefined) {
             updatePayload.order = Number(updatePayload.order);

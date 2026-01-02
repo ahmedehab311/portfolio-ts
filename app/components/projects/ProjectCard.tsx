@@ -51,21 +51,48 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
 
                 <div className="absolute top-2.5 right-2.5">
                     <span className="bg-blue-600/80 backdrop-blur-md text-white text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-lg border border-white/10 shadow-lg">
-                        {project.category === "Full Stack" ? "Next.js" : "React.js"}
+                        {(project.category === "Full Stack" || project.category === "nextjs") ? "Next.js" : "React.js"}
                     </span>
                 </div>
 
+                {/* <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                    <div className="flex flex-wrap justify-between gap-1">
+                        {project.tags.slice(0, 2).map((tag: any) => (
+                            <span key={tag} className="bg-white/10 backdrop-blur-md text-white/90 text-[8px] px-1.5 py-0.5 rounded-md border border-white/5">
+                                {tag}
+                            </span>
+                        ))}
+                        <span className={`px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-tighter border ${project.projectStatus === "completed"
+                            ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
+                            : "bg-amber-500/10 text-amber-600 border-amber-500/20"
+                            }`}>
+                            {project.projectStatus}
+                        </span>
+                    </div>
+                    {project.tags.length > 2 && (
+                        <span className="text-[8px] text-white/50">+{project.tags.length - 4}</span>
+                    )}
+                </div> */}
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                    {/* 1. مجموعة الـ Tags على اليسار */}
                     <div className="flex flex-wrap gap-1">
                         {project.tags.slice(0, 2).map((tag: any) => (
                             <span key={tag} className="bg-white/10 backdrop-blur-md text-white/90 text-[8px] px-1.5 py-0.5 rounded-md border border-white/5">
                                 {tag}
                             </span>
                         ))}
+                        {project.tags.length > 2 && (
+                            <span className="text-[8px] text-white/50 self-center">+{project.tags.length - 2}</span>
+                        )}
                     </div>
-                    {project.tags.length > 2 && (
-                        <span className="text-[8px] text-white/50">+{project.tags.length - 2}</span>
-                    )}
+
+                    {/* 2. الـ Status على اليمين */}
+                    <span className={`px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-tighter border backdrop-blur-md ${project.projectStatus === "completed"
+                            ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                            : "bg-amber-500/20 text-amber-400 border-amber-500/30"
+                        }`}>
+                        {project.projectStatus}
+                    </span>
                 </div>
             </div>
 
@@ -73,6 +100,8 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
             <div className="p-6 flex flex-col grow">
                 <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+
+
                 </div>
 
                 <p className="text-gray-400 text-sm line-clamp-2 mb-6">

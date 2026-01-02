@@ -3,7 +3,7 @@ import { ProjectCategory, ProjectStatus } from "@/app/constants/project";
 
 export const projectSchema = z.object({
     title: z.string().min(3),
-    shortDescription: z.string().min(10).max(150),
+    shortDescription: z.string().min(10),
     fullDescription: z.string().min(20),
     category: z.enum(Object.values(ProjectCategory) as [string, ...string[]]),
     projectStatus: z.enum(Object.values(ProjectStatus) as [string, ...string[]]),

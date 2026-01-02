@@ -16,7 +16,11 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
 
     if (!project) return null;
 
-    const allImages = project.gallery?.length > 0 ? project.gallery : [project.mainImage];
+    const allImages = project.gallery?.filter(Boolean).length > 0
+        ? project.gallery
+        : project.mainImage
+            ? [project.mainImage]
+            : [];
 
     const nextImage = () => setCurrentImageIndex((p) => (p + 1) % allImages.length);
     const prevImage = () => setCurrentImageIndex((p) => (p - 1 + allImages.length) % allImages.length);
@@ -26,22 +30,45 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: any) {
             <DialogContent className="w-[95vw] md:max-w-4xl p-0 overflow-hidden border border-white/20 dark:border-blue-500/20 bg-linear-to-br from-blue-50/90 via-blue-100/90 to-white/90 dark:from-gray-950/90 dark:via-blue-950/90 dark:to-gray-950/90 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.3)] dark:shadow-[0_0_40px_rgba(30,58,138,0.5)] transition-all duration-300 max-h-[90vh] flex flex-col rounded-3xl">
                 <div className="relative h-60 sm:h-72 md:h-100 w-full bg-linear-to-b from-transparent to-black/5 dark:to-white/5 shrink-0 border-b border-white/10">
                     <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentImageIndex}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="relative w-full h-full"
-                        >
-                            <Image
-                                src={allImages[currentImageIndex]}
-                                alt={project.title}
-                                fill
-                                priority
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 50vw"
-                                className="object-cover object-top transition-transform duration-500"
-                            />
-                        </motion.div>
+                        {allImages.length > 0 ? (
+                            <motion.div
+                                key={currentImageIndex}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="relative w-full h-full"
+                            >
+                                <Image
+                                    src={allImages[currentImageIndex]}
+                                    alt={project.title}
+                                    fill
+                                    priority
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 50vw"
+                                    className="object-cover object-top transition-transform duration-500"
+                                />
+                            </motion.div>
+                        ) : (
+                            // 2. الـ Placeholder الشيك اللي اتفقنا عليه لو مفيش صور
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-gray-900 via-blue-900 to-black p-4">
+                                <div className="opacity-10 absolute inset-0 overflow-hidden pointer-events-none">
+                                    <pre className="text-[7px] text-blue-400 leading-tight">
+                                        {`
+                                            function EnterpriseSystem() {
+                                                const [security, setSecurity] = useState('High');
+                                                const data = useSensitiveData();
+                                                // Data Protected by NDA
+                                                return <SystemArchitecture code="Restricted" />
+                                            }
+                                        `}
+                                    </pre>
+                                </div>
+                                <Cpu size={48} className="text-blue-500/40 mb-3 animate-pulse" />
+                                <h3 className="text-blue-400/80 text-sm font-mono tracking-widest uppercase text-center px-6">
+                                    Proprietary System Dashboard
+                                </h3>
+                                <p className="text-blue-500/40 text-[10px] mt-2">Internal Architecture Protected</p>
+                            </div>
+                        )}
                     </AnimatePresence>
 
                     {allImages.length > 1 && (
