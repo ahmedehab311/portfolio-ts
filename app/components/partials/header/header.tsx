@@ -72,7 +72,7 @@ const Header = () => {
 
     return (
         <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled ? "backdrop-blur-xl shadow-lg" : ""}`}>
-            <div className="px-4 md:px-8 lg:px-16 py-4 ">
+            <div className="px-4 md:px-8 lg:px-16 pt-4 ">
                 <div className="flex justify-between items-center">
 
                     <motion.div
@@ -183,9 +183,9 @@ const Header = () => {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            className="absolute top-full left-0 w-full  md:hidden"
+                            className="absolute  left-0 w-full  md:hidden"
                         >
-                            <div className="mt-2 p-4 rounded-2xl border border-gray-200/50 dark:border-gray-800/50 bg-linear-to-br  dark:from-gray-900 dark:via-blue-900  dark:to-gray-900  from-blue-50 via-blue-100 to-white backdrop-blur-xl shadow-2xl">
+                            <div className="p-4 rounded-2xl border border-gray-200/50 dark:border-gray-800/50 bg-linear-to-br  dark:from-gray-900 dark:via-blue-900  dark:to-gray-900  from-blue-50 via-blue-100 to-white backdrop-blur-xl shadow-2xl">
                                 <div className="flex flex-col space-y-2">
                                     {navLinks.map((link, index) => (
                                         <motion.button
