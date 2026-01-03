@@ -79,7 +79,7 @@ const Header = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ type: "spring", stiffness: 100 }}
-                        className="flex items-center space-x-3 cursor-pointer group"
+                        className="flex items-center  cursor-pointer group"
                         onClick={() => router.push("/")}
                         role="button"
                         tabIndex={0}
