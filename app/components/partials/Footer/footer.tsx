@@ -1,6 +1,7 @@
 "use client";
 import { Github, Linkedin, Twitter, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
@@ -16,30 +17,33 @@ export default function Footer() {
                         viewport={{ once: true }}
                         className="text-2xl font-bold  mb-2"
                     >
-                        Ahmed<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 ml-1">Ehab</span>
+                        Ahmed<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-cyan-400 ml-1">Ehab</span>
                     </motion.h2>
                     <p className=" text-sm">
                         © <span className="text-blue-400">{currentYear}</span> All rights reserved. <br className="md:hidden" />
-                        Built with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400">Next.js</span> & <span className="text-cyan-400">Tailwind</span>
+                        Built with <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-cyan-400">Next.js</span> & <span className="text-cyan-400">Tailwind</span>
                     </p>
                 </div>
 
                 {/* 2. اللينكات (في النص تماماً) */}
                 <nav className="flex justify-center gap-6 text-sm font-medium">
-                    <a href="#home" className="hover:text-blue-500 transition-colors">Home</a>
-                    <a href="#projects" className="hover:text-blue-500 transition-colors">Projects</a>
-                    <a href="#experience" className="hover:text-blue-500 transition-colors">Experience</a>
-                    <a href="#skills" className="hover:text-blue-500 transition-colors">Skills</a>
+                    <Link href="#home" className="hover:text-blue-500 transition-colors">Home</Link>
+                    <Link href="#projects" className="hover:text-blue-500 transition-colors">Projects</Link>
+                    <Link href="#experience" className="hover:text-blue-500 transition-colors">Experience</Link>
+                    <Link href="#skills" className="hover:text-blue-500 transition-colors">Skills</Link>
                 </nav>
 
                 {/* 3. السوشيال (على اليمين) */}
                 <div className="flex justify-center md:justify-end gap-4">
-                    <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 border border-white/5 transition-all">
+                    <Link href="https://www.linkedin.com/in/ahmed-ehab-137381268"
+                        target="_blank"
+                        className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 border border-white/5 transition-all">
                         <Github size={20} />
-                    </a>
-                    <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 border border-white/5 transition-all">
+                    </Link>
+                    <Link href="https://github.com/ahmedehab311"
+                        target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-blue-500/20 hover:text-blue-500 border border-white/5 transition-all">
                         <Linkedin size={20} />
-                    </a>
+                    </Link>
                 </div>
             </div>
 
