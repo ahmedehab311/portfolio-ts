@@ -2,31 +2,17 @@ import { useState, useEffect } from "react";
 import { TSkillsHero } from '@/types/heroSectionType';
 import { FaFacebook, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { motion } from "framer-motion";
+import Link from "next/link";
 export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
-    const handleViewCV = () => {
-        alert('سيتم تنزيل ملف الـ CV الخاص بـ أحمد إيهاب');
-    };
 
     return (
         <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="flex gap-6">
-                <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`social-icon ${mounted ? (isDark ? 'dark-social' : 'light-social') : 'opacity-0'
-                        } transition-all duration-300`}
-                    aria-label="Facebook"
-                >
-                    <FaFacebook
-                        size={24}
-                        className={mounted ? (isDark ? "text-gray-300 hover:text-blue-500" : "text-gray-600 hover:text-blue-700") : "text-transparent"}
-                    />
-                </a>
-                <a
-                    href="https://linkedin.com"
+
+                <Link
+                    href="https://www.linkedin.com/in/ahmed-ehab-137381268"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`social-icon ${mounted ? (isDark ? 'dark-social' : 'light-social') : 'opacity-0'
@@ -37,9 +23,9 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
                         size={24}
                         className={mounted ? (isDark ? "text-gray-300 hover:text-blue-700" : "text-gray-600 hover:text-blue-800") : "text-transparent"}
                     />
-                </a>
-                <a
-                    href="https://github.com"
+                </Link>
+                <Link
+                    href="https://github.com/ahmedehab311"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`social-icon ${mounted ? (isDark ? 'dark-social' : 'light-social') : 'opacity-0'
@@ -50,7 +36,7 @@ export default function SocialIconsWithCV({ colors, isDark }: TSkillsHero) {
                         size={24}
                         className={mounted ? (isDark ? "text-gray-300 hover:text-gray-100" : "text-gray-600 hover:text-gray-900") : "text-transparent"}
                     />
-                </a>
+                </Link>
             </div>
 
             <div className="flex gap-4 flex-wrap items-center">
