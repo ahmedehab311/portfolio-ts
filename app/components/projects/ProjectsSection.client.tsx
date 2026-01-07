@@ -6,6 +6,8 @@ import { TProjectSchema } from "@/types/back/project";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import HeaderComponents from "../headerComponents";
 import ProjectDetailsModal from "./ProjectDetailsModal";
+import { useProjects } from "@/hooks/useProjects";
+import { ProjectSkeleton } from "../skeltons/ProjectSkeleton";
 type Project = {
     _id: string;
     title: string;
@@ -29,11 +31,11 @@ type Project = {
 type ProjectsSectionProps = {
     projects: Project[];
 };
-export default function ProjectsSection({ projects }: ProjectsSectionProps) {
+export default function ProjectsSection() {
     const [selectedCategory, setSelectedCategory] = useState(
         ProjectCategory.ALL
     );
-
+    const { data: projects = [], isLoading, isError } = useProjects();
     const [selectedTag, setSelectedTag] = useState("All Tags");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -117,7 +119,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
                 <AnimatePresence mode="popLayout">
-                    {filteredProjects.map((project, index) => (
+                    {/* {filteredProjects.map((project, index) => (
                         <motion.div
                             key={project._id}
                             layout
@@ -130,7 +132,27 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                         >
                             <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
                         </motion.div>
-                    ))}
+                    ))} */}
+                    {isLoading ? (
+                        Array.from({ length: 6 }).map((_, i) => (
+                            <ProjectSkeleton key={`skeleton-${i}`} />
+                        ))
+                    ) : (
+                        filteredProjects.map((project, index) => (
+                            <motion.div
+                                key={project._id}
+                                layout
+                                custom={index}
+                                variants={cardVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-50px" }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                            >
+                                <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
+                            </motion.div>
+                        ))
+                    )}
                 </AnimatePresence>
             </motion.div>
             <ProjectDetailsModal

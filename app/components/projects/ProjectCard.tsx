@@ -13,7 +13,6 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
                 <Info size={18} />
             </button>
 
-
             <div className="relative aspect-16/8 w-full overflow-hidden rounded-t-2xl">
                 {project.mainImage ? (
                     <Image
@@ -23,10 +22,9 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
                         className="object-cover"
                     />
                 ) : (
-                    // ده الـ Placeholder اللي هيظهر لو مفيش صورة
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-gray-900 via-blue-900 to-black p-4">
                         <div className="opacity-20 absolute inset-0 overflow-hidden">
-                            {/* خلفية بشكل كود وهمي لإعطاء شكل تقني */}
+     
                             <pre className="text-[6px] text-blue-400 leading-tight">
                                 {`
                         function DashboardCore() {
@@ -55,26 +53,8 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
                     </span>
                 </div>
 
-                {/* <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
-                    <div className="flex flex-wrap justify-between gap-1">
-                        {project.tags.slice(0, 2).map((tag: any) => (
-                            <span key={tag} className="bg-white/10 backdrop-blur-md text-white/90 text-[8px] px-1.5 py-0.5 rounded-md border border-white/5">
-                                {tag}
-                            </span>
-                        ))}
-                        <span className={`px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-tighter border ${project.projectStatus === "completed"
-                            ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
-                            : "bg-amber-500/10 text-amber-600 border-amber-500/20"
-                            }`}>
-                            {project.projectStatus}
-                        </span>
-                    </div>
-                    {project.tags.length > 2 && (
-                        <span className="text-[8px] text-white/50">+{project.tags.length - 4}</span>
-                    )}
-                </div> */}
+    
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
-                    {/* 1. مجموعة الـ Tags على اليسار */}
                     <div className="flex flex-wrap gap-1">
                         {project.tags.slice(0, 2).map((tag: any) => (
                             <span key={tag} className="bg-white/10 backdrop-blur-md text-white/90 text-[8px] px-1.5 py-0.5 rounded-md border border-white/5">
@@ -86,7 +66,7 @@ export default function ProjectCard({ project, onOpenDetails }: any) {
                         )}
                     </div>
 
-                    {/* 2. الـ Status على اليمين */}
+ 
                     <span className={`px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-tighter border backdrop-blur-md ${project.projectStatus === "completed"
                             ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
                             : "bg-amber-500/20 text-amber-400 border-amber-500/30"
