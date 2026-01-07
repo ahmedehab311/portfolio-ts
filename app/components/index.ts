@@ -18,13 +18,11 @@ export {
 };
 
 
-import getProjects from "./projects/ProjectCardServer";
 import getSkillsHero from "./heroSection/skillsHeroServer";
 import getAllSkills from "./allSkillsSection/allSkillsServer";
 import getExperience from "./experienceSection/experienceSectionServer";
 
 export {
-    getProjects,
     getSkillsHero,
     getAllSkills,
     getExperience

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { ProjectCategory } from "@/app/constants/project";
 import ProjectCard from "./ProjectCard";
-import { TProjectSchema } from "@/types/back/project";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import HeaderComponents from "../headerComponents";
 import ProjectDetailsModal from "./ProjectDetailsModal";
@@ -28,9 +27,7 @@ type Project = {
     updatedAt?: string;
 };
 
-type ProjectsSectionProps = {
-    projects: Project[];
-};
+
 export default function ProjectsSection() {
     const [selectedCategory, setSelectedCategory] = useState(
         ProjectCategory.ALL
@@ -62,7 +59,7 @@ export default function ProjectsSection() {
             opacity: 1,
             y: 0,
             transition: {
-                delay: i * 0.1, // ده بيعمل تأثير إن الكروت بتظهر ورا بعضها
+                delay: i * 0.1,
                 duration: 0.5,
                 ease: "easeOut"
             }
@@ -119,20 +116,6 @@ export default function ProjectsSection() {
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
                 <AnimatePresence mode="popLayout">
-                    {/* {filteredProjects.map((project, index) => (
-                        <motion.div
-                            key={project._id}
-                            layout
-                            custom={index}
-                            variants={cardVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                        >
-                            <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
-                        </motion.div>
-                    ))} */}
                     {isLoading ? (
                         Array.from({ length: 6 }).map((_, i) => (
                             <ProjectSkeleton key={`skeleton-${i}`} />
