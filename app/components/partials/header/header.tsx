@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 import logo from '@/app/icon.png';
 import Image from "next/image";
+import MobileMenu from "./mobileMenu";
+import ThemeToggleMobile from "./themeToggleMobile";
 const Header = () => {
     const router = useRouter();
     const { theme, setTheme } = useTheme();
@@ -15,7 +17,6 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState<string>("home");
     useEffect(() => {
-        const observers = [];
         const sections = ["home", "projects", "skills", "experience", "contact"];
 
         const observerOptions = {
@@ -80,7 +81,7 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ type: "spring", stiffness: 100 }}
                         className="flex items-center  cursor-pointer group"
-                        onClick={() => router.push("/")}
+                        onClick={() => handleNavClick("#home")}
                         role="button"
                         tabIndex={0}
                         onKeyDown={(e) => {
@@ -140,7 +141,7 @@ const Header = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                            className="relative w-12 h-6 rounded-full bg-gradient-to-r from-gray-200   cursor-pointer to-gray-300 dark:from-gray-700 dark:to-gray-800 p-1 transition-all duration-300"
+                            className="relative w-12 h-6 rounded-full bg-linear-to-r from-gray-200   cursor-pointer to-gray-300 dark:from-gray-700 dark:to-gray-800 p-1 transition-all duration-300"
                             aria-label="Toggle theme"
                         >
                             <motion.div
@@ -158,13 +159,7 @@ const Header = () => {
                     {/* Mobile Menu Button */}
                     <div className="flex items-center md:hidden space-x-4">
                         {/* Theme Toggle Mobile */}
-                        <button
-                            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                            className="p-2 rounded-lg cursor-pointer"
-                        >
-                            {theme === "light" ? "🌙" : "☀️"}
-                        </button>
-
+                        <ThemeToggleMobile theme={theme} setTheme={setTheme} />
                         {/* Hamburger Menu */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -177,39 +172,7 @@ const Header = () => {
                 </div>
 
                 {/* Mobile Menu */}
-                <AnimatePresence>
-                    {isMenuOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="absolute  left-0 w-full  md:hidden"
-                        >
-                            <div className="p-4 rounded-2xl border border-gray-200/50 dark:border-gray-800/50 bg-linear-to-br  dark:from-gray-900 dark:via-blue-900  dark:to-gray-900  from-blue-50 via-blue-100 to-white backdrop-blur-xl shadow-2xl">
-                                <div className="flex flex-col space-y-2">
-                                    {navLinks.map((link, index) => (
-                                        <motion.button
-                                            key={link.href}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.05 }}
-                                            onClick={() => handleNavClick(link.href)}
-                                            className={`flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-300 ${activeSection === link.href.replace('#', '')
-                                                ? "bg-white/20 dark:bg-blue-500/20 text-blue-700 dark:text-cyan-300 shadow-[0_0_15px_rgba(59,130,246,0.3)] border border-white/20"
-                                                : "hover:bg-white/10 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 hover:translate-x-1"
-                                                }`}
-                                        >
-                                            <span className="text-lg uppercase tracking-widest">{link.name}</span>
-                                            {activeSection === link.href.replace('#', '') && (
-                                                <motion.div layoutId="activeDot" className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                                            )}
-                                        </motion.button>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                <MobileMenu isMenuOpen={isMenuOpen} navLinks={navLinks} activeSection={activeSection} handleNavClick={handleNavClick} />
             </div>
 
         </header>
