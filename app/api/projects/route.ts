@@ -10,16 +10,14 @@ export async function GET(req: NextRequest) {
     try {
         await connectDB();
         const { searchParams } = new URL(req.url);
-        const id = searchParams.get("id"); // لو باعت ID هات المشروع كامل
+        const id = searchParams.get("id");
 
         if (id) {
             const project = await Project.findById(id);
             return apiResponse({ statusCode: 200, status: "success", message: "project fetched successfully", data: project })
         }
 
-        // لو بتجيب الكل للـ Landing Page، استخدم .select() عشان تشيل الحاجات التقيلة
         const projects = await Project.find()
-            .select("-challenges -features -gallery") // شيل دول مؤقتاً عشان الريسبونس يصغر
             .sort({ order: 1 });
 
         return apiResponse({ statusCode: 200, status: "success", message: "projects fetched successfully", data: projects })

@@ -33,6 +33,8 @@ export default function ProjectsSection() {
         ProjectCategory.ALL
     );
     const { data: projects = [], isLoading, isError } = useProjects();
+    console.log("projects", projects);
+
     const [selectedTag, setSelectedTag] = useState("All Tags");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
