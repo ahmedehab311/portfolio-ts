@@ -27,7 +27,6 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
 
     const project = fetchedProject || initialProject;
     const isActuallyLoading = isLoading && !initialProject;
-    console.log("fetchedProject", fetchedProject);
 
     const allImages: string[] = project?.gallery?.filter((img): img is string => Boolean(img)) || [];
     if (allImages.length === 0 && project?.mainImage) {

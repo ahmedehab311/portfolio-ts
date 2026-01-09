@@ -29,21 +29,13 @@ type Project = {
 
 
 export default function ProjectsSection() {
-    const [selectedCategory, setSelectedCategory] = useState(
-        ProjectCategory.ALL
-    );
-    // داخل ProjectsSection
-    const [selectedId, setSelectedId] = useState<string | null>(null);
-
     const { data: projects = [], isLoading, isError } = useProjects();
-    console.log("projects", projects);
-
+    
+    const [selectedCategory, setSelectedCategory] = useState(ProjectCategory.ALL);
+    const [selectedId, setSelectedId] = useState<string | null>(null);
     const [selectedTag, setSelectedTag] = useState("All Tags");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-    console.log("selectedProject", selectedProject);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-
 
     const filteredProjects = projects.filter(project => {
         const categoryMatch =
@@ -86,36 +78,9 @@ export default function ProjectsSection() {
                     description="A collection of web applications where design meets functional logic, built to solve real-world problems."
                 />
                 <div className="flex flex-wrap gap-3 justify-center">
-                    {/* {categories.map((cat) => {
-                        const isActive = selectedCategory === cat;
 
-                        return (
-                            <motion.button
-                                key={cat}
-                                onClick={() => setSelectedCategory(cat as ProjectCategory)}
-                                // Hover & Tap Effects
-                                whileHover={{ y: -2, scale: 1.02 }}
-                                whileTap={{ scale: 0.95 }}
-                                className={`relative px-6 py-2.5 rounded-xl font-medium transition-colors duration-300 cursor-pointer overflow-hidden ${isActive ? "text-white" : "card-glass hover:text-primary"
-                                    }`}
-                            >
-                                <span className="relative z-10">
-                                    {cat === ProjectCategory.ALL ? "All Projects" : cat}
-                                </span>
-
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className="absolute inset-0 bg-gradient-button-primary shadow-lg shadow-blue-500/20"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                            </motion.button>
-                        );
-                    })} */}
                     <div className="flex flex-wrap gap-3 justify-center">
                         {isLoading ? (
-                            // عرض 4 أزرار Skeleton أثناء التحميل
                             Array.from({ length: 4 }).map((_, i) => (
                                 <div
                                     key={`cat-skeleton-${i}`}
@@ -123,7 +88,6 @@ export default function ProjectsSection() {
                                 />
                             ))
                         ) : (
-                            // عرض الكاتيغوريز الحقيقية بعد انتهاء التحميل
                             categories.map((cat) => {
                                 const isActive = selectedCategory === cat;
                                 return (
@@ -159,28 +123,28 @@ export default function ProjectsSection() {
                 layout
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-                <AnimatePresence mode="popLayout">
-                    {isLoading ? (
-                        Array.from({ length: 6 }).map((_, i) => (
-                            <ProjectSkeleton key={`skeleton-${i}`} />
-                        ))
-                    ) : (
-                        filteredProjects.map((project, index) => (
-                            <motion.div
-                                key={project._id}
-                                layout
-                                custom={index}
-                                variants={cardVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, margin: "-50px" }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                            >
-                                <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
-                            </motion.div>
-                        ))
-                    )}
-                </AnimatePresence>
+                {/* <AnimatePresence mode="popLayout"> */}
+                {isLoading ? (
+                    Array.from({ length: 6 }).map((_, i) => (
+                        <ProjectSkeleton key={`skeleton-${i}`} />
+                    ))
+                ) : (
+                    filteredProjects.map((project, index) => (
+                        <motion.div
+                            key={project._id}
+                            layout
+                            custom={index}
+                            variants={cardVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-50px" }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                        >
+                            <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
+                        </motion.div>
+                    ))
+                )}
+                {/* </AnimatePresence> */}
             </motion.div>
             <ProjectDetailsModal
                 projectId={selectedId}

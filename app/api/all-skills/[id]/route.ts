@@ -31,7 +31,6 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
         const { id } = await params;
 
 
-        console.log("Updating Skill with ID:", id);
 
         const body = await req.json();
 
@@ -45,7 +44,6 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
         );
 
         if (!updatedSkill) {
-            console.log("No skill found with this ID in DB");
             return apiResponse({ statusCode: 404, status: "error", message: "Skill not found in database", data: null });
         }
 

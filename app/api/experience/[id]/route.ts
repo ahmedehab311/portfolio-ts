@@ -35,7 +35,7 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
 
         const updatedExperience = await Experience.findByIdAndUpdate(
             id,
-            { $set: body }, 
+            { $set: body },
             {
                 new: true,
                 runValidators: true
@@ -43,7 +43,6 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
         );
 
         if (!updatedExperience) {
-            console.log("No Experience found with this ID in DB");
             return apiResponse({ statusCode: 404, status: "error", message: "Experience not found in database", data: null });
         }
 
