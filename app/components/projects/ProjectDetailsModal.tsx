@@ -26,7 +26,7 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
     const { data: fetchedProject, isLoading } = useProjectDetails(isOpen ? projectId : null);
 
     const project = fetchedProject || initialProject;
-
+    const isActuallyLoading = isLoading && !initialProject;
     console.log("fetchedProject", fetchedProject);
 
     const allImages: string[] = project?.gallery?.filter((img): img is string => Boolean(img)) || [];
@@ -132,7 +132,7 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
                             </div> */}
                             <div>
                                 <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">About</h4>
-                                {isLoading && !fetchedProject ? (
+                                {isActuallyLoading && !fetchedProject ? (
                                     <div className="space-y-2">
                                         <SkeletonLine className="h-4 w-full" />
                                         <SkeletonLine className="h-4 w-[90%]" />
@@ -159,7 +159,7 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
                                 <div>
                                     <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">Key Features</h4>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        {isLoading && !features.length ? (
+                                        {isActuallyLoading && !features.length ? (
                                             // عرض 4 عناصر Skeleton
                                             [...Array(4)].map((_, i) => (
                                                 <div key={i} className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/20 dark:bg-white/5 border border-white/10">
@@ -213,7 +213,7 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
                                         <AlertCircle size={14} /> Challenges
                                     </h4>
                                     <ul className="space-y-3">
-                                        {isLoading && !challenges.length ? (
+                                        {isActuallyLoading && !challenges.length ? (
                                             [...Array(3)].map((_, i) => (
                                                 <div key={i} className="flex gap-3 items-center">
                                                     <SkeletonLine className="w-1 h-1 rounded-full" />

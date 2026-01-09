@@ -86,7 +86,7 @@ export default function ProjectsSection() {
                     description="A collection of web applications where design meets functional logic, built to solve real-world problems."
                 />
                 <div className="flex flex-wrap gap-3 justify-center">
-                    {categories.map((cat) => {
+                    {/* {categories.map((cat) => {
                         const isActive = selectedCategory === cat;
 
                         return (
@@ -99,22 +99,58 @@ export default function ProjectsSection() {
                                 className={`relative px-6 py-2.5 rounded-xl font-medium transition-colors duration-300 cursor-pointer overflow-hidden ${isActive ? "text-white" : "card-glass hover:text-primary"
                                     }`}
                             >
-                                {/* نص الزرار */}
                                 <span className="relative z-10">
                                     {cat === ProjectCategory.ALL ? "All Projects" : cat}
                                 </span>
 
-                                {/* الحركة الانسيابية للخلفية (The Magic) */}
                                 {isActive && (
                                     <motion.div
-                                        layoutId="activeTab" // ده بيخلي الخلفية تتزحلق بين الزراير
+                                        layoutId="activeTab"
                                         className="absolute inset-0 bg-gradient-button-primary shadow-lg shadow-blue-500/20"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
                             </motion.button>
                         );
-                    })}
+                    })} */}
+                    <div className="flex flex-wrap gap-3 justify-center">
+                        {isLoading ? (
+                            // عرض 4 أزرار Skeleton أثناء التحميل
+                            Array.from({ length: 4 }).map((_, i) => (
+                                <div
+                                    key={`cat-skeleton-${i}`}
+                                    className="w-24 h-10 rounded-xl bg-gray-200 dark:bg-white/5 animate-pulse"
+                                />
+                            ))
+                        ) : (
+                            // عرض الكاتيغوريز الحقيقية بعد انتهاء التحميل
+                            categories.map((cat) => {
+                                const isActive = selectedCategory === cat;
+                                return (
+                                    <motion.button
+                                        key={cat}
+                                        onClick={() => setSelectedCategory(cat as ProjectCategory)}
+                                        whileHover={{ y: -2, scale: 1.02 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className={`relative px-6 py-2.5 rounded-xl font-medium transition-colors duration-300 cursor-pointer overflow-hidden ${isActive ? "text-white" : "card-glass hover:text-primary"
+                                            }`}
+                                    >
+                                        <span className="relative z-10">
+                                            {cat === ProjectCategory.ALL ? "All Projects" : cat}
+                                        </span>
+
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="activeTab"
+                                                className="absolute inset-0 bg-gradient-button-primary shadow-lg shadow-blue-500/20"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                    </motion.button>
+                                );
+                            })
+                        )}
+                    </div>
                 </div>
             </div>
 

@@ -25,6 +25,11 @@ export const useProjects = () =>
     useApiQuery<TProjects[]>({
         key: ["projects"],
         url: "/api/projects",
+        options: {
+            staleTime: Infinity,
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+        }
     });
 
 export const useProjectDetails = (id: string | null, enabled: boolean = true) =>
@@ -32,6 +37,8 @@ export const useProjectDetails = (id: string | null, enabled: boolean = true) =>
         key: ["project", id || ""],
         url: `/api/projects/${id}`,
         options: {
-            enabled: enabled && !!id, // لن يعمل إلا إذا كان الـ id موجود والـ enabled true
+            enabled: enabled && !!id,
+            staleTime: Infinity,
+            refetchOnWindowFocus: false,
         }
     });
