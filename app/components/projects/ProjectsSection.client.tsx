@@ -32,11 +32,16 @@ export default function ProjectsSection() {
     const [selectedCategory, setSelectedCategory] = useState(
         ProjectCategory.ALL
     );
+    // داخل ProjectsSection
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+
     const { data: projects = [], isLoading, isError } = useProjects();
     console.log("projects", projects);
 
     const [selectedTag, setSelectedTag] = useState("All Tags");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    console.log("selectedProject", selectedProject);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
@@ -68,6 +73,7 @@ export default function ProjectsSection() {
         })
     };
     const handleOpenDetails = (project: Project) => {
+        setSelectedId(project._id);
         setSelectedProject(project);
         setIsModalOpen(true);
     };
@@ -141,6 +147,7 @@ export default function ProjectsSection() {
                 </AnimatePresence>
             </motion.div>
             <ProjectDetailsModal
+                projectId={selectedId}
                 project={selectedProject}
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}

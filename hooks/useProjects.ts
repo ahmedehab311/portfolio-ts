@@ -20,8 +20,18 @@ export interface TProjects {
     updatedAt?: string;
 }
 
+// 1. لجلب كل المشاريع (بيانات خفيفة للكروت)
 export const useProjects = () =>
     useApiQuery<TProjects[]>({
         key: ["projects"],
         url: "/api/projects",
+    });
+
+export const useProjectDetails = (id: string | null, enabled: boolean = true) =>
+    useApiQuery<TProjects>({
+        key: ["project", id || ""],
+        url: `/api/projects/${id}`,
+        options: {
+            enabled: enabled && !!id, // لن يعمل إلا إذا كان الـ id موجود والـ enabled true
+        }
     });
