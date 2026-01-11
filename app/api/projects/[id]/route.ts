@@ -1,12 +1,11 @@
+import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { Project } from "@/models/projects";
 import { projectSchema, updateProjectSchema } from "../../validators/project.schema";
 import { apiResponse } from "@/lib/apiResponseBackend";
 import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
-import { NextRequest } from "next/server";
-
-
+import { vaildateApiKey } from "@/lib/auth";
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         await connectDB();
@@ -167,7 +166,14 @@ export async function PATCH(
 export async function DELETE(req: NextRequest) {
     try {
         await connectDB();
+        const isValid = await vaildateApiKey();
 
+        if (!isValid) {
+            return NextResponse.json(
+                { error: 'Unauthorized: Invalid API Secret Key' },
+                { status: 401 }
+            );
+        }
         const url = new URL(req.url);
         const id = url.pathname.split("/").pop(); // آخر جزء من المسار هو الـ id
         if (!id) throw new Error("Project id is required");

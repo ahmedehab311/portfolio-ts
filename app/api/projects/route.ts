@@ -2,10 +2,11 @@ import { connectDB } from "@/lib/db";
 import { Project } from "@/models/projects";
 import { ProjectCategory } from "@/app/constants/project";
 import { apiResponse } from "@/lib/apiResponseBackend";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { projectSchema } from "../validators/project.schema";
 import cloudinary from "@/lib/cloudinary";
 import streamifier from "streamifier";
+import { vaildateApiKey } from "@/lib/auth";
 export async function GET(req: NextRequest) {
     try {
         await connectDB();
@@ -26,6 +27,15 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
     try {
         await connectDB();
+
+        const isValid = await vaildateApiKey();
+
+        if (!isValid) {
+            return NextResponse.json(
+                { error: 'Unauthorized: Invalid API Secret Key' },
+                { status: 401 }
+            );
+        }
         const formData = await req.formData();
 
         // 1. استخراج الملفات من الـ FormData

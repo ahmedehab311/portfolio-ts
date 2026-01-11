@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db";
 import { apiResponse } from "@/lib/apiResponseBackend";
 import { SkillsHero } from "@/models/hero/skillsHero";
+import { vaildateApiKey } from "@/lib/auth";
+import { NextResponse } from "next/server";
 
 export async function GET() {
 
@@ -25,7 +27,14 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     await connectDB();
+    const isValid = await vaildateApiKey();
 
+    if (!isValid) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Invalid API Secret Key' },
+        { status: 401 }
+      );
+    }
     const body = await req.json();
 
     const { name, icon, color } = body;
