@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
         const id = searchParams.get("id"); // لو باعت ID هات المشروع كامل
 
         const projects = await Project.find({ deletedAt: null })
-            .select("-challenges -features -gallery -fullDescription -__v -createdAt  -updatedAt -tags") // شيل دول مؤقتاً عشان الريسبونس يصغر
+            .select("-challenges -features -gallery -fullDescription -__v -createdAt  -updatedAt -tags")
             .sort({ order: 1 });
 
         return apiResponse({ statusCode: 200, status: "success", message: "projects fetched successfully", data: projects })
