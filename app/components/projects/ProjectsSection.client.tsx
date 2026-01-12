@@ -99,7 +99,7 @@ export default function ProjectsSection() {
                                         className={`relative px-6 py-2.5 rounded-xl font-medium transition-colors duration-300 cursor-pointer overflow-hidden ${isActive ? "text-white" : "card-glass hover:text-primary"
                                             }`}
                                     >
-                                        <span className="relative z-10">
+                                        <span className="relative z-10 capitalize">
                                             {cat === ProjectCategory.ALL ? "All Projects" : cat}
                                         </span>
 

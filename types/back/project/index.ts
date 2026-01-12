@@ -13,4 +13,5 @@ export interface TProjectSchema extends Document {
     demoUrl: string;
     order: number;
     tags: string[];
+    deletedAt: Date | null;
 }

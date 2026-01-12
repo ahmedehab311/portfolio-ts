@@ -4,7 +4,6 @@ import { Project } from "@/models/projects";
 import { projectSchema, updateProjectSchema } from "../../validators/project.schema";
 import { apiResponse } from "@/lib/apiResponseBackend";
 import cloudinary from "@/lib/cloudinary";
-import streamifier from "streamifier";
 import { vaildateApiKey } from "@/lib/auth";
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
@@ -170,7 +169,7 @@ export async function DELETE(req: NextRequest) {
 
         if (!isValid) {
             return NextResponse.json(
-                { error: 'Unauthorized: Invalid API Secret Key' },
+                { error: 'Unauthorized: Invalid Secret Key' },
                 { status: 401 }
             );
         }
@@ -178,7 +177,11 @@ export async function DELETE(req: NextRequest) {
         const id = url.pathname.split("/").pop(); // آخر جزء من المسار هو الـ id
         if (!id) throw new Error("Project id is required");
 
-        const project = await Project.findByIdAndDelete(id);
+        const project = await Project.findByIdAndUpdate(
+            id,
+            { deletedAt: new Date() },
+            { new: true }
+        );
 
         if (!project) {
             return apiResponse({

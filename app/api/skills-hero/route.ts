@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
     if (!isValid) {
       return NextResponse.json(
-        { error: 'Unauthorized: Invalid API Secret Key' },
+        { error: 'Unauthorized: Invalid Secret Key' },
         { status: 401 }
       );
     }

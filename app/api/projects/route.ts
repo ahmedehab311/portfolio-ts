@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
         const { searchParams } = new URL(req.url);
         const id = searchParams.get("id"); // لو باعت ID هات المشروع كامل
 
-        const projects = await Project.find()
+        const projects = await Project.find({ deletedAt: null })
             .select("-challenges -features -gallery -fullDescription -__v -createdAt  -updatedAt -tags") // شيل دول مؤقتاً عشان الريسبونس يصغر
             .sort({ order: 1 });
 
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 
         if (!isValid) {
             return NextResponse.json(
-                { error: 'Unauthorized: Invalid API Secret Key' },
+                { error: 'Unauthorized: Invalid Secret Key' },
                 { status: 401 }
             );
         }

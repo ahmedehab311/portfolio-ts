@@ -10,7 +10,7 @@ const ProjectSchema = new Schema<TProjectSchema>({
         type: String,
         enum: {
             values: Object.values(ProjectCategory),
-            message: '{VALUE} is not supported' 
+            message: '{VALUE} is not supported'
         },
         required: true
     },
@@ -24,6 +24,7 @@ const ProjectSchema = new Schema<TProjectSchema>({
     demoUrl: { type: String },
     order: { type: Number, default: 0 },
     tags: { type: [String], required: true, default: [] },
+    deletedAt: { type: Date, default: null },
 }, { timestamps: true });
 
 
