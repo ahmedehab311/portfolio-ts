@@ -123,12 +123,7 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="md:col-span-2 space-y-8">
-                            {/* <div>
-                                <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">About</h4>
-                                <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-                                    {project?.fullDescription || project?.shortDescription || "No description available."}
-                                </p>
-                            </div> */}
+
                             <div>
                                 <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">About</h4>
                                 {isActuallyLoading && !fetchedProject ? (
@@ -149,7 +144,6 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
                                     <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">Key Features</h4>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                         {isActuallyLoading && !features.length ? (
-                                            // عرض 4 عناصر Skeleton
                                             [...Array(4)].map((_, i) => (
                                                 <div key={i} className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/20 dark:bg-white/5 border border-white/10">
                                                     <SkeletonLine className="w-4 h-4 rounded-full" />
@@ -171,62 +165,49 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
 
                         <div className="space-y-8">
                             <div>
-                                {techStack.length === 0 && ( 
-                                     < h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4 flex items-center gap-2">
-                                <Cpu size={14} /> Stack
-                            </h4>
-                                   )
+                                {techStack.length > 0 && (
+                                    < h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4 flex items-center gap-2">
+                                        <Cpu size={14} /> Stack
+                                    </h4>
+                                )
                                 }
-                            <div className="flex flex-wrap gap-2">
-                                {techStack.map((tech) => (
-                                    <span key={tech} className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] font-semibold text-blue-700 dark:text-blue-300">
-                                        {tech}
-                                    </span>
-                                ))}
+                                <div className="flex flex-wrap gap-2">
+                                    {techStack.map((tech) => (
+                                        <span key={tech} className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] font-semibold text-blue-700 dark:text-blue-300">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                        {challenges.length > 0 && (
-                            // <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/10 relative overflow-hidden">
-                            //     <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4 flex items-center gap-2">
-                            //         <AlertCircle size={14} /> Challenges
-                            //     </h4>
-                            //     <ul className="space-y-3">
-                            //         {challenges.map((c, i) => (
-                            //             <li key={i} className="flex gap-3 text-[12px] text-gray-700 dark:text-gray-400 leading-relaxed">
-                            //                 <span className="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0" />
-                            //                 {c}
-                            //             </li>
-                            //         ))}
-                            //     </ul>
-                            // </div>
-                            <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/10 relative overflow-hidden">
-                                <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4 flex items-center gap-2">
-                                    <AlertCircle size={14} /> Challenges
-                                </h4>
-                                <ul className="space-y-3">
-                                    {isActuallyLoading && !challenges.length ? (
-                                        [...Array(3)].map((_, i) => (
-                                            <div key={i} className="flex gap-3 items-center">
-                                                <SkeletonLine className="w-1 h-1 rounded-full" />
-                                                <SkeletonLine className="h-3 w-full" />
-                                            </div>
-                                        ))
-                                    ) : (
-                                        challenges.map((c, i) => (
-                                            <li key={i} className="flex gap-3 text-[12px] text-gray-700 dark:text-gray-400 leading-relaxed">
-                                                <span className="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0" />
-                                                {c}
-                                            </li>
-                                        ))
-                                    )}
-                                </ul>
-                            </div>
-                        )}
+                            {challenges.length > 0 && (
+                                <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/10 relative overflow-hidden">
+                                    <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4 flex items-center gap-2">
+                                        <AlertCircle size={14} /> Challenges
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {isActuallyLoading && !challenges.length ? (
+                                            [...Array(3)].map((_, i) => (
+                                                <div key={i} className="flex gap-3 items-center">
+                                                    <SkeletonLine className="w-1 h-1 rounded-full" />
+                                                    <SkeletonLine className="h-3 w-full" />
+                                                </div>
+                                            ))
+                                        ) : (
+                                            challenges.map((c, i) => (
+                                                <li key={i} className="flex gap-3 text-[12px] text-gray-700 dark:text-gray-400 leading-relaxed">
+                                                    <span className="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0" />
+                                                    {c}
+                                                </li>
+                                            ))
+                                        )}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </DialogContent>
+            </DialogContent>
         </Dialog >
 
     );

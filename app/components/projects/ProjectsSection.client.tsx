@@ -139,7 +139,7 @@ export default function ProjectsSection() {
                             viewport={{ once: true, margin: "-50px" }}
                             exit={{ opacity: 0, scale: 0.9 }}
                         >
-                            <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
+                            <ProjectCard project={project} index={index} onOpenDetails={() => handleOpenDetails(project)} />
                         </motion.div>
                     ))
                 )}
