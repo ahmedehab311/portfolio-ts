@@ -95,7 +95,7 @@ export default function ProjectCard({ project, onOpenDetails, index }: ProjectCa
                     <Link
                         href={project.codeUrl || "#"}
                         target="_blank"
-                        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-medium transition-all"
+                        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-black hover:bg-white/6 text-xs font-medium transition-all"
                     >
                         <Github size={14} /> Code
                     </Link>
