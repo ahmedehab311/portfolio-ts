@@ -144,17 +144,7 @@ export default function ProjectDetailsModal({ projectId, isOpen, project: initia
                                 )}
                             </div>
                             {features.length > 0 && (
-                                // <div>
-                                //     <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">Key Features</h4>
-                                //     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                //         {features.map((feature) => (
-                                //             <div key={feature} className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/40 dark:bg-white/5 border border-white/40 dark:border-white/10 shadow-sm">
-                                //                 <CheckCircle2 size={16} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                                //                 <span className="text-[12px] text-gray-800 dark:text-gray-200">{feature}</span>
-                                //             </div>
-                                //         ))}
-                                //     </div>
-                                // </div>
+    
                                 <div>
                                     <h4 className="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-[0.2em] mb-4">Key Features</h4>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -30,7 +30,7 @@ type Project = {
 
 export default function ProjectsSection() {
     const { data: projects = [], isLoading, isError } = useProjects();
-    
+
     const [selectedCategory, setSelectedCategory] = useState(ProjectCategory.ALL);
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [selectedTag, setSelectedTag] = useState("All Tags");
@@ -53,13 +53,13 @@ export default function ProjectsSection() {
         ...Array.from(new Set(projects.map(p => p.category))),
     ];
     const cardVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 20 },
         visible: (i: number) => ({
             opacity: 1,
             y: 0,
             transition: {
-                delay: i * 0.1,
-                duration: 0.5,
+                delay: i * 0.05,
+                duration: 0.4,
                 ease: "easeOut"
             }
         })
@@ -120,31 +120,31 @@ export default function ProjectsSection() {
 
 
             <motion.div
-                layout
+
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-                {/* <AnimatePresence mode="popLayout"> */}
-                {isLoading ? (
-                    Array.from({ length: 6 }).map((_, i) => (
-                        <ProjectSkeleton key={`skeleton-${i}`} />
-                    ))
-                ) : (
-                    filteredProjects.map((project, index) => (
-                        <motion.div
-                            key={project._id}
-                            layout
-                            custom={index}
-                            variants={cardVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                        >
-                            <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
-                        </motion.div>
-                    ))
-                )}
-                {/* </AnimatePresence> */}
+                <AnimatePresence mode="popLayout">
+                    {isLoading ? (
+                        Array.from({ length: 6 }).map((_, i) => (
+                            <ProjectSkeleton key={`skeleton-${i}`} />
+                        ))
+                    ) : (
+                        filteredProjects.map((project, index) => (
+                            <motion.div
+                                key={project._id}
+
+                                custom={index}
+                                variants={cardVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-50px" }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                            >
+                                <ProjectCard project={project} onOpenDetails={() => handleOpenDetails(project)} />
+                            </motion.div>
+                        ))
+                    )}
+                </AnimatePresence>
             </motion.div>
             <ProjectDetailsModal
                 projectId={selectedId}
